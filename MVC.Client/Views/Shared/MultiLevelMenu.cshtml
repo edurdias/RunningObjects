@@ -1,0 +1,105 @@
+﻿@using RunningObjects.MVC
+@using RunningObjects.MVC.Html
+@using RunningObjects.MVC.Mapping
+@model IEnumerable<NamespaceMapping>
+<ul id="navbar" class="dropdown dropdown-horizontal">
+    @foreach (var ns in Model)
+    {
+        foreach (var type in ns.Types.Where(t => t.Visible))
+        {
+        @Type(type, false)
+        }
+
+        foreach (var cns in ns.Namespaces.Where(n => n.Visible))
+        {
+        @Namespace(cns, false)
+        }
+    }
+</ul>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        if ($("#navbar.dropdown").length) {
+            $("#navbar.dropdown li").dropdown();
+        }
+
+    });
+
+    $.fn.dropdown = function () {
+
+        return this.each(function () {
+
+            $(this).hover(function () {
+                $(this).addClass("hover");
+                $('> .dir', this).addClass("open");
+                $('i[class^="icon-"]:first,i[class*=" icon-"]:first', this).addClass('icon-white');
+                $('ul:first', this).css('visibility', 'visible');
+            }, function () {
+                $(this).removeClass("hover");
+                $('.open', this).removeClass("open");
+                $('i[class^="icon-"]:first,i[class*=" icon-"]:first', this).removeClass('icon-white');
+                $('ul:first', this).css('visibility', 'hidden');
+            });
+
+        });
+
+    };
+</script>
+@helper Namespace(NamespaceMapping ns, bool subitem)
+    {
+    <li><span class="dir">
+        @ns.Name
+        <i class="icon-chevron-@(subitem ? "right" : "down")"></i></span>
+        @if (ns.Namespaces.Any() || ns.Types.Any())
+        {
+            <ul>
+                @foreach (var cns in ns.Namespaces.Where(n => n.Visible))
+                {
+                    @Namespace(cns, true)
+                }
+                @foreach (var type in ns.Types.Where(t => t.Visible))
+                {
+                    @Type(type, true)
+                }
+            </ul>
+        }
+    </li>
+    
+}
+@helper Type(TypeMapping type, bool subitem)
+    {
+        
+    <li><span class="dir">
+        @type.Name
+        <i class="icon-chevron-@(subitem ? "right" : "down")"></i></span>
+        <ul>
+            @foreach (var query in type.Queries.Where(q => q.Visible))
+            {
+                <li>
+                    @Html.ActionLink(query.Name, type.ModelType, RunningObjectsAction.Index, new { q = query.ID })
+                </li>
+            }
+            @foreach (var ctor in type.Constructors.Where(m => m.Visible))
+            {
+                @Method(ctor)
+            }
+            @foreach (var method in type.StaticMethods.Where(m => m.Visible))
+            {
+                @Method(method)
+            }
+        </ul>
+    </li>
+
+}
+@helper Method(MethodMapping method)
+    {
+    <li>
+        @{
+            var argument = method.UnderlineAction == RunningObjectsAction.Create
+                ? (object)new { index = method.Index }
+                : new { methodName = method.MethodName, index = method.Index };
+        }
+        @Html.ActionLink(method.Name, method.Type.ModelType, method.UnderlineAction, argument)
+    </li>
+
+}

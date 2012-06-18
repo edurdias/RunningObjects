@@ -1,0 +1,11 @@
+[$RootKey$\MVC3\ProjectTemplates\RunningObjectsProjectTemplate]
+"Title"="Running Objects"
+"Description"="A Running Objects application using ASP.NET MVC 3."
+
+[$RootKey$\MVC3\ProjectTemplates\RunningObjectsProjectTemplate\C#]
+
+[$RootKey$\MVC3\ProjectTemplates\RunningObjectsProjectTemplate\C#\Razor]
+"Path"="CSharp\\Web"
+"SupportsHTML5"=dword:00000001
+"SupportsUnitTests"=dword:00000000
+"Template"="ro.zip"

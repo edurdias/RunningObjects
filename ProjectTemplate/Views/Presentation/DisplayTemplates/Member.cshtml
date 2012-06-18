@@ -1,0 +1,4 @@
+﻿@using RunningObjects.MVC
+@using RunningObjects.MVC.Html
+@model Member
+@Html.ActionLink(Model.ToString(), Model.MemberType, RunningObjectsAction.View, new { key = Model.UnderliningModel.KeyValue })

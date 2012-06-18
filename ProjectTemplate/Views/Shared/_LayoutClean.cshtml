@@ -1,0 +1,67 @@
+﻿@using RunningObjects.MVC
+@using RunningObjects.MVC.Html
+@using RunningObjects.MVC.Mapping
+@{
+    ViewBag.Title = ViewBag.Title ?? "Running Objects for ASP.NET MVC 3";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap-responsive.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/lwis-dropdown.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/lwis-default.ultimate.css")">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        
+        .navbar .container .brand {
+            padding: 7px 20px 7px 20px;
+        }
+        
+        .alert ul {
+            padding: 0;
+            margin: 0 0 0 15px;
+        }
+    </style>
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/modernizr-1.7.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"> </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.min.js")"> </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"> </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.infinitescroll.js")"> </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="@Url.Action("Welcome", "Presentation")">
+                    <img src="@Url.Content("~/Content/img/running-objects-153x25.png")" alt="@ViewBag.Title"/>
+                </a>
+                <div class="nav-collapse">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @{
+                Html.RenderPartial("Exceptions");
+            }
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

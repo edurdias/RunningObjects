@@ -1,0 +1,22 @@
+﻿@using RunningObjects.MVC.Mapping
+@model IElementMapping
+@if(Model != null)
+{
+    var reversed = new List<IElementMapping>();
+    var parent = Model.Parent;
+    while(parent != null && parent.Visible)
+    {
+        reversed.Add(parent);
+        parent = parent.Parent;
+    }
+    reversed.Reverse();
+    
+    <ul class="breadcrumb">
+        @foreach(var element in reversed)
+        {
+            <li>@element.Name</li>
+            <span class="divider">/</span>
+        }
+        <li>@Model.Name</li>
+    </ul>
+}

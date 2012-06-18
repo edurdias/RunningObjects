@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{44B512B4-6DEA-4B1C-BB53-6DE6730B9D85}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RunningObjects.MVC</RootNamespace>
+    <AssemblyName>RunningObjects.MVC</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionNameConstraint.cs" />
+    <Compile Include="Caching\CacheableViewResult.cs" />
+    <Compile Include="Caching\CacheProvider.cs" />
+    <Compile Include="Caching\CachedPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConfigurationBuilder.cs" />
+    <Compile Include="ControllerExtensions.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\PresentationControllerBase.cs" />
+    <Compile Include="Controllers\ServiceControllerBase.cs" />
+    <Compile Include="Data\RunningObjectsDbContext.cs" />
+    <Compile Include="Html\DisplayExtensions.cs" />
+    <Compile Include="Html\EditorExtensions.cs" />
+    <Compile Include="Html\InputExtensions.cs" />
+    <Compile Include="Html\LabelExtensions.cs" />
+    <Compile Include="Html\LinkExtensions.cs" />
+    <Compile Include="Html\SelectExtensions.cs" />
+    <Compile Include="Html\TextAreaExtensions.cs" />
+    <Compile Include="IPagedCollection.cs" />
+    <Compile Include="Logging\DefaultLoggingProvider.cs" />
+    <Compile Include="Logging\LoggingProvider.cs" />
+    <Compile Include="Logging\LoggingProviders.cs" />
+    <Compile Include="Mapping\IElementMapping.cs" />
+    <Compile Include="Mapping\MethodMapping.cs" />
+    <Compile Include="Mapping\ModelMappingManager.cs" />
+    <Compile Include="Mapping\NamespaceMapping.cs" />
+    <Compile Include="Mapping\QueryMapping.cs" />
+    <Compile Include="Mapping\TypeMapping.cs" />
+    <Compile Include="Member.cs" />
+    <Compile Include="MemberExtensions.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="ModelAssemblies.cs" />
+    <Compile Include="ModelBinder.cs" />
+    <Compile Include="MethodDescriptor.cs" />
+    <Compile Include="MethodBinder.cs" />
+    <Compile Include="ModelCollection.cs" />
+    <Compile Include="ModelDescriptor.cs" />
+    <Compile Include="ModelExtensions.cs" />
+    <Compile Include="QueryAttribute.cs" />
+    <Compile Include="RunningObjectsViewEngineExtensions.cs" />
+    <Compile Include="RunningObjectsSetup.cs" />
+    <Compile Include="Security\Containers\AnythingSecurityContainer.cs" />
+    <Compile Include="Security\Authentication.cs" />
+    <Compile Include="Security\Containers\ActionSecurityContainer.cs" />
+    <Compile Include="Security\Containers\ConstructorSecurityContainer.cs" />
+    <Compile Include="Security\Containers\MethodSecurityContainer.cs" />
+    <Compile Include="Security\DenyRolesSecurityPolicy.cs" />
+    <Compile Include="Security\IAuthentication.cs" />
+    <Compile Include="Security\ISecurityPolicyContainer.cs" />
+    <Compile Include="Security\ITypeSecurityConfiguration.cs" />
+    <Compile Include="Security\Policies\AlloRolesSecurityPolicy.cs" />
+    <Compile Include="Security\Policies\AllowAllSecurityPolicy.cs" />
+    <Compile Include="Security\Policies\DenyAllSecurityPolicy.cs" />
+    <Compile Include="Security\SecurityConfigurationBuilder.cs" />
+    <Compile Include="Security\SecurityHandlerAttribute.cs" />
+    <Compile Include="Security\ISecurityPolicy.cs" />
+    <Compile Include="Security\SecurityPolicyContainer.cs" />
+    <Compile Include="Security\SecurityPolicyContainerExtensions.cs" />
+    <Compile Include="Security\SecurityPolicyContext.cs" />
+    <Compile Include="Security\TypeSecurityConfiguration.cs" />
+    <Compile Include="Security\ITypeSecurityConfigurationBuilder.cs" />
+    <Compile Include="TypeBinder.cs" />
+    <Compile Include="Parameter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property.cs" />
+    <Compile Include="QueryExtensions.cs" />
+    <Compile Include="Query\ClassFactory.cs" />
+    <Compile Include="Query\Dynamic.cs" />
+    <Compile Include="Query\DynamicClass.cs" />
+    <Compile Include="Query\DynamicExpression.cs" />
+    <Compile Include="Query\DynamicOrdering.cs" />
+    <Compile Include="Query\DynamicProperty.cs" />
+    <Compile Include="Query\ExpressionParser.cs" />
+    <Compile Include="Query\OrderBy.cs" />
+    <Compile Include="Query\ParseException.cs" />
+    <Compile Include="Query\Query.cs" />
+    <Compile Include="Query\QueryParser.cs" />
+    <Compile Include="Query\Res.cs" />
+    <Compile Include="Query\Select.cs" />
+    <Compile Include="Query\Signature.cs" />
+    <Compile Include="Query\Where.cs" />
+    <Compile Include="RunningObjectsAction.cs" />
+    <Compile Include="RunningObjectsException.cs" />
+    <Compile Include="MemberBinder.cs" />
+    <Compile Include="Method.cs" />
+    <Compile Include="RunningObjectsModelMetadataProvider.cs" />
+    <Compile Include="RunningObjectsValidatorProvider.cs" />
+    <Compile Include="RunningObjectsViewEngine.cs" />
+    <Compile Include="TextAttribute.cs" />
+    <Compile Include="TypeExtensions.cs" />
+    <Compile Include="ParameterUIHintAttribute.cs" />
+    <Compile Include="ValidationContextExtensions.cs" />
+    <Compile Include="WelcomeConfigurationBuilder.cs" />
+    <Compile Include="WelcomeHandlerAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

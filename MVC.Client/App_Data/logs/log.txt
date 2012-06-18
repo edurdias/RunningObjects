@@ -1,0 +1,1250 @@
+2012-04-27 08:39:27.1130|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 08:39:27.1791|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 08:39:27.1931|INFO|Index:Executing:GET:/Category
+2012-04-27 08:39:27.1931|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:41:32.7212|INFO|Welcome:Executing:GET:/
+2012-04-27 08:41:32.7292|INFO|Welcome:Executed:GET:/:200
+2012-04-27 08:42:11.2644|INFO|Index:Executing:GET:/Category
+2012-04-27 08:42:12.3415|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:42:18.4238|INFO|Index:Executing:GET:/Product
+2012-04-27 08:42:18.5279|INFO|Index:Executed:GET:/Product:200
+2012-04-27 08:42:20.9670|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 08:42:20.9930|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 08:42:39.0870|INFO|Index:Executing:GET:/Category
+2012-04-27 08:42:39.1160|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:42:52.9788|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 08:42:53.1428|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 08:42:53.1698|INFO|Index:Executing:GET:/Category
+2012-04-27 08:42:53.2098|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:43:05.4345|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 08:43:26.0187|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 08:43:26.0187|INFO|Index:Executing:GET:/Category
+2012-04-27 08:43:26.0327|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:44:02.0728|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 08:44:02.9058|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 08:44:02.9088|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 08:44:07.0041|INFO|Create:Executing:GET:/Category/Create
+2012-04-27 08:44:07.0041|INFO|Create:Executed:GET:/Category/Create:200
+2012-04-27 08:44:16.5086|INFO|Create:Executing:POST:/Category/Create
+2012-04-27 08:44:16.5926|INFO|Create:Executed:POST:/Category/Create:200
+2012-04-27 08:44:16.6096|INFO|Index:Executing:GET:/Category
+2012-04-27 08:44:16.7346|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:44:24.0960|INFO|Delete:Executing:POST:/Category/12/Delete
+2012-04-27 08:44:24.0960|INFO|Delete:Executed:POST:/Category/12/Delete:200
+2012-04-27 08:44:24.0960|INFO|Index:Executing:GET:/Category
+2012-04-27 08:44:24.1110|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:54:01.5601|INFO|Index:Executing:GET:/Category
+2012-04-27 08:54:01.9121|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:54:34.2579|INFO|Update:Executing:GET:/Category/15/Update
+2012-04-27 08:54:34.2639|INFO|Update:Executed:GET:/Category/15/Update:200
+2012-04-27 08:54:47.0447|ERROR|Update:Error:POST:/Category/15/Update: Invalid cast from 'System.String' to 'System.Collections.Generic.ICollection`1[[RunningObjects.MVC.Northiwind.Product, RunningObjects.MVC.Northiwind, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 
+    at System.Convert.DefaultToType(IConvertible value, Type targetType, IFormatProvider provider)
+   at System.String.System.IConvertible.ToType(Type type, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.ModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in D:\dev\RunningObjects\MVC\ModelBinder.cs:line 27
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-04-27 08:56:49.1106|INFO|Welcome:Executing:GET:/
+2012-04-27 08:56:49.1236|INFO|Welcome:Executed:GET:/:200
+2012-04-27 08:57:07.5447|INFO|Welcome:Executing:GET:/
+2012-04-27 08:57:07.5537|INFO|Welcome:Executed:GET:/:200
+2012-04-27 08:57:11.2039|INFO|Index:Executing:GET:/Category
+2012-04-27 08:57:12.5620|INFO|Index:Executed:GET:/Category:200
+2012-04-27 08:57:17.1303|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 08:57:59.1827|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 08:57:59.1857|INFO|Index:Executing:GET:/Category
+2012-04-27 08:57:59.2277|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:00:38.6668|INFO|Welcome:Executing:GET:/
+2012-04-27 09:00:38.6788|INFO|Welcome:Executed:GET:/:200
+2012-04-27 09:00:49.5274|INFO|Index:Executing:GET:/Category
+2012-04-27 09:00:50.6925|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:00:55.5037|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 09:00:55.7008|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 09:00:55.7158|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 09:07:34.9776|INFO|Welcome:Executing:GET:/
+2012-04-27 09:07:34.9866|INFO|Welcome:Executed:GET:/:200
+2012-04-27 09:07:37.8948|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 09:07:39.0198|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 09:10:30.5956|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 09:10:30.5956|INFO|Index:Executing:GET:/Category
+2012-04-27 09:10:30.8486|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:18:50.3992|INFO|Delete:Executing:POST:/Category/2/Delete
+2012-04-27 09:18:51.3083|ERROR|Delete:Error:POST:/Category/2/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 09:18:51.3103|INFO|Delete:Executed:POST:/Category/2/Delete:200
+2012-04-27 09:18:51.3103|INFO|Index:Executing:GET:/Category
+2012-04-27 09:18:51.3963|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:20:02.1483|INFO|Delete:Executing:POST:/Category/15/Delete
+2012-04-27 09:20:02.1683|INFO|Delete:Executed:POST:/Category/15/Delete:200
+2012-04-27 09:20:02.1683|INFO|Index:Executing:GET:/Category
+2012-04-27 09:20:02.1933|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:20:17.5452|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 09:20:17.5472|ERROR|Delete:Error:POST:/Category/8/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 09:20:17.5472|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 09:20:17.5632|INFO|Index:Executing:GET:/Category
+2012-04-27 09:20:17.5802|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:20:20.1734|INFO|Update:Executing:GET:/Category/8/Update
+2012-04-27 09:20:20.1734|INFO|Update:Executed:GET:/Category/8/Update:200
+2012-04-27 09:20:21.7454|ERROR|Update:Error:POST:/Category/8/Update: Invalid cast from 'System.String' to 'System.Collections.Generic.ICollection`1[[RunningObjects.MVC.Northiwind.Product, RunningObjects.MVC.Northiwind, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. 
+    at System.Convert.DefaultToType(IConvertible value, Type targetType, IFormatProvider provider)
+   at System.String.System.IConvertible.ToType(Type type, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.ModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in D:\dev\RunningObjects\MVC\ModelBinder.cs:line 27
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-04-27 09:25:01.2054|INFO|Show:Executing:GET:/Category/15/Show
+2012-04-27 09:25:01.2054|INFO|Show:Executed:GET:/Category/15/Show:404
+2012-04-27 09:25:06.4827|INFO|Welcome:Executing:GET:/
+2012-04-27 09:25:06.4827|INFO|Welcome:Executed:GET:/:200
+2012-04-27 09:25:10.0989|INFO|Index:Executing:GET:/Category
+2012-04-27 09:25:10.1149|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:25:14.6982|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 09:25:14.6982|ERROR|Delete:Error:POST:/Category/8/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 09:25:14.6982|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 09:25:14.7142|INFO|Index:Executing:GET:/Category
+2012-04-27 09:25:14.7142|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:38:20.3751|INFO|Index:Executing:GET:/Category
+2012-04-27 09:38:20.6822|INFO|Index:Executed:GET:/Category:200
+2012-04-27 09:38:29.4437|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 09:38:29.5157|ERROR|Delete:Error:POST:/Category/8/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 09:38:29.5157|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 09:38:29.5237|INFO|Index:Executing:GET:/Category
+2012-04-27 09:38:29.5237|INFO|Index:Executed:GET:/Category:200
+2012-04-27 10:11:18.6293|INFO|Index:Executing:GET:/Category
+2012-04-27 10:11:19.7834|INFO|Index:Executed:GET:/Category:200
+2012-04-27 10:11:25.1317|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 10:11:25.2057|ERROR|Delete:Error:POST:/Category/8/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 10:11:25.2057|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 10:11:25.2147|INFO|Index:Executing:GET:/Category
+2012-04-27 10:11:25.2147|INFO|Index:Executed:GET:/Category:200
+2012-04-27 10:14:25.6880|INFO|Create:Executing:GET:/Category/Create
+2012-04-27 10:14:25.6920|INFO|Create:Executed:GET:/Category/Create:200
+2012-04-27 10:14:26.7170|INFO|Index:Executing:GET:/Category
+2012-04-27 10:14:26.7350|INFO|Index:Executed:GET:/Category:200
+2012-04-27 10:14:27.6701|INFO|Create:Executing:GET:/Category/Create
+2012-04-27 10:14:27.6721|INFO|Create:Executed:GET:/Category/Create:200
+2012-04-27 10:14:30.3243|INFO|Index:Executing:GET:/Category
+2012-04-27 10:14:30.3243|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:13:03.6552|INFO|Welcome:Executing:GET:/
+2012-04-27 11:13:03.6552|INFO|Welcome:Executed:GET:/:200
+2012-04-27 11:13:09.3845|INFO|Index:Executing:GET:/Category
+2012-04-27 11:13:10.5406|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:13:15.1009|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 11:13:15.2719|ERROR|Delete:Error:POST:/Category/8/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 11:13:15.2719|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 11:13:15.2769|INFO|Index:Executing:GET:/Category
+2012-04-27 11:13:15.3499|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:14:30.0611|INFO|Welcome:Executing:GET:/
+2012-04-27 11:14:30.0681|INFO|Welcome:Executed:GET:/:200
+2012-04-27 11:14:33.9004|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 11:15:51.7488|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 11:15:51.7488|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 11:15:51.7678|INFO|Index:Executing:GET:/Category
+2012-04-27 11:15:51.9568|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:37:00.0894|INFO|Welcome:Executing:GET:/
+2012-04-27 11:37:00.0974|INFO|Welcome:Executed:GET:/:200
+2012-04-27 11:37:03.3566|INFO|Index:Executing:GET:/Category
+2012-04-27 11:37:04.4396|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:37:09.3559|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 11:37:32.7592|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 11:37:32.7632|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 11:37:32.7632|INFO|Index:Executing:GET:/Category
+2012-04-27 11:37:32.8382|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:45:44.8344|INFO|Index:Executing:GET:/Category
+2012-04-27 11:45:45.8374|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:48:08.0986|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 11:48:08.1436|ERROR|Delete:Error:POST:/Category/1/Delete: Object reference not set to an instance of an object. 
+    at RunningObjects.MVC.Northiwind.NorthwindContext.ValidateEntity(DbEntityEntry entityEntry, IDictionary`2 items) in D:\dev\RunningObjects\MVC.Northiwind\NorthwindContext.cs:line 51
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 11:48:08.1436|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 11:48:08.1546|INFO|Index:Executing:GET:/Category
+2012-04-27 11:48:08.1766|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:48:23.1484|INFO|Welcome:Executing:GET:/
+2012-04-27 11:48:23.1484|INFO|Welcome:Executed:GET:/:200
+2012-04-27 11:48:32.9870|INFO|Index:Executing:GET:/Category
+2012-04-27 11:48:33.0380|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:48:40.3444|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 11:49:46.9612|ERROR|Delete:Error:POST:/Category/1/Delete: Object reference not set to an instance of an object. 
+    at RunningObjects.MVC.Northiwind.NorthwindContext.ValidateEntity(DbEntityEntry entityEntry, IDictionary`2 items) in D:\dev\RunningObjects\MVC.Northiwind\NorthwindContext.cs:line 51
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 11:49:46.9612|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 11:49:46.9652|INFO|Index:Executing:GET:/Category
+2012-04-27 11:49:47.0162|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:50:52.0229|INFO|Index:Executing:GET:/Category
+2012-04-27 11:50:53.0250|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:50:58.4093|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 11:50:58.4523|ERROR|Delete:Error:POST:/Category/8/Delete: Object reference not set to an instance of an object. 
+    at RunningObjects.MVC.Northiwind.NorthwindContext.ValidateEntity(DbEntityEntry entityEntry, IDictionary`2 items) in D:\dev\RunningObjects\MVC.Northiwind\NorthwindContext.cs:line 51
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 11:50:58.4523|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 11:50:58.4623|INFO|Index:Executing:GET:/Category
+2012-04-27 11:50:58.4793|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:56:47.8973|INFO|Index:Executing:GET:/Category
+2012-04-27 11:56:48.8074|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:57:37.9892|INFO|Index:Executing:GET:/Category
+2012-04-27 11:57:38.9712|INFO|Index:Executed:GET:/Category:200
+2012-04-27 11:58:31.3882|INFO|Index:Executing:GET:/Category
+2012-04-27 11:58:32.3903|INFO|Index:Executed:GET:/Category:200
+2012-04-27 12:00:14.8631|INFO|Welcome:Executing:GET:/
+2012-04-27 12:00:14.8721|INFO|Welcome:Executed:GET:/:200
+2012-04-27 12:00:19.9494|INFO|Index:Executing:GET:/Category
+2012-04-27 12:00:21.0685|INFO|Index:Executed:GET:/Category:200
+2012-04-27 12:00:24.6377|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 12:03:07.6400|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 12:03:07.6430|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 12:03:07.6630|INFO|Index:Executing:GET:/Category
+2012-04-27 12:03:07.7410|INFO|Index:Executed:GET:/Category:200
+2012-04-27 12:10:13.5644|INFO|Welcome:Executing:GET:/
+2012-04-27 12:10:13.5724|INFO|Welcome:Executed:GET:/:200
+2012-04-27 12:10:17.0946|INFO|Index:Executing:GET:/Category
+2012-04-27 12:10:18.2347|INFO|Index:Executed:GET:/Category:200
+2012-04-27 12:10:22.4769|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 12:10:38.0818|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 12:10:38.0818|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 12:10:38.0998|INFO|Index:Executing:GET:/Category
+2012-04-27 12:10:38.1618|INFO|Index:Executed:GET:/Category:200
+2012-04-27 12:44:58.7216|INFO|Welcome:Executing:GET:/
+2012-04-27 12:44:58.7296|INFO|Welcome:Executed:GET:/:200
+2012-04-27 12:45:20.3609|INFO|Index:Executing:GET:/Category
+2012-04-27 12:45:21.4249|INFO|Index:Executed:GET:/Category:200
+2012-04-27 12:45:50.0776|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 12:47:58.5759|ERROR|Delete:Error:POST:/Category/8/Delete: IsValid(object value) has not been implemented by this class.  The preferred entry point is GetValidationResult() and classes should override IsValid(object value, ValidationContext context). 
+    at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+   at RunningObjects.MVC.Data.ValidateDeletionAttribute.IsValid(Object value, ValidationContext validationContext) in D:\dev\RunningObjects\MVC\Data\ValidateDeletionAttribute.cs:line 9
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)
+   at System.Data.Entity.Internal.Validation.ValidationAttributeValidator.Validate(EntityValidationContext entityValidationContext, InternalMemberEntry property)
+2012-04-27 12:47:58.5799|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 12:47:58.5799|INFO|Index:Executing:GET:/Category
+2012-04-27 12:47:58.6329|INFO|Index:Executed:GET:/Category:200
+2012-04-27 12:48:06.5044|INFO|Welcome:Executing:GET:/
+2012-04-27 12:48:06.5044|INFO|Welcome:Executed:GET:/:200
+2012-04-27 12:48:23.8864|INFO|Index:Executing:GET:/Category
+2012-04-27 12:48:24.9964|INFO|Index:Executed:GET:/Category:200
+2012-04-27 12:48:30.0607|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 12:49:33.0713|ERROR|Delete:Error:POST:/Category/1/Delete: IsValid(object value) has not been implemented by this class.  The preferred entry point is GetValidationResult() and classes should override IsValid(object value, ValidationContext context). 
+    at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+   at RunningObjects.MVC.Data.ValidateDeletionAttribute.IsValid(Object value, ValidationContext validationContext) in D:\dev\RunningObjects\MVC\Data\ValidateDeletionAttribute.cs:line 9
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)
+   at RunningObjects.MVC.Data.RunningObjectsDbContext.ValidateEntity(DbEntityEntry entry, IDictionary`2 items) in D:\dev\RunningObjects\MVC\Data\RunningObjectsDbContext.cs:line 34
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 12:49:33.0713|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 12:49:33.0913|INFO|Index:Executing:GET:/Category
+2012-04-27 12:49:33.1603|INFO|Index:Executed:GET:/Category:200
+2012-04-27 13:10:35.7736|INFO|Show:Executing:GET:/Category/1/Show
+2012-04-27 13:10:36.0096|INFO|Show:Executed:GET:/Category/1/Show:200
+2012-04-27 13:10:45.4091|INFO|Index:Executing:GET:/Category
+2012-04-27 13:10:45.4591|INFO|Index:Executed:GET:/Category:200
+2012-04-27 13:10:46.3882|INFO|Create:Executing:GET:/Category/Create
+2012-04-27 13:10:46.3882|INFO|Create:Executed:GET:/Category/Create:200
+2012-04-27 13:10:52.1945|INFO|Create:Executing:GET:/Product/Create
+2012-04-27 13:10:52.1945|INFO|Create:Executed:GET:/Product/Create:200
+2012-04-27 13:10:56.8068|INFO|Create:Executing:POST:/Product/Create
+2012-04-27 13:10:56.8068|ERROR|Create:Error:POST:/Product/Create: You need to be carefull! :P
+Parameter name: name 
+    at RunningObjects.MVC.Northiwind.Product..ctor(String name, Decimal unitPrice, Category category) in D:\dev\RunningObjects\MVC.Northiwind\Product.cs:line 24
+2012-04-27 13:10:56.9108|INFO|Create:Executed:POST:/Product/Create:200
+2012-04-27 13:16:23.4494|INFO|Index:Executing:GET:/Product
+2012-04-27 13:16:23.5905|INFO|Index:Executed:GET:/Product:200
+2012-04-27 13:16:28.2907|INFO|Index:Executing:GET:/Category
+2012-04-27 13:16:28.3067|INFO|Index:Executed:GET:/Category:200
+2012-04-27 13:34:48.2926|INFO|Welcome:Executing:GET:/
+2012-04-27 13:34:48.3006|INFO|Welcome:Executed:GET:/:200
+2012-04-27 13:34:52.0999|INFO|Index:Executing:GET:/Category
+2012-04-27 13:34:53.1859|INFO|Index:Executed:GET:/Category:200
+2012-04-27 13:34:57.9692|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 13:35:27.3759|ERROR|Delete:Error:POST:/Category/8/Delete: Unable to cast object of type 'System.Data.Entity.DynamicProxies.Category_220D57B761977B3FC819092E554E23A13699D9F17C4AC45050B7938ABABB8096' to type 'RunningObjects.MVC.Validation.IModelValidator`1[System.Object]'. 
+    at RunningObjects.MVC.Data.RunningObjectsDbContext.ValidateEntity(DbEntityEntry entry, IDictionary`2 items) in D:\dev\RunningObjects\MVC\Data\RunningObjectsDbContext.cs:line 33
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 13:35:27.3779|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 13:35:27.3959|INFO|Index:Executing:GET:/Category
+2012-04-27 13:35:27.4569|INFO|Index:Executed:GET:/Category:200
+2012-04-27 13:49:02.0685|INFO|Welcome:Executing:GET:/
+2012-04-27 13:49:02.0765|INFO|Welcome:Executed:GET:/:200
+2012-04-27 13:56:40.7207|INFO|Index:Executing:GET:/Category
+2012-04-27 13:56:41.8598|INFO|Index:Executed:GET:/Category:200
+2012-04-27 13:56:56.9136|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 13:58:46.2949|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 13:58:46.2949|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 13:58:46.2999|INFO|Index:Executing:GET:/Category
+2012-04-27 13:58:46.3319|INFO|Index:Executed:GET:/Category:200
+2012-04-27 14:38:24.6889|INFO|Welcome:Executing:GET:/
+2012-04-27 14:38:24.6979|INFO|Welcome:Executed:GET:/:200
+2012-04-27 14:38:26.6140|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 14:38:27.6661|ERROR|Delete:Error:POST:/Category/1/Delete: Object reference not set to an instance of an object. 
+    at RunningObjects.MVC.Data.RunningObjectsDbContext.ValidateEntity(DbEntityEntry entry, IDictionary`2 items) in D:\dev\RunningObjects\MVC\Data\RunningObjectsDbContext.cs:line 31
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 14:38:27.6661|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 14:38:27.6891|INFO|Index:Executing:GET:/Category
+2012-04-27 14:38:27.9021|INFO|Index:Executed:GET:/Category:200
+2012-04-27 14:39:02.8151|INFO|Welcome:Executing:GET:/
+2012-04-27 14:39:02.8241|INFO|Welcome:Executed:GET:/:200
+2012-04-27 14:39:09.6255|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 14:39:59.2723|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 14:39:59.2743|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 14:39:59.2933|INFO|Index:Executing:GET:/Category
+2012-04-27 14:39:59.4934|INFO|Index:Executed:GET:/Category:200
+2012-04-27 15:29:00.9716|INFO|Welcome:Executing:GET:/
+2012-04-27 15:29:00.9856|INFO|Welcome:Executed:GET:/:200
+2012-04-27 15:29:07.6600|INFO|Index:Executing:GET:/Category
+2012-04-27 15:29:08.8820|INFO|Index:Executed:GET:/Category:200
+2012-04-27 15:29:12.6643|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 15:29:51.7145|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 15:29:51.7175|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 15:29:51.7325|INFO|Index:Executing:GET:/Category
+2012-04-27 15:29:51.8035|INFO|Index:Executed:GET:/Category:200
+2012-04-27 15:31:49.7862|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 15:33:30.7990|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 15:33:30.7990|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 15:33:30.8100|INFO|Index:Executing:GET:/Category
+2012-04-27 15:33:30.8270|INFO|Index:Executed:GET:/Category:200
+2012-04-27 15:37:40.8183|INFO|Welcome:Executing:GET:/
+2012-04-27 15:37:40.8273|INFO|Welcome:Executed:GET:/:200
+2012-04-27 15:45:51.4424|INFO|Welcome:Executing:GET:/
+2012-04-27 15:45:51.4504|INFO|Welcome:Executed:GET:/:200
+2012-04-27 15:46:34.6699|INFO|Index:Executing:GET:/Category
+2012-04-27 15:46:35.7269|INFO|Index:Executed:GET:/Category:200
+2012-04-27 15:47:10.3039|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 15:56:30.5279|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 15:56:30.5279|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 15:56:30.5479|INFO|Index:Executing:GET:/Category
+2012-04-27 15:56:30.6179|INFO|Index:Executed:GET:/Category:200
+2012-04-27 15:56:32.9011|INFO|Index:Executing:GET:/Category
+2012-04-27 15:56:32.9321|INFO|Index:Executed:GET:/Category:200
+2012-04-27 16:42:36.0831|INFO|Welcome:Executing:GET:/
+2012-04-27 16:42:36.0831|INFO|Welcome:Executed:GET:/:200
+2012-04-27 16:46:56.7800|INFO|Index:Executing:GET:/Category
+2012-04-27 16:46:57.1111|INFO|Index:Executed:GET:/Category:200
+2012-04-27 16:47:00.6423|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 16:50:06.6119|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 16:50:06.6119|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 16:50:06.6119|INFO|Index:Executing:GET:/Category
+2012-04-27 16:50:06.6379|INFO|Index:Executed:GET:/Category:200
+2012-04-27 17:02:10.2323|INFO|Welcome:Executing:GET:/
+2012-04-27 17:02:10.2323|INFO|Welcome:Executed:GET:/:200
+2012-04-27 17:02:33.1676|INFO|Index:Executing:GET:/Category
+2012-04-27 17:02:33.4616|INFO|Index:Executed:GET:/Category:200
+2012-04-27 17:02:42.2161|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 17:06:46.7341|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 17:06:46.7341|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 17:06:46.7341|INFO|Index:Executing:GET:/Category
+2012-04-27 17:06:46.7591|INFO|Index:Executed:GET:/Category:200
+2012-04-27 17:08:33.4142|INFO|Welcome:Executing:GET:/
+2012-04-27 17:08:33.4142|INFO|Welcome:Executed:GET:/:200
+2012-04-27 17:16:09.0983|INFO|Index:Executing:GET:/Category
+2012-04-27 17:16:09.3753|INFO|Index:Executed:GET:/Category:200
+2012-04-27 17:20:28.1121|INFO|Welcome:Executing:GET:/
+2012-04-27 17:20:28.1121|INFO|Welcome:Executed:GET:/:200
+2012-04-27 17:42:14.3028|INFO|Welcome:Executing:GET:/
+2012-04-27 17:42:14.3118|INFO|Welcome:Executed:GET:/:200
+2012-04-27 17:42:44.4065|INFO|Create:Executing:GET:/Category/Create
+2012-04-27 17:42:44.4065|INFO|Create:Executed:GET:/Category/Create:200
+2012-04-27 17:42:46.2816|INFO|Index:Executing:GET:/Category
+2012-04-27 17:42:47.5637|INFO|Index:Executed:GET:/Category:200
+2012-04-27 17:42:50.6309|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 17:56:35.7201|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 17:56:35.7201|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 17:56:35.7741|INFO|Index:Executing:GET:/Category
+2012-04-27 17:56:35.8031|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:08:52.3722|INFO|Welcome:Executing:GET:/
+2012-04-27 18:08:52.3802|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:09:42.6591|INFO|Welcome:Executing:GET:/
+2012-04-27 18:09:42.6591|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:09:50.0695|INFO|Index:Executing:GET:/Category
+2012-04-27 18:11:01.0706|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:12:39.2462|INFO|Welcome:Executing:GET:/
+2012-04-27 18:12:39.2542|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:12:44.0514|INFO|Index:Executing:GET:/Category
+2012-04-27 18:12:45.1085|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:12:50.5468|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 18:17:37.4512|ERROR|Delete:Error:POST:/Category/1/Delete: The DELETE statement conflicted with the REFERENCE constraint "FK_Products_Categories". The conflict occurred in database "D:\DEV\RUNNINGOBJECTS\MVC.CLIENT\APP_DATA\NORTHWND.MDF", table "dbo.Products", column 'CategoryID'.
+The statement has been terminated. 
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at System.Data.Mapping.Update.Internal.DynamicUpdateCommand.Execute(UpdateTranslator translator, EntityConnection connection, Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Mapping.Update.Internal.UpdateTranslator.Update(IEntityStateManager stateManager, IEntityAdapter adapter)
+2012-04-27 18:17:37.4512|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 18:17:37.4652|INFO|Index:Executing:GET:/Category
+2012-04-27 18:17:37.4862|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:17:58.7864|INFO|Welcome:Executing:GET:/
+2012-04-27 18:17:58.7954|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:18:07.8090|INFO|Index:Executing:GET:/Category
+2012-04-27 18:18:08.9580|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:18:13.9273|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 18:22:37.6964|ERROR|Delete:Error:POST:/Category/1/Delete: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted. 
+    at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:22:37.6964|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 18:22:37.7224|INFO|Index:Executing:GET:/Category
+2012-04-27 18:22:37.7474|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:26:52.4310|INFO|Welcome:Executing:GET:/
+2012-04-27 18:26:52.4390|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:27:12.0371|INFO|Index:Executing:GET:/Category
+2012-04-27 18:27:13.1512|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:27:17.5724|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 18:27:38.4246|ERROR|Delete:Error:POST:/Category/1/Delete: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted. 
+    at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:27:38.4276|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 18:27:38.4436|INFO|Index:Executing:GET:/Category
+2012-04-27 18:28:42.7883|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:28:51.2418|INFO|Welcome:Executing:GET:/
+2012-04-27 18:28:51.2498|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:29:03.2584|INFO|Index:Executing:GET:/Category
+2012-04-27 18:29:04.5365|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:29:07.8357|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 18:29:58.8216|ERROR|Delete:Error:POST:/Category/1/Delete: The Load method cannot return the EntityCollection when the related object is in a deleted state. 
+    at System.Data.Objects.DataClasses.RelatedEnd.ValidateLoad[TEntity](MergeOption mergeOption, String relatedEndName, Boolean& hasResults)
+   at System.Data.Objects.DataClasses.EntityCollection`1.Load(List`1 collection, MergeOption mergeOption)
+   at System.Data.Objects.DataClasses.EntityCollection`1.Load(MergeOption mergeOption)
+   at System.Data.Objects.DataClasses.RelatedEnd.Load()
+   at System.Data.Entity.Internal.InternalNavigationEntry.Load()
+   at System.Data.Entity.Infrastructure.DbCollectionEntry.Load()
+   at RunningObjects.MVC.Data.RunningObjectsDbContext.ValidateEntity(DbEntityEntry entry, IDictionary`2 items) in D:\dev\RunningObjects\MVC\Data\RunningObjectsDbContext.cs:line 42
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:29:58.8216|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 18:29:58.8276|INFO|Index:Executing:GET:/Category
+2012-04-27 18:29:58.9146|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:30:03.6259|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 18:30:32.6916|ERROR|Delete:Error:POST:/Category/1/Delete: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted. 
+    at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:30:32.6916|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 18:30:32.7126|INFO|Index:Executing:GET:/Category
+2012-04-27 18:30:32.7406|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:30:59.0091|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 18:30:59.0171|ERROR|Delete:Error:POST:/Category/8/Delete: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted. 
+    at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:30:59.0171|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 18:30:59.0171|INFO|Index:Executing:GET:/Category
+2012-04-27 18:30:59.0371|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:36:46.0949|INFO|Welcome:Executing:GET:/
+2012-04-27 18:36:46.1039|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:36:54.5304|INFO|Index:Executing:GET:/Category
+2012-04-27 18:36:55.5675|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:36:59.9587|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 18:38:31.4819|INFO|Welcome:Executing:GET:/
+2012-04-27 18:38:31.4940|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:38:35.0312|INFO|Index:Executing:GET:/Category
+2012-04-27 18:38:36.3102|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:38:47.6149|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 18:39:14.0814|ERROR|Delete:Error:POST:/Category/1/Delete: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted. 
+    at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:39:14.0814|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 18:39:14.0814|INFO|Index:Executing:GET:/Category
+2012-04-27 18:39:14.1164|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:39:44.7721|INFO|Welcome:Executing:GET:/
+2012-04-27 18:39:44.7841|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:39:50.9535|INFO|Index:Executing:GET:/Category
+2012-04-27 18:39:52.0306|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:39:56.1028|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 18:40:16.7560|ERROR|Delete:Error:POST:/Category/8/Delete: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted. 
+    at System.Data.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:40:16.7560|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 18:40:16.7830|INFO|Index:Executing:GET:/Category
+2012-04-27 18:40:16.8440|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:40:46.6327|INFO|Index:Executing:GET:/Category
+2012-04-27 18:40:47.5607|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:40:51.7830|INFO|Execute:Executing:GET:/Category/1/ShowProducts
+2012-04-27 18:40:51.8310|INFO|Execute:Executed:GET:/Category/1/ShowProducts:200
+2012-04-27 18:46:41.2780|INFO|Index:Executing:GET:/Category
+2012-04-27 18:46:42.2220|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:46:47.4643|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 18:46:47.5553|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:46:47.5553|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 18:46:47.5603|INFO|Index:Executing:GET:/Category
+2012-04-27 18:46:47.5763|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:47:56.3503|INFO|Index:Executing:GET:/Category
+2012-04-27 18:47:57.2613|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:48:02.3676|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 18:48:02.4536|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:48:02.4536|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 18:48:02.4576|INFO|Index:Executing:GET:/Category
+2012-04-27 18:48:02.4756|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:48:11.3701|INFO|Welcome:Executing:GET:/
+2012-04-27 18:48:11.3701|INFO|Welcome:Executed:GET:/:200
+2012-04-27 18:48:17.3015|INFO|Index:Executing:GET:/Category
+2012-04-27 18:48:17.3435|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:48:21.1937|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 18:48:53.8875|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 181
+2012-04-27 18:48:58.0638|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 18:48:58.0638|INFO|Index:Executing:GET:/Category
+2012-04-27 18:48:58.0868|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:52:22.7705|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 18:52:23.8296|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 184
+2012-04-27 18:52:23.8296|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 18:52:23.8366|INFO|Index:Executing:GET:/Category
+2012-04-27 18:52:23.9116|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:54:56.2153|INFO|Index:Executing:GET:/Category
+2012-04-27 18:54:57.1343|INFO|Index:Executed:GET:/Category:200
+2012-04-27 18:55:04.8158|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 18:55:04.9058|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 184
+2012-04-27 18:55:04.9078|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 18:55:04.9078|INFO|Index:Executing:GET:/Category
+2012-04-27 18:55:04.9268|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:02:25.3200|INFO|Index:Executing:GET:/Category
+2012-04-27 19:02:26.2560|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:03:07.0973|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 19:03:07.9754|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 195
+2012-04-27 19:03:07.9804|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 19:03:07.9804|INFO|Index:Executing:GET:/Category
+2012-04-27 19:03:08.0654|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:04:05.1287|INFO|Index:Executing:GET:/Category
+2012-04-27 19:04:05.9607|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:04:31.1902|INFO|Index:Executing:GET:/Category
+2012-04-27 19:04:32.0692|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:04:37.0085|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 19:04:37.1025|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 195
+2012-04-27 19:04:37.1045|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 19:04:37.1045|INFO|Index:Executing:GET:/Category
+2012-04-27 19:04:37.1235|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:07:58.1630|INFO|Index:Executing:GET:/Category
+2012-04-27 19:07:58.1830|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:08:01.0222|INFO|Index:Executing:GET:/Category
+2012-04-27 19:08:01.0342|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:08:06.1585|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 19:08:06.1675|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 195
+2012-04-27 19:08:06.1675|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 19:08:06.1675|INFO|Index:Executing:GET:/Category
+2012-04-27 19:08:06.1765|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:08:09.7057|INFO|Welcome:Executing:GET:/
+2012-04-27 19:08:09.7057|INFO|Welcome:Executed:GET:/:200
+2012-04-27 19:08:12.9208|INFO|Index:Executing:GET:/Category
+2012-04-27 19:08:12.9348|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:08:28.1717|INFO|Update:Executing:GET:/Category/1/Update
+2012-04-27 19:08:28.1717|INFO|Update:Executed:GET:/Category/1/Update:200
+2012-04-27 19:09:27.9461|INFO|Index:Executing:GET:/Product
+2012-04-27 19:09:28.0271|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:23:38.4738|INFO|Welcome:Executing:GET:/
+2012-04-27 19:23:38.4868|INFO|Welcome:Executed:GET:/:200
+2012-04-27 19:23:41.9960|INFO|Index:Executing:GET:/Category
+2012-04-27 19:23:43.3071|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:23:47.5883|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 19:23:47.7083|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 195
+2012-04-27 19:23:47.7083|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 19:23:47.7263|INFO|Index:Executing:GET:/Category
+2012-04-27 19:23:47.7563|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:24:36.2571|INFO|Index:Executing:GET:/Product
+2012-04-27 19:24:36.3411|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:24:38.2502|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:24:38.4942|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:24:38.5062|INFO|Index:Executing:GET:/Product
+2012-04-27 19:24:38.5342|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:24:40.6753|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:24:40.7013|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:24:40.7133|INFO|Index:Executing:GET:/Product
+2012-04-27 19:24:40.7433|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:24:44.5566|INFO|Index:Executing:GET:/Product
+2012-04-27 19:24:44.5866|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:25:13.4232|INFO|Welcome:Executing:GET:/
+2012-04-27 19:25:13.4312|INFO|Welcome:Executed:GET:/:200
+2012-04-27 19:25:35.7745|INFO|Index:Executing:GET:/Product
+2012-04-27 19:25:36.8125|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:25:40.0897|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:26:14.5987|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:26:14.6157|INFO|Index:Executing:GET:/Product
+2012-04-27 19:26:14.6497|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:26:17.3609|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:26:27.4354|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:26:27.4354|INFO|Index:Executing:GET:/Product
+2012-04-27 19:26:27.4754|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:26:45.8995|INFO|Execute:Executing:GET:/Product/40/Toggle
+2012-04-27 19:27:01.2744|INFO|Execute:Executed:GET:/Product/40/Toggle:200
+2012-04-27 19:27:01.2874|INFO|Index:Executing:GET:/Product
+2012-04-27 19:27:01.3154|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:27:07.3997|INFO|Execute:Executing:GET:/Product/40/Toggle
+2012-04-27 19:27:39.5976|INFO|Execute:Executed:GET:/Product/40/Toggle:200
+2012-04-27 19:27:39.5996|INFO|Index:Executing:GET:/Product
+2012-04-27 19:27:39.6436|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:27:44.2318|INFO|Execute:Executing:GET:/Product/40/Toggle
+2012-04-27 19:28:26.6833|INFO|Execute:Executed:GET:/Product/40/Toggle:200
+2012-04-27 19:28:26.6833|INFO|Index:Executing:GET:/Product
+2012-04-27 19:28:26.7283|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:31:24.6124|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:31:25.5845|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:31:25.5845|INFO|Index:Executing:GET:/Product
+2012-04-27 19:31:25.6845|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:31:29.0767|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:31:29.1187|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:31:29.1237|INFO|Index:Executing:GET:/Product
+2012-04-27 19:31:29.1237|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:31:31.0198|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:31:31.0268|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:31:31.0448|INFO|Index:Executing:GET:/Product
+2012-04-27 19:31:31.0448|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:33:46.7296|INFO|Welcome:Executing:GET:/
+2012-04-27 19:33:46.7376|INFO|Welcome:Executed:GET:/:200
+2012-04-27 19:33:50.0178|INFO|Index:Executing:GET:/Product
+2012-04-27 19:33:51.0818|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:33:54.0220|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:34:32.1722|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:34:32.1862|INFO|Index:Executing:GET:/Product
+2012-04-27 19:34:32.2152|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:34:40.2926|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:34:40.3226|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:34:40.3226|INFO|Index:Executing:GET:/Product
+2012-04-27 19:34:40.3626|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:34:41.9667|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:34:41.9967|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:34:42.0087|INFO|Index:Executing:GET:/Product
+2012-04-27 19:34:42.0387|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:38:04.3953|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:38:05.2904|ERROR|Execute:Error:GET:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 19:38:05.2904|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:39:51.1794|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:39:51.1874|ERROR|Execute:Error:GET:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 19:39:51.1874|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:39:52.4505|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 19:39:52.4505|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 19:39:52.4505|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 19:39:53.3635|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 19:39:53.3655|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 19:39:53.3655|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 19:43:23.7136|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 19:43:23.8126|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 19:43:23.8126|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 19:43:27.9128|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 19:43:27.9148|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 19:43:27.9148|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 19:43:48.7630|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 19:43:48.7630|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 19:43:48.7630|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 19:44:21.7489|INFO|Welcome:Executing:GET:/
+2012-04-27 19:44:21.7519|INFO|Welcome:Executed:GET:/:200
+2012-04-27 19:44:29.3023|INFO|Index:Executing:GET:/Category
+2012-04-27 19:44:30.5264|INFO|Index:Executed:GET:/Category:200
+2012-04-27 19:44:49.2705|INFO|Index:Executing:GET:/Product
+2012-04-27 19:44:49.3555|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:44:51.0936|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:44:51.1706|ERROR|Execute:Error:GET:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 19:44:51.2056|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:45:33.6100|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:45:33.6390|ERROR|Execute:Error:GET:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 19:45:33.6390|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:48:04.4506|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:48:05.2857|ERROR|Execute:Error:GET:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 19:48:05.2857|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:48:53.4884|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 19:48:53.4884|ERROR|Execute:Error:GET:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 19:48:53.4884|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 19:48:56.7456|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:48:56.7486|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:48:59.2818|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:48:59.2818|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:49:02.2969|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:49:02.2969|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:49:04.6491|INFO|Create:Executing:GET:/Product/Create
+2012-04-27 19:49:04.6491|INFO|Create:Executed:GET:/Product/Create:200
+2012-04-27 19:49:05.5451|INFO|Index:Executing:GET:/Product
+2012-04-27 19:49:05.6111|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:49:06.5532|INFO|Execute:Executing:GET:/Product/Show
+2012-04-27 19:49:06.5532|INFO|Execute:Executed:GET:/Product/Show:200
+2012-04-27 19:49:08.2563|INFO|Index:Executing:GET:/Product
+2012-04-27 19:49:08.2673|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:49:09.9384|INFO|Execute:Executing:GET:/Product/Show
+2012-04-27 19:49:09.9384|INFO|Execute:Executed:GET:/Product/Show:200
+2012-04-27 19:49:11.0584|INFO|Index:Executing:GET:/Product
+2012-04-27 19:49:11.0714|INFO|Index:Executed:GET:/Product:200
+2012-04-27 19:49:16.9168|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:49:16.9238|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:49:41.7222|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:49:42.5802|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:52:42.5725|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:52:42.5785|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:52:50.3620|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:52:50.3620|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:52:51.9781|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:52:51.9821|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:53:04.1648|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:53:04.1668|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:53:07.5120|INFO|Welcome:Executing:GET:/
+2012-04-27 19:53:07.5120|INFO|Welcome:Executed:GET:/:200
+2012-04-27 19:54:01.9251|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:54:01.9441|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 19:56:24.2092|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 19:56:24.2092|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 20:00:56.1338|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 20:00:56.9688|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 20:10:31.0927|INFO|Welcome:Executing:GET:/
+2012-04-27 20:10:31.1047|INFO|Welcome:Executed:GET:/:200
+2012-04-27 20:10:32.7898|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 20:10:33.5878|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 20:10:35.3719|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 20:10:35.3719|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 20:10:46.7776|INFO|Welcome:Executing:GET:/
+2012-04-27 20:10:46.7866|INFO|Welcome:Executed:GET:/:200
+2012-04-27 20:12:08.3782|INFO|Welcome:Executing:GET:/
+2012-04-27 20:12:08.3862|INFO|Welcome:Executed:GET:/:200
+2012-04-27 20:12:22.1840|INFO|Index:Executing:GET:/Product
+2012-04-27 20:12:23.5041|INFO|Index:Executed:GET:/Product:200
+2012-04-27 20:12:35.9388|INFO|Show:Executing:GET:/Product/17/Show
+2012-04-27 20:12:35.9748|INFO|Show:Executed:GET:/Product/17/Show:200
+2012-04-27 20:12:52.2737|INFO|Execute:Executing:GET:/Product/Show
+2012-04-27 20:12:52.2737|INFO|Execute:Executed:GET:/Product/Show:200
+2012-04-27 20:12:55.6739|INFO|Index:Executing:GET:/Product
+2012-04-27 20:12:55.7089|INFO|Index:Executed:GET:/Product:200
+2012-04-27 20:14:33.9365|INFO|Index:Executing:GET:/Product
+2012-04-27 20:14:34.9416|INFO|Index:Executed:GET:/Product:200
+2012-04-27 20:14:39.7439|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 20:14:39.8109|ERROR|Execute:Error:GET:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 20:14:39.8109|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 20:14:43.5721|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 20:14:43.5761|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 20:14:43.5761|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 20:14:44.8682|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 20:14:44.8712|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 20:14:44.8712|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 20:14:45.8352|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 20:14:45.8382|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 20:14:45.8382|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 20:14:53.4947|INFO|Welcome:Executing:GET:/
+2012-04-27 20:14:53.4977|INFO|Welcome:Executed:GET:/:200
+2012-04-27 20:14:55.3678|INFO|Index:Executing:GET:/Product
+2012-04-27 20:14:55.4098|INFO|Index:Executed:GET:/Product:200
+2012-04-27 20:14:57.1219|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 20:14:57.1569|ERROR|Execute:Error:GET:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 20:14:57.1569|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 20:15:04.5413|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 20:16:03.6287|ERROR|Execute:Error:POST:/Product/17/Toggle: Null object cannot be converted to a value type. 
+    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 217
+2012-04-27 20:16:03.6287|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 20:16:15.2383|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 20:16:16.2114|ERROR|Execute:Error:POST:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 20:16:16.2114|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 20:16:29.7402|INFO|Execute:Executing:POST:/Product/17/Toggle
+2012-04-27 20:16:29.7652|ERROR|Execute:Error:POST:/Product/17/Toggle: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.ExecuteMethodOf(Type modelType, Method model, Func`1 onSuccess, Func`2 onSuccessWithReturn, Func`2 onException, Func`1 onNotFound, String key) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 223
+2012-04-27 20:16:29.7682|INFO|Execute:Executed:POST:/Product/17/Toggle:200
+2012-04-27 20:29:21.0513|INFO|Index:Executing:GET:/Product
+2012-04-27 20:29:21.9553|INFO|Index:Executed:GET:/Product:200
+2012-04-27 20:29:26.1696|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 20:29:26.3636|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 20:29:26.3636|INFO|Index:Executing:GET:/Product
+2012-04-27 20:29:26.3706|INFO|Index:Executed:GET:/Product:200
+2012-04-27 20:29:27.9927|INFO|Execute:Executing:GET:/Product/17/Toggle
+2012-04-27 20:29:28.0097|INFO|Execute:Executed:GET:/Product/17/Toggle:200
+2012-04-27 20:29:28.0097|INFO|Index:Executing:GET:/Product
+2012-04-27 20:29:28.0247|INFO|Index:Executed:GET:/Product:200
+2012-04-27 20:29:33.6390|INFO|Index:Executing:GET:/Category
+2012-04-27 20:29:33.7050|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:29:36.7732|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 20:29:36.8202|ERROR|Delete:Error:POST:/Category/1/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 195
+2012-04-27 20:29:36.8222|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 20:29:36.8222|INFO|Index:Executing:GET:/Category
+2012-04-27 20:29:36.8402|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:29:53.3301|INFO|Index:Executing:GET:/Category
+2012-04-27 20:29:54.2572|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:29:57.3454|INFO|Create:Executing:GET:/Product/Create
+2012-04-27 20:29:57.3454|INFO|Create:Executed:GET:/Product/Create:200
+2012-04-27 20:30:00.2475|INFO|Execute:Executing:GET:/Product/Show
+2012-04-27 20:30:00.2475|INFO|Execute:Executed:GET:/Product/Show:200
+2012-04-27 20:30:27.0961|INFO|Execute:Executing:GET:/Product/Show
+2012-04-27 20:30:27.1041|INFO|Execute:Executed:GET:/Product/Show:200
+2012-04-27 20:31:50.4008|INFO|Index:Executing:GET:/Category
+2012-04-27 20:31:50.4848|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:31:57.0952|INFO|Create:Executing:GET:/Category/Create
+2012-04-27 20:31:57.0982|INFO|Create:Executed:GET:/Category/Create:200
+2012-04-27 20:32:10.4760|INFO|Create:Executing:POST:/Category/Create
+2012-04-27 20:32:10.5670|INFO|Create:Executed:POST:/Category/Create:200
+2012-04-27 20:32:10.5670|INFO|Index:Executing:GET:/Category
+2012-04-27 20:32:10.5890|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:32:22.9717|INFO|Delete:Executing:POST:/Category/16/Delete
+2012-04-27 20:32:23.0447|INFO|Delete:Executed:POST:/Category/16/Delete:200
+2012-04-27 20:32:23.0447|INFO|Index:Executing:GET:/Category
+2012-04-27 20:32:23.0667|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:32:31.1152|INFO|Delete:Executing:POST:/Category/8/Delete
+2012-04-27 20:32:31.1332|ERROR|Delete:Error:POST:/Category/8/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 195
+2012-04-27 20:32:31.1332|INFO|Delete:Executed:POST:/Category/8/Delete:200
+2012-04-27 20:32:31.1412|INFO|Index:Executing:GET:/Category
+2012-04-27 20:32:31.1412|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:32:56.5366|INFO|Execute:Executing:GET:/Category/8/ShowProducts
+2012-04-27 20:32:56.5366|INFO|Execute:Executed:GET:/Category/8/ShowProducts:200
+2012-04-27 20:33:10.3264|INFO|Index:Executing:GET:/Category
+2012-04-27 20:33:10.3264|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:37:32.3454|INFO|Execute:Executing:GET:/Category/1/ShowProducts
+2012-04-27 20:37:32.5944|INFO|Execute:Executed:GET:/Category/1/ShowProducts:200
+2012-04-27 20:37:39.2528|INFO|Index:Executing:GET:/Category
+2012-04-27 20:37:39.2738|INFO|Index:Executed:GET:/Category:200
+2012-04-27 20:37:40.3258|INFO|Create:Executing:GET:/Category/Create
+2012-04-27 20:37:40.3258|INFO|Create:Executed:GET:/Category/Create:200
+2012-04-27 20:37:44.0441|INFO|Index:Executing:GET:/Product
+2012-04-27 20:37:44.1061|INFO|Index:Executed:GET:/Product:200
+2012-04-27 20:37:45.5161|INFO|Index:Executing:GET:/Customer
+2012-04-27 20:37:46.0072|INFO|Index:Executed:GET:/Customer:200
+2012-04-27 21:04:33.6791|INFO|Index:Executing:GET:/Category
+2012-04-27 21:04:33.9851|INFO|Index:Executed:GET:/Category:200
+2012-04-27 21:05:04.4229|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 21:05:04.4319|ERROR|Delete:Error:POST:/Category/1/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 195
+2012-04-27 21:05:04.4319|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 21:05:04.4319|INFO|Index:Executing:GET:/Category
+2012-04-27 21:05:04.4419|INFO|Index:Executed:GET:/Category:200
+2012-04-27 21:12:29.4153|INFO|Index:Executing:GET:/Customer
+2012-04-27 21:12:30.4244|INFO|Index:Executed:GET:/Customer:200
+2012-04-27 21:12:35.9457|INFO|Index:Executing:GET:/Customer?page=2&size=25
+2012-04-27 21:12:35.9617|INFO|Index:Executed:GET:/Customer?page=2&size=25:200
+2012-04-27 21:12:38.5038|INFO|Index:Executing:GET:/Customer?page=3&size=25
+2012-04-27 21:12:38.5198|INFO|Index:Executed:GET:/Customer?page=3&size=25:200
+2012-04-27 21:12:41.1060|INFO|Index:Executing:GET:/Customer?page=4&size=25
+2012-04-27 21:12:41.1210|INFO|Index:Executed:GET:/Customer?page=4&size=25:200
+2012-04-27 21:12:43.9602|INFO|Index:Executing:GET:/Customer?page=5&size=25
+2012-04-27 21:12:43.9762|INFO|Index:Executed:GET:/Customer?page=5&size=25:200
+2012-04-27 21:12:45.7833|INFO|Index:Executing:GET:/Customer
+2012-04-27 21:12:45.7853|INFO|Index:Executed:GET:/Customer:200
+2012-04-27 21:13:11.5597|INFO|Index:Executing:GET:/Customer?page=2&size=25
+2012-04-27 21:13:11.5757|INFO|Index:Executed:GET:/Customer?page=2&size=25:200
+2012-04-27 21:13:13.1678|INFO|Index:Executing:GET:/Customer
+2012-04-27 21:13:13.1838|INFO|Index:Executed:GET:/Customer:200
+2012-04-27 21:13:14.0169|INFO|Execute:Executing:GET:/Customer/GenerateData
+2012-04-27 21:13:14.0239|INFO|Execute:Executed:GET:/Customer/GenerateData:200
+2012-04-27 21:13:15.5730|INFO|Index:Executing:GET:/Customer
+2012-04-27 21:13:15.5860|INFO|Index:Executed:GET:/Customer:200
+2012-04-27 21:13:17.8571|INFO|Execute:Executing:GET:/Product/Show
+2012-04-27 21:13:17.8591|INFO|Execute:Executed:GET:/Product/Show:200
+2012-04-27 21:13:20.0542|INFO|Create:Executing:GET:/Product/Create
+2012-04-27 21:13:20.0542|INFO|Create:Executed:GET:/Product/Create:200
+2012-04-27 21:13:23.4364|INFO|Index:Executing:GET:/Product
+2012-04-27 21:13:23.5544|INFO|Index:Executed:GET:/Product:200
+2012-04-27 21:13:26.1896|INFO|Index:Executing:GET:/Customer
+2012-04-27 21:13:26.1896|INFO|Index:Executed:GET:/Customer:200
+2012-04-27 21:28:16.9355|INFO|Index:Executing:GET:/Category
+2012-04-27 21:28:17.8626|INFO|Index:Executed:GET:/Category:200
+2012-04-27 21:28:23.0569|INFO|Update:Executing:GET:/Category/1/Update
+2012-04-27 21:28:23.0829|INFO|Update:Executed:GET:/Category/1/Update:200
+2012-04-27 21:28:26.9431|INFO|Index:Executing:GET:/Category
+2012-04-27 21:28:26.9881|INFO|Index:Executed:GET:/Category:200
+2012-04-27 21:28:32.3794|INFO|Delete:Executing:POST:/Category/1/Delete
+2012-04-27 21:28:32.4364|ERROR|Delete:Error:POST:/Category/1/Delete: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details. 
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RunningObjects.MVC.Controllers.ControllerBase.DeleteInstanceOf(Type modelType, Object key, Func`1 onSuccess, Func`2 onException, Func`1 onNotFound) in D:\dev\RunningObjects\MVC\Controllers\ControllerBase.cs:line 195
+2012-04-27 21:28:32.4364|INFO|Delete:Executed:POST:/Category/1/Delete:200
+2012-04-27 21:28:32.4454|INFO|Index:Executing:GET:/Category
+2012-04-27 21:28:32.4454|INFO|Index:Executed:GET:/Category:200
+2012-04-27 21:28:35.4166|INFO|Execute:Executing:GET:/Category/1/ShowProducts
+2012-04-27 21:28:35.4286|INFO|Execute:Executed:GET:/Category/1/ShowProducts:200

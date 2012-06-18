@@ -1,0 +1,4 @@
+﻿@using RunningObjects.MVC
+@using RunningObjects.MVC.Html
+@model Member
+@Html.DropDownList(Model, Model.GetSelectListItems(ViewContext.Controller.ControllerContext, Model.Value))
