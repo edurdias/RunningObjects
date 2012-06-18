@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningObjects.MVC.Client",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningObjects.MVC", "MVC\RunningObjects.MVC.csproj", "{44B512B4-6DEA-4B1C-BB53-6DE6730B9D85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningObjects.MVC.Northwind", "MVC.Northiwind\RunningObjects.MVC.Northwind.csproj", "{5875174F-CD7A-49DB-97CD-969B52946972}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningObjects.MVC.Northwind", "MVC.Northwind\RunningObjects.MVC.Northwind.csproj", "{5875174F-CD7A-49DB-97CD-969B52946972}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

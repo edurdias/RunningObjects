@@ -145,7 +145,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MVC.Northiwind\RunningObjects.MVC.Northwind.csproj">
+    <ProjectReference Include="..\MVC.Northwind\RunningObjects.MVC.Northwind.csproj">
       <Project>{5875174F-CD7A-49DB-97CD-969B52946972}</Project>
       <Name>RunningObjects.MVC.Northwind</Name>
     </ProjectReference>
