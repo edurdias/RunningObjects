@@ -40,18 +40,6 @@ namespace RunningObjects.MVC.Northwind.Products
         [Query(Select = "ProductID,ProductName,UnitPrice,Discontinued", OrderBy = "ProductName:Asc")]
         public virtual ICollection<Product> Products { get; set; }
 
-        public static IQueryable<Category> Search(string name)
-        {
-            var ctx = new NorthwindContext();
-            return (from c in ctx.Categories where c.CategoryName.Contains(name) select c);
-        }
-
-        public void AddProducts([Query(Take = 10)] ICollection<Product> products)
-        {
-            foreach (var product in products)
-                Products.Add(product);
-        }
-
         public override string ToString()
         {
             return CategoryName;
