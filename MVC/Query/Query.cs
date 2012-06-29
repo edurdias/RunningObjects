@@ -78,29 +78,33 @@ namespace RunningObjects.MVC.Query
         private IQueryable GetAppliedQuery()
         {
             if (Where != null)
-                Source = (Parameters != null && Parameters.Count() > 0)
+                Source = (Parameters != null && Parameters.Any())
                     ? Source.Where(Where.Expression, Parameters)
                     : Source.Where(Where.Expression);
 
             if (OrderBy != null && OrderBy.Elements.Any())
             {
-                var orderBy = string.Empty;
-                foreach (var element in OrderBy.Elements)
-                    orderBy += element.Key + " " + element.Value + ",";
+                var orderBy = OrderBy.Elements.Aggregate(string.Empty, (current, element) => current + (element.Key + " " + element.Value + ","));
                 Source = Source.OrderBy(orderBy.Substring(0, orderBy.Length - 1));
             }
             else
             {
                 var mapping = ModelMappingManager.FindByType(ModelType);
                 var descriptor = new ModelDescriptor(mapping);
-                Source = Source.OrderBy(descriptor.KeyProperty.Name + " Asc");
+
+                if (descriptor.Properties.Any())
+                {
+                    var orderedProperty = descriptor.KeyProperty ??
+                                          (descriptor.TextProperty ?? descriptor.Properties.FirstOrDefault());
+                    if (orderedProperty != null)
+                        Source = Source.OrderBy(orderedProperty.Name + " Asc");
+                }
             }
 
-
-            if (Skip != null)
+            if (Skip.HasValue)
                 Source = Source.Skip(Skip.Value);
 
-            if (Take != null)
+            if (Take.HasValue)
                 Source = Source.Take(Take.Value);
 
             if (!string.IsNullOrEmpty(Include))
