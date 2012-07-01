@@ -9,7 +9,7 @@ namespace RunningObjects.MVC.Northwind
     public class NorthwindContext : RunningObjectsDbContext
     {
         public NorthwindContext()
-            : base(ConfigurationManager.ConnectionStrings["Northwind"].ConnectionString)
+            : base("Northwind")
         {
         }
 

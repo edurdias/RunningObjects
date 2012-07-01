@@ -18,6 +18,11 @@ namespace RunningObjects.MVC.Northwind
             HttpContext.Current.Session["user"] = new User { Roles = new[] { "Admin" } };
         }
 
+        public static void Register([Required] string name)
+        {
+            
+        }
+
         public static void Logout()
         {
             HttpContext.Current.Session.Remove("user");

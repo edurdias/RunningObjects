@@ -44,8 +44,8 @@ namespace RunningObjects.MVC.Controllers
             if (mapping == null)
                 throw new RunningObjectsException(string.Format("No constructor found at index {0} for type {1}", index, modelType.PartialName()));
 
-            var descriptor = new MethodDescriptor(mapping, ControllerContext.GetActionDescriptor(RunningObjectsAction.Create));
-            return View(new Method(descriptor));
+            var method = new Method(new MethodDescriptor(mapping, ControllerContext.GetActionDescriptor(RunningObjectsAction.Create)));
+            return !ControllerContext.IsChildAction ? (ActionResult) View(method) : PartialView(method);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -67,7 +67,8 @@ namespace RunningObjects.MVC.Controllers
             var instance = GetInstanceOf(modelType, key, descriptor);
             if (instance == null)
                 return HttpNotFound();
-            return View(new Model(modelType, descriptor, instance));
+            var model = new Model(modelType, descriptor, instance);
+            return !ControllerContext.IsChildAction ? (ActionResult) View(model) : PartialView(model);
         }
 
         public ActionResult Edit(Type modelType, object key)
@@ -77,7 +78,8 @@ namespace RunningObjects.MVC.Controllers
             var instance = GetInstanceOf(modelType, key, descriptor);
             if (instance == null)
                 return HttpNotFound();
-            return View(new Model(modelType, descriptor, instance));
+            var model = new Model(modelType, descriptor, instance);
+            return !ControllerContext.IsChildAction ? (ActionResult) View(model) : PartialView(model);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -116,18 +118,21 @@ namespace RunningObjects.MVC.Controllers
 
             var method = new Method(new MethodDescriptor(mapping, ControllerContext.GetActionDescriptor(RunningObjectsAction.Execute)));
 
-            return method.Parameters.Any()
-                       ? View(method)
-                       : ExecuteMethodOf
-                        (
-                            modelType,
-                            method,
-                            () => OnSuccess(modelType)(null),
-                            OnSuccessWithReturn(method),
-                            OnException(method),
-                            HttpNotFound,
-                            key
-                        );
+            if (!method.Parameters.Any())
+            {
+                return ExecuteMethodOf
+                (
+                    modelType,
+                    method,
+                    () => OnSuccess(modelType)(null),
+                    OnSuccessWithReturn(method),
+                    OnException(method),
+                    HttpNotFound,
+                    key
+                );
+            }
+
+            return !ControllerContext.IsChildAction ? (ActionResult) View(method) : PartialView(method);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

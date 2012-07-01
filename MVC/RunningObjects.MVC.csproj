@@ -69,6 +69,7 @@
     <Compile Include="Html\InputExtensions.cs" />
     <Compile Include="Html\LabelExtensions.cs" />
     <Compile Include="Html\LinkExtensions.cs" />
+    <Compile Include="Html\RenderPartialExtensions.cs" />
     <Compile Include="Html\SelectExtensions.cs" />
     <Compile Include="Html\TextAreaExtensions.cs" />
     <Compile Include="IPagedCollection.cs" />

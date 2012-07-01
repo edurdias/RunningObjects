@@ -45,7 +45,7 @@ namespace RunningObjects.MVC.Northwind.Products
 
         [ScriptIgnore]
         [Display(Name = "Categoria")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         public void Toggle()
         {
