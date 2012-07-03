@@ -1,5 +1,9 @@
 using System;
+using System.Linq;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RunningObjects.MVC.Mapping;
 using RunningObjects.MVC.Query;
 
@@ -72,5 +76,53 @@ namespace RunningObjects.MVC.Controllers
         {
             throw ex;
         }
+
+        protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
+        {
+            return new EnhancedJsonResult
+            {
+                Data = data,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding,
+                JsonRequestBehavior = behavior
+            };
+        }
+
+        private class EnhancedJsonResult : JsonResult
+        {
+            public override void ExecuteResult(ControllerContext context)
+            {
+                var response = context.HttpContext.Response;
+
+                response.ContentType = !String.IsNullOrEmpty(ContentType) ? ContentType : "application/json";
+                if (ContentEncoding != null)
+                    response.ContentEncoding = ContentEncoding;
+                if (Data != null)
+                {
+                    var settings = new JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        ContractResolver = new ContractResolver()
+                    };
+
+                    response.Write(JsonConvert.SerializeObject(Data, Formatting.None, settings));
+                }
+            }
+
+            private class ContractResolver : DefaultContractResolver
+            {
+                protected override JsonProperty CreateProperty(System.Reflection.MemberInfo member, MemberSerialization memberSerialization)
+                {
+                    var property = base.CreateProperty(member, memberSerialization);
+                    property.ShouldSerialize =
+                        o => !member.GetCustomAttributes(true).OfType<NotScaffoldAttribute>().Any()
+                             && !member.GetCustomAttributes(true).OfType<ScriptIgnoreAttribute>().Any();
+                    return property;
+                }
+            }
+        }
+
     }
+
+    
 }

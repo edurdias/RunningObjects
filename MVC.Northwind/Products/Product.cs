@@ -40,7 +40,7 @@ namespace RunningObjects.MVC.Northwind.Products
 
         public bool Discontinued { get; set; }
 
-        [ScaffoldColumn(false)]
+        [NotScaffold]
         public int CategoryID { get; set; }
 
         [ScriptIgnore]

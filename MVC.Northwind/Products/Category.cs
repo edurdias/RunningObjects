@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Web.Script.Serialization;
-using System.Linq;
 
 namespace RunningObjects.MVC.Northwind.Products
 {

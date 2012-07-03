@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <version>1.0.3</version>
+    <version>1.0.6</version>
     <authors>Eduardo Dias</authors>
     <owners />
     <licenseUrl>http://www.opensource.org/licenses/ms-pl</licenseUrl>
     <projectUrl>http://runningobjects.com</projectUrl>
     <dependencies>
       <dependency id="NLog" version="2.0.0.2000" />
-	  <dependency id="WebActivator" version="1.0.0.0" />
+	  <dependency id="WebActivator" version="1.5.1.0" />
+	  <dependency id="EntityFramework" version="4.3.1.0" />
+	  <dependency id="Newtonsoft.Json" version="4.5.7.0" />
     </dependencies>
     <id>RunningObjects</id>
     <title>Running Objects for ASP.NET MVC</title>

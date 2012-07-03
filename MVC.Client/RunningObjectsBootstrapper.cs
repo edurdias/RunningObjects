@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-using System.Web.Mvc;
-using System.Web.Routing;
+﻿using System.Data.Entity;
+using System.Reflection;
 using RunningObjects.MVC.Northwind;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(RunningObjects.MVC.Client.RunningObjectsBootstrapper), "Start")]
@@ -16,11 +15,7 @@ namespace RunningObjects.MVC.Client
                 Assembly.GetAssembly(typeof(NorthwindContext)), // Assembly
                 () => new NorthwindContext() // Entity Framework Context
             );
-
             RunningObjectsSetup.Initialize();
-
-            RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            RouteTable.Routes.IgnoreRoute("favicon.ico");
         }
     }
 }

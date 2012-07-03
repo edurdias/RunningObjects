@@ -11,15 +11,16 @@ namespace RunningObjects.MVC
 
         public ModelCollection(Type modelType, ModelDescriptor descriptor, IEnumerable items)
         {
-            if (modelType == null) 
+            if (modelType == null)
                 throw new ArgumentNullException("modelType");
-            if (descriptor == null) 
+            if (descriptor == null)
                 throw new ArgumentNullException("descriptor");
             ModelType = modelType;
             Descriptor = descriptor;
 
-            foreach (var item in items)
-                this.items.Add(new Model(modelType, descriptor, item));
+            if (items != null)
+                foreach (var item in items)
+                    this.items.Add(new Model(modelType, descriptor, item));
 
             var emptyModel = new Model(modelType, descriptor);
 
@@ -34,12 +35,12 @@ namespace RunningObjects.MVC
         public IEnumerable<Property> Properties
         {
             get { return properties; }
-        } 
+        }
 
         public IEnumerable<Model> Items
         {
             get { return items; }
-        } 
+        }
 
         #region Implementation of IPagedCollection
 

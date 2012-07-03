@@ -6,6 +6,7 @@ namespace RunningObjects.MVC
     public class QueryAttribute : Attribute
     {
         private object[] parameters;
+        private string[] includes;
 
         public string Id { get; set; }
 
@@ -21,15 +22,23 @@ namespace RunningObjects.MVC
 
         public int Take { get; set; }
 
-        public string Include { get; set; }
+        public string[] Includes
+        {
+            get
+            {
+                return includes ?? new string[] { };
+            }
+            set
+            {
+                includes = value;
+            }
+        }
 
         public object[] Parameters
         {
             get
             {
-                if (parameters == null)
-                    return new object[] { };
-                return parameters;
+                return parameters ?? new object[] { };
             }
             set
             {

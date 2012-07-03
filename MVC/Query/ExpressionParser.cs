@@ -651,14 +651,14 @@ namespace RunningObjects.MVC.Query
             if (symbols.TryGetValue(token.text, out value) ||
                 externals != null && externals.TryGetValue(token.text, out value))
             {
-                Expression expr = value as Expression;
+                var expr = value as Expression;
                 if (expr == null)
                 {
                     expr = Expression.Constant(value);
                 }
                 else
                 {
-                    LambdaExpression lambda = expr as LambdaExpression;
+                    var lambda = expr as LambdaExpression;
                     if (lambda != null) return ParseLambdaInvocation(lambda);
                 }
                 NextToken();
@@ -719,12 +719,12 @@ namespace RunningObjects.MVC.Query
             NextToken();
             ValidateToken(TokenId.OpenParen, Res.OpenParenExpected);
             NextToken();
-            List<DynamicProperty> properties = new List<DynamicProperty>();
-            List<Expression> expressions = new List<Expression>();
+            var properties = new List<DynamicProperty>();
+            var expressions = new List<Expression>();
             while (true)
             {
                 int exprPos = token.pos;
-                Expression expr = ParseExpression();
+                var expr = ParseExpression();
                 string propName;
                 if (TokenIdentifierIs("as"))
                 {
@@ -734,28 +734,23 @@ namespace RunningObjects.MVC.Query
                 }
                 else
                 {
-                    MemberExpression me = expr as MemberExpression;
+                    var me = expr as MemberExpression;
                     if (me == null) throw ParseError(exprPos, Res.MissingAsClause);
                     propName = me.Member.Name;
                 }
                 expressions.Add(expr);
                 
-                PropertyDescriptor descriptor = null;
-                foreach (PropertyDescriptor pd in TypeDescriptor.GetProperties(it.Type))
-                {
-                    if (pd.Name.Equals(propName))
-                    {
-                        descriptor = pd;
-                        break;
-                    }
-                }
+                var descriptor = TypeDescriptor.GetProperties(it.Type)
+                    .Cast<PropertyDescriptor>()
+                    .FirstOrDefault(pd => pd.Name.Equals(propName));
+
                 var ignoredAttrTypes = new[]
-                                           {
-                                               typeof (CLSCompliantAttribute),
-                                               typeof (DefaultMemberAttribute),
-                                               typeof (SerializableAttribute),
-                                               typeof (ComVisibleAttribute)
-                                           };
+                {
+                    typeof (CLSCompliantAttribute),
+                    typeof (DefaultMemberAttribute),
+                    typeof (SerializableAttribute),
+                    typeof (ComVisibleAttribute)
+                };
 
                 var attrs = new List<Attribute>();
                 if (descriptor != null)
@@ -768,7 +763,7 @@ namespace RunningObjects.MVC.Query
             ValidateToken(TokenId.CloseParen, Res.CloseParenOrCommaExpected);
             NextToken();
             Type type = DynamicExpression.CreateClass(it.Type, properties);
-            MemberBinding[] bindings = new MemberBinding[properties.Count];
+            var bindings = new MemberBinding[properties.Count];
             for (int i = 0; i < bindings.Length; i++)
                 bindings[i] = Expression.Bind(type.GetProperty(properties[i].Name), expressions[i]);
             return Expression.MemberInit(Expression.New(type), bindings);
@@ -862,28 +857,25 @@ namespace RunningObjects.MVC.Query
                         throw ParseError(errorPos, Res.NoApplicableMethod,
                                          id, GetTypeName(type));
                     case 1:
-                        MethodInfo method = (MethodInfo)mb;
+                        var method = (MethodInfo)mb;
                         if (!IsPredefinedType(method.DeclaringType))
                             throw ParseError(errorPos, Res.MethodsAreInaccessible, GetTypeName(method.DeclaringType));
                         if (method.ReturnType == typeof(void))
                             throw ParseError(errorPos, Res.MethodIsVoid,
                                              id, GetTypeName(method.DeclaringType));
-                        return Expression.Call(instance, (MethodInfo)method, args);
+                        return Expression.Call(instance, method, args);
                     default:
                         throw ParseError(errorPos, Res.AmbiguousMethodInvocation,
                                          id, GetTypeName(type));
                 }
             }
-            else
-            {
-                MemberInfo member = FindPropertyOrField(type, id, instance == null);
-                if (member == null)
-                    throw ParseError(errorPos, Res.UnknownPropertyOrField,
-                                     id, GetTypeName(type));
-                return member is PropertyInfo ?
-                                                  Expression.Property(instance, (PropertyInfo)member) :
-                                                                                                          Expression.Field(instance, (FieldInfo)member);
-            }
+            MemberInfo member = FindPropertyOrField(type, id, instance == null);
+            if (member == null)
+                throw ParseError(errorPos, Res.UnknownPropertyOrField,
+                                 id, GetTypeName(type));
+            return member is PropertyInfo ?
+                                              Expression.Property(instance, (PropertyInfo)member) :
+                                                                                                      Expression.Field(instance, (FieldInfo)member);
         }
 
         static Type FindGenericType(Type generic, Type type)

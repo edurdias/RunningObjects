@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using RunningObjects.MVC.Data;
 using RunningObjects.MVC.Northwind.Products;
 using RunningObjects.MVC.Northwind.Sales;
@@ -11,6 +10,7 @@ namespace RunningObjects.MVC.Northwind
         public NorthwindContext()
             : base("Northwind")
         {
+            
         }
 
         public DbSet<Category> Categories { get; set; }

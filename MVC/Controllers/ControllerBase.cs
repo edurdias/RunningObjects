@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Reflection;
@@ -156,7 +157,10 @@ namespace RunningObjects.MVC.Controllers
         {
             var context = ModelAssemblies.GetContext(modelType);
             var set = context.Set(modelType);
+            //context.Configuration.ProxyCreationEnabled = false;
+            context.Configuration.LazyLoadingEnabled = true;
             var instance = set.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
+            //context.Configuration.ProxyCreationEnabled = true;
             return instance;
         }
 

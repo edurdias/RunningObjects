@@ -33,7 +33,7 @@ namespace RunningObjects.MVC.Query
 
         public int? Take { get; set; }
 
-        public string Include { get; set; }
+        public string[] Includes { get; set; }
 
         public object[] Parameters { get; set; }
 
@@ -77,43 +77,48 @@ namespace RunningObjects.MVC.Query
 
         private IQueryable GetAppliedQuery()
         {
-            if (Where != null)
-                Source = (Parameters != null && Parameters.Any())
-                    ? Source.Where(Where.Expression, Parameters)
-                    : Source.Where(Where.Expression);
-
-            if (OrderBy != null && OrderBy.Elements.Any())
+            if (Source != null)
             {
-                var orderBy = OrderBy.Elements.Aggregate(string.Empty, (current, element) => current + (element.Key + " " + element.Value + ","));
-                Source = Source.OrderBy(orderBy.Substring(0, orderBy.Length - 1));
-            }
-            else
-            {
-                var mapping = ModelMappingManager.FindByType(ModelType);
-                var descriptor = new ModelDescriptor(mapping);
+                if (Where != null)
+                    Source = (Parameters != null && Parameters.Any())
+                        ? Source.Where(Where.Expression, Parameters)
+                        : Source.Where(Where.Expression);
 
-                if (descriptor.Properties.Any())
+                if (OrderBy != null && OrderBy.Elements.Any())
                 {
-                    var orderedProperty = descriptor.KeyProperty ??
-                                          (descriptor.TextProperty ?? descriptor.Properties.FirstOrDefault());
-                    if (orderedProperty != null)
-                        Source = Source.OrderBy(orderedProperty.Name + " Asc");
+                    var orderBy = OrderBy.Elements.Aggregate(string.Empty, (current, element) => current + (element.Key + " " + element.Value + ","));
+                    Source = Source.OrderBy(orderBy.Substring(0, orderBy.Length - 1));
                 }
+                else
+                {
+                    var mapping = ModelMappingManager.FindByType(ModelType);
+                    var descriptor = new ModelDescriptor(mapping);
+
+                    if (descriptor.Properties.Any())
+                    {
+                        var orderedProperty = descriptor.KeyProperty ??
+                                              (descriptor.TextProperty ?? descriptor.Properties.FirstOrDefault());
+                        if (orderedProperty != null)
+                            Source = Source.OrderBy(orderedProperty.Name + " Asc");
+                    }
+                }
+
+                if (Skip.HasValue)
+                    Source = Source.Skip(Skip.Value);
+
+                if (Take.HasValue)
+                    Source = Source.Take(Take.Value);
+
+                if(Includes != null)
+                    foreach (var include in Includes)
+                        Source = Source.Include(include);
+
+                var data = (Select != null && Select.Properties.Any())
+                               ? Source.Select(string.Format("new({0})", Select))
+                               : Source.Select("it");
+                return data;
             }
-
-            if (Skip.HasValue)
-                Source = Source.Skip(Skip.Value);
-
-            if (Take.HasValue)
-                Source = Source.Take(Take.Value);
-
-            if (!string.IsNullOrEmpty(Include))
-                Source = Source.Include(Include);
-
-            var data = (Select != null && Select.Properties.Any())
-                           ? Source.Select(string.Format("new({0})", Select))
-                           : Source;
-            return data;
+            return Source;
         }
     }
 }

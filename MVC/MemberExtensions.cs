@@ -25,7 +25,8 @@ namespace RunningObjects.MVC
                 
                 var attr = member.Attributes.OfType<QueryAttribute>().FirstOrDefault();
                 var result = QueryParser.Parse(model.ModelType, items, attr).Execute(true);
-                var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(result.ElementType));
+
+                var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(model.ModelType));
                 return new ModelCollection(model.ModelType, descriptor, result);
             }
             return null;

@@ -32,7 +32,7 @@ namespace RunningObjects.MVC.Query
                 query.Skip = ParseSkip(attr);
                 query.Take = ParseTake(attr);
                 query.CacheDuration = attr.CacheDuration;
-                query.Include = attr.Include;
+                query.Includes = attr.Includes;
                 query.Parameters = attr.Parameters;
                 query.Paging = attr.Paging;
                 query.PageSize = attr.PageSize > 0 ? attr.PageSize : Query.DefaultPageSize;
