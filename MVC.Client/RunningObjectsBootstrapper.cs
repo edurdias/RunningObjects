@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Reflection;
+﻿using System.Reflection;
 using RunningObjects.MVC.Northwind;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(RunningObjects.MVC.Client.RunningObjectsBootstrapper), "Start")]
