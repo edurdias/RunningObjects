@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using RunningObjects.MVC.Configuration;
 
 namespace RunningObjects.MVC.Security
 {
@@ -22,7 +23,7 @@ namespace RunningObjects.MVC.Security
             {
                 configurations.Add(key, new TypeSecurityConfiguration<T>());
             }
-            return (ITypeSecurityConfiguration<T>)GetConfiguration<T>(key);
+            return GetConfiguration<T>(key);
         }
 
         public void For<T>(ITypeSecurityConfigurationBuilder<T> builder) where T : class

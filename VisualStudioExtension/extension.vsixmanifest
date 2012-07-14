@@ -3,20 +3,24 @@
   <Identifier Id="RunningObjectsVsix.7ac1ebb2-fc12-4601-bf05-b2df3d4b4cb9">
     <Name>Running Objects Project Template</Name>
     <Author>Eduardo Dias</Author>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Description xml:space="preserve">Customized ASP.NET MVC template to create Running Objects based applications.</Description>
     <Locale>1033</Locale>
     <MoreInfoUrl>http://runningobjects.com/</MoreInfoUrl>
     <GettingStartedGuide>http://runningobjects.com/get-started</GettingStartedGuide>
-    <SupportedProducts>
+   <SupportedProducts>
       <VisualStudio Version="10.0">
         <Edition>Pro</Edition>
         <Edition>IntegratedShell</Edition>
-        
+        <Edition>VWDExpress</Edition>
+        <Edition>VPDExpress</Edition>
       </VisualStudio>
       <VisualStudio Version="11.0">
         <Edition>Pro</Edition>
         <Edition>IntegratedShell</Edition>
+        <Edition>VWDExpress</Edition>
+        <Edition>VPDExpress</Edition>
+        <Edition>VSWinExpress</Edition>
       </VisualStudio>
     </SupportedProducts>
     <SupportedFrameworkRuntimeEdition MinVersion="4.0" />

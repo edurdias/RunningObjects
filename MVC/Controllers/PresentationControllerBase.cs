@@ -26,7 +26,7 @@ namespace RunningObjects.MVC.Controllers
 
                 var mapping = ModelMappingManager.MappingFor(fetched.ElementType);
                 var descriptor = new ModelDescriptor(mapping);
-
+                
                 return new ModelCollection(modelType, descriptor, fetched)
                 {
                     PageCount = quantity > 0 ? (int)Math.Ceiling((decimal)items.Count() / quantity) : items.Count(),
@@ -39,7 +39,7 @@ namespace RunningObjects.MVC.Controllers
 
         public ActionResult Create(Type modelType, int index)
         {
-            var typeMapping = ModelMappingManager.FindByType(modelType);
+            var typeMapping = ModelMappingManager.MappingFor(modelType);
             var mapping = typeMapping.Constructors.FirstOrDefault(m => m.Index == index);
             if (mapping == null)
                 throw new RunningObjectsException(string.Format("No constructor found at index {0} for type {1}", index, modelType.PartialName()));
@@ -62,7 +62,7 @@ namespace RunningObjects.MVC.Controllers
 
         public ActionResult View(Type modelType, object key)
         {
-            var mapping = ModelMappingManager.FindByType(modelType);
+            var mapping = ModelMappingManager.MappingFor(modelType);
             var descriptor = new ModelDescriptor(mapping);
             var instance = GetInstanceOf(modelType, key, descriptor);
             if (instance == null)
@@ -73,7 +73,7 @@ namespace RunningObjects.MVC.Controllers
 
         public ActionResult Edit(Type modelType, object key)
         {
-            var mapping = ModelMappingManager.FindByType(modelType);
+            var mapping = ModelMappingManager.MappingFor(modelType);
             var descriptor = new ModelDescriptor(mapping);
             var instance = GetInstanceOf(modelType, key, descriptor);
             if (instance == null)
@@ -110,7 +110,7 @@ namespace RunningObjects.MVC.Controllers
 
         public ActionResult Execute(Type modelType, string methodName, int index, string key = null)
         {
-            var typeMapping = ModelMappingManager.FindByType(modelType);
+            var typeMapping = ModelMappingManager.MappingFor(modelType);
             var methods = key != null ? typeMapping.InstanceMethods : typeMapping.StaticMethods;
             var mapping = methods.FirstOrDefault(m => m.MethodName.Equals(methodName, StringComparison.InvariantCultureIgnoreCase) && m.Index == index);
             if (mapping == null)

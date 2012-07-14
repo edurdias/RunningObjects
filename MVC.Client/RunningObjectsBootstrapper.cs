@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using RunningObjects.MVC.Northwind;
+﻿using RunningObjects.MVC.Northwind;
+using RunningObjects.MVC.Persistence;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(RunningObjects.MVC.Client.RunningObjectsBootstrapper), "Start")]
 namespace RunningObjects.MVC.Client
@@ -8,13 +8,16 @@ namespace RunningObjects.MVC.Client
     {
         public static void Start()
         {
-            ModelAssemblies.Add
-            (
-                typeof(NorthwindContext).Namespace, // Root Namespace
-                Assembly.GetAssembly(typeof(NorthwindContext)), // Assembly
-                () => new NorthwindContext() // Entity Framework Context
-            );
-            RunningObjectsSetup.Initialize();
+            RunningObjectsSetup.Initialize(config =>
+            {
+                var referenceType = typeof(User);
+                config.Mapping.MapAssembly
+                (
+                    referenceType.Assembly, 
+                    referenceType.Namespace, 
+                    type => new EntityFrameworkRepository(type, new NorthwindContext())
+                );
+            });
         }
     }
 }

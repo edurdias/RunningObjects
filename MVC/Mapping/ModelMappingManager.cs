@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using RunningObjects.MVC.Mapping.Configuration;
 
 namespace RunningObjects.MVC.Mapping
 {
@@ -14,7 +14,7 @@ namespace RunningObjects.MVC.Mapping
         public const string TypeSeparator = ".";
 
         public static List<NamespaceMapping> Namespaces { get; private set; }
-        private static Dictionary<string, TypeMapping> Types { get; set; }
+        public static Dictionary<string, TypeMapping> Types { get; set; }
 
         static ModelMappingManager()
         {
@@ -43,7 +43,7 @@ namespace RunningObjects.MVC.Mapping
             return null;
         }
 
-        public static IElementMapping CurrentElement(ControllerContext controllerContext)
+        public static IMappingElement CurrentElement(ControllerContext controllerContext)
         {
             var currentType = CurrentType(controllerContext);
             if (currentType != null)
@@ -75,27 +75,24 @@ namespace RunningObjects.MVC.Mapping
             return type != null && Types.ContainsKey(type.FullName);
         }
 
-        public static TypeMapping FindByType(Type type)
+        private static TypeMapping FindByType(Type type)
         {
             return type != null && Exists(type) ? Types[type.FullName] : null;
         }
 
 
-        public static void LoadFrom(Dictionary<string, Assembly> assemblies)
+        public static void LoadFromConfiguration()
         {
             Namespaces.Clear();
-            foreach (var rootNamespace in assemblies.Keys)
-            {
-                var assembly = assemblies[rootNamespace];
-                LoadFromAssembly(assembly, rootNamespace);
-            }
+            foreach (var configuration in MappingConfiguration.Assemblies.Values)
+                LoadFromAssembly(configuration);
             ExtractTypes(Namespaces);
         }
 
-        private static void LoadFromAssembly(Assembly assembly, string rootNamespace)
+        private static void LoadFromAssembly(AssemblyMappingConfiguration assembly)
         {
-            var types = assembly.GetTypes().Where(t => t.IsPublic && !t.IsGenericType && !t.IsInterface && !t.IsSubclassOf(typeof(DbContext))).OrderBy(t => t.Namespace);
-            var ns = CreateNamespace(rootNamespace, types);
+            var types = assembly.Types.Select(t => t.UnderlineType).OrderBy(t => t.Namespace);
+            var ns = CreateNamespace(assembly.RootNamespace, types, assembly);
             if (ns != null)
                 Namespaces.Add(ns);
         }
@@ -112,7 +109,7 @@ namespace RunningObjects.MVC.Mapping
         #endregion
 
         #region Private and Building Methods
-        private static NamespaceMapping CreateNamespace(string ns, IEnumerable<Type> availableTypes, NamespaceMapping parent = null)
+        private static NamespaceMapping CreateNamespace(string ns, IEnumerable<Type> availableTypes, AssemblyMappingConfiguration assembly, IMappingElement parent = null)
         {
             var separator = new[] { TypeSeparator };
             const StringSplitOptions options = StringSplitOptions.RemoveEmptyEntries;
@@ -128,26 +125,27 @@ namespace RunningObjects.MVC.Mapping
 
             @namespace.Types = availableTypes
                 .Where(t => t.Namespace == ns)
-                .Select(t => CreateTypeMapping(t, @namespace))
+                .Select(t => CreateTypeMapping(t, @namespace, assembly.For(t)))
                 .ToList();
 
             @namespace.Namespaces = availableTypes
                 .Where(t => t.Namespace != null && t.Namespace != ns && t.Namespace.StartsWith(ns))
                 .GroupBy(t => t.Namespace)
                 .Select(g => g.Key.Replace(ns + TypeSeparator, string.Empty).Split(separator, options).FirstOrDefault())
-                .Select(nm => CreateNamespace(string.Concat(ns, TypeSeparator, nm), availableTypes.Where(t => t.Namespace != ns), @namespace))
+                .Select(nm => CreateNamespace(string.Concat(ns, TypeSeparator, nm), availableTypes.Where(t => t.Namespace != ns), assembly, @namespace))
                 .ToList();
 
             return @namespace;
         }
 
-        private static TypeMapping CreateTypeMapping(Type type, NamespaceMapping @namespace)
+        private static TypeMapping CreateTypeMapping(Type type, NamespaceMapping @namespace, TypeMappingConfiguration configuration)
         {
             var mapping = new TypeMapping
                               {
                                   ID = Guid.NewGuid().ToString("N"),
                                   ModelType = type,
-                                  Namespace = @namespace
+                                  Namespace = @namespace,
+                                  Configuration = configuration
                               };
 
             var attributes = type.GetCustomAttributes(true);
@@ -247,7 +245,15 @@ namespace RunningObjects.MVC.Mapping
 
         public static TypeMapping MappingFor(Type type)
         {
-            return CreateTypeMapping(type, null);
+            var mapping = FindByType(type);
+            if (mapping != null)
+                return mapping;
+
+            var asms = MappingConfiguration.Assemblies.Values;
+            var configuration = asms.SelectMany(asm => asm.Types).FirstOrDefault(config => config.UnderlineType == type);
+            return CreateTypeMapping(type, null, configuration);
         }
+
+        
     }
 }

@@ -29,7 +29,7 @@ namespace RunningObjects.MVC.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ActionResult View(Type modelType, object key)
         {
-            var mapping = ModelMappingManager.FindByType(modelType);
+            var mapping = ModelMappingManager.MappingFor(modelType);
             var descriptor = new ModelDescriptor(mapping);
             var instance = GetInstanceOf(modelType, key, descriptor);
             if (instance == null)

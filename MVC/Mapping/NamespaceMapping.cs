@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RunningObjects.MVC.Mapping
 {
-    public class NamespaceMapping : IElementMapping
+    public class NamespaceMapping : IMappingElement
     {
         private IEnumerable<TypeMapping> types;
         private IEnumerable<NamespaceMapping> namespaces;
@@ -14,7 +14,7 @@ namespace RunningObjects.MVC.Mapping
 
         public string FullName { get; internal set; }
 
-        public IElementMapping Parent { get; set; }
+        public IMappingElement Parent { get; set; }
 
         public bool Visible { get; set; }
 

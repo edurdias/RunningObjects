@@ -16,7 +16,7 @@ namespace RunningObjects.MVC.Html
 
         private static void RenderMethod(HtmlHelper htmlHelper, Type modelType, MethodBase method, object key = null)
         {
-            var typeMapping = ModelMappingManager.FindByType(modelType);
+            var typeMapping = ModelMappingManager.MappingFor(modelType);
             var methods = method.IsConstructor
                               ? typeMapping.Constructors
                               : method.IsStatic

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -11,10 +10,9 @@ namespace RunningObjects.MVC
     {
         public static Query.Query Query(this Member member, ControllerContext controllerContext)
         {
-            var context = ModelAssemblies.GetContext(member.MemberType);
-            var actionName = controllerContext.RouteData.Values["action"].ToString();
-            var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
-            var source = context.Set(member.MemberType);
+            var typeMapping = ModelMappingManager.MappingFor(member.MemberType);
+            var repository = typeMapping.Configuration.Repository();
+            var source = repository.All();
             var attr = member.Attributes.OfType<QueryAttribute>().FirstOrDefault();
             return attr != null 
                 ? QueryParser.Parse(member.MemberType, source, attr) 
@@ -26,8 +24,6 @@ namespace RunningObjects.MVC
             var items = new List<SelectListItem> { new SelectListItem() };
             if(member.IsModel)
             {
-                var actionName = controllerContext.RouteData.Values["action"].ToString();
-                var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
                 var result = member.Query(controllerContext).Execute();
 
                 var mapping = ModelMappingManager.MappingFor(result.ElementType);
@@ -52,7 +48,7 @@ namespace RunningObjects.MVC
 
                     if (selectedValue != null)
                     {
-                        var descriptor = new ModelDescriptor(ModelMappingManager.FindByType(member.MemberType));
+                        var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(member.MemberType));
                         var modelValue = descriptor.KeyProperty.GetValue(selectedValue);
                         if (modelValue != null)
                             listItem.Selected = listItem.Value == modelValue.ToString();

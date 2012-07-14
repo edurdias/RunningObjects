@@ -19,14 +19,14 @@ namespace RunningObjects.MVC
                     items = ((IEnumerable)member.Value).AsQueryable();
                 else if (member is Parameter)
                 {
-                    var context = ModelAssemblies.GetContext(model.ModelType);
-                    items = context.Set(model.ModelType);
+                    var mapping = model.Descriptor.ModelMapping;
+                    items = mapping.Configuration.Repository().All();
                 }
                 
                 var attr = member.Attributes.OfType<QueryAttribute>().FirstOrDefault();
                 var result = QueryParser.Parse(model.ModelType, items, attr).Execute(true);
 
-                var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(model.ModelType));
+                var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(result.ElementType));
                 return new ModelCollection(model.ModelType, descriptor, result);
             }
             return null;

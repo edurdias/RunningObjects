@@ -123,7 +123,7 @@
           <package id="Newtonsoft.Json" version="4.5.7.0"  />
           <package id="NLog" version="2.0.0.2000"  />
           <package id="WebActivator" version="1.5.1.0"  />
-          <package id="RunningObjects" version="1.0.6"  />
+          <package id="RunningObjects" version="1.0.8"  />
         </packages>
     </WizardData>
 </VSTemplate>

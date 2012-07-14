@@ -26,10 +26,9 @@ namespace RunningObjects.MVC
                         parameter.Value = result.ConvertTo(parameter.MemberType);
                     else
                     {
-                        var context = ModelAssemblies.GetContext(parameter.MemberType);
-                        var descriptor = new ModelDescriptor(ModelMappingManager.FindByType(parameter.MemberType));
+                        var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(parameter.MemberType));
                         var value = result.ConvertTo(descriptor.KeyProperty.PropertyType);
-                        parameter.Value = context.Set(parameter.MemberType).Find(value);
+                        parameter.Value = mapping.Type.Configuration.Repository().Find(value);
                     }
                 }
             }
@@ -53,7 +52,7 @@ namespace RunningObjects.MVC
         {
             var values = controllerContext.RouteData.Values;
             var methodName = values["methodName"].ToString();
-            var typeMapping = ModelMappingManager.FindByType(modelType);
+            var typeMapping = ModelMappingManager.MappingFor(modelType);
             var methods = values.ContainsKey("key") ? typeMapping.InstanceMethods : typeMapping.StaticMethods;
             var methodsOfName = methods.Where(m => m.MethodName.Equals(methodName, StringComparison.InvariantCultureIgnoreCase));
             return methodsOfName.FirstOrDefault(m => m.Index == index);
@@ -61,7 +60,7 @@ namespace RunningObjects.MVC
 
         private static MethodMapping GetConstructorMapping(Type modelType, int index)
         {
-            var typeMapping = ModelMappingManager.FindByType(modelType);
+            var typeMapping = ModelMappingManager.MappingFor(modelType);
             return typeMapping.Constructors.FirstOrDefault(m => m.Index == index);
         }
     }

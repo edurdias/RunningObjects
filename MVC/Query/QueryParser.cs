@@ -46,7 +46,7 @@ namespace RunningObjects.MVC.Query
         private static Select ParseSelect(Type modelType, QueryAttribute spec)
         {
             var select = new Select();
-            var descriptor = new ModelDescriptor(ModelMappingManager.FindByType(modelType));
+            var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(modelType));
             var properties = descriptor.GetProperties().OfType<PropertyDescriptor>();
 
             select.Properties.AddRange(properties);

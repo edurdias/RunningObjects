@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RunningObjects.MVC.Mapping;
 
 namespace RunningObjects.MVC
 {
@@ -10,7 +11,7 @@ namespace RunningObjects.MVC
         {
             if (type == null)
                 throw new ArgumentNullException("type");
-            var namespaces = new List<string>(ModelAssemblies.Assemblies.Keys);
+            var namespaces = new List<string>(ModelMappingManager.Namespaces.Select(ns=> ns.FullName));
             var typeNamespace = namespaces.FirstOrDefault(ns => !string.IsNullOrEmpty(type.FullName) && type.FullName.StartsWith(ns));
 
             return !string.IsNullOrEmpty(type.FullName) && !string.IsNullOrEmpty(typeNamespace)

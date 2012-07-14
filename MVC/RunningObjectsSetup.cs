@@ -1,6 +1,7 @@
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+using RunningObjects.MVC.Configuration;
 using RunningObjects.MVC.Mapping;
 using RunningObjects.MVC.Security;
 
@@ -8,47 +9,41 @@ namespace RunningObjects.MVC
 {
     public sealed class RunningObjectsSetup
     {
-        private static ConfigurationBuilder configuration = new ConfigurationBuilder();
+        private static readonly ConfigurationBuilder configuration = new ConfigurationBuilder();
 
         public static ConfigurationBuilder Configuration
         {
             get { return configuration; }
         }
-
-        public static void Initialize()
+        public static void Initialize(Action<ConfigurationBuilder> expression)
         {
             InitializeViewEngine();
             InitializeBinders();
             InitializeMetadataProvider();
             InitializeValidatorProviders();
             InitializeRoutes();
-            InitializeMapping();
-        }
-
-        public static void Initialize(Action<ConfigurationBuilder> expression)
-        {
-            Initialize();
             expression(Configuration);
             InitializeWelcome(Configuration.Welcome);
             InitializeSecurity(Configuration.Security);
+            InitializeMapping();
         }
 
         #region Initialization Steps
 
-        private static void InitializeWelcome(WelcomeConfigurationBuilder configuration)
+        private static void InitializeWelcome(WelcomeConfigurationBuilder welcomeConfiguration)
         {
-            GlobalFilters.Filters.Add(new WelcomeHandlerAttribute(configuration), 0);
+            GlobalFilters.Filters.Add(new WelcomeHandlerAttribute(welcomeConfiguration), 0);
         }
 
 
-        private static void InitializeSecurity(SecurityConfigurationBuilder configuration)
+        private static void InitializeSecurity(SecurityConfigurationBuilder securityConfiguration)
         {
-            GlobalFilters.Filters.Add(new SecurityHandlerAttribute(configuration), 0);
+            GlobalFilters.Filters.Add(new SecurityHandlerAttribute(securityConfiguration), 0);
         }
 
         private static void InitializeMapping()
         {
-            ModelMappingManager.LoadFrom(ModelAssemblies.Assemblies);
+            ModelMappingManager.LoadFromConfiguration();
         }
 
         private static void InitializeValidatorProviders()

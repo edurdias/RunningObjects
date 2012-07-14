@@ -1,6 +1,6 @@
 namespace RunningObjects.MVC.Mapping
 {
-    public class QueryMapping : IElementMapping
+    public class QueryMapping : IMappingElement
     {
         public string ID { get; set; }
 
@@ -8,7 +8,7 @@ namespace RunningObjects.MVC.Mapping
 
         public TypeMapping Type { get; set; }
 
-        public IElementMapping Parent
+        public IMappingElement Parent
         {
             get { return Type; }
         }

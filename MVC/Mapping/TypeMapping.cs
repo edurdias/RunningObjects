@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using RunningObjects.MVC.Mapping.Configuration;
 
 namespace RunningObjects.MVC.Mapping
 {
-    public class TypeMapping : IElementMapping
+    public class TypeMapping : IMappingElement
     {
         private IEnumerable<MethodMapping> constructors;
         private IEnumerable<MethodMapping> staticMethods;
@@ -56,12 +57,14 @@ namespace RunningObjects.MVC.Mapping
             set { queries = value; }
         }
 
-        public IElementMapping Parent
+        public IMappingElement Parent
         {
             get { return !Namespace.IsRoot ? Namespace : null; }
         }
 
         public bool Visible { get; set; }
+
+        public TypeMappingConfiguration Configuration { get; set; }
 
         public override bool Equals(object obj)
         {

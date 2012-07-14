@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace RunningObjects.MVC.Mapping
 {
-    public class MethodMapping : IElementMapping
+    public class MethodMapping : IMappingElement
     {
         private IEnumerable<ParameterInfo> parameters;
 
@@ -28,7 +28,7 @@ namespace RunningObjects.MVC.Mapping
 
         public RunningObjectsAction UnderlineAction { get; internal set; }
 
-        public IElementMapping Parent
+        public IMappingElement Parent
         {
             get { return Type; }
         }

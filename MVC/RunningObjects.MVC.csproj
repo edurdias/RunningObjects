@@ -63,7 +63,9 @@
     <Compile Include="Caching\CachedPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ConfigurationBuilder.cs" />
+    <Compile Include="Configuration\ConfigurationBuilder.cs" />
+    <Compile Include="Configuration\WelcomeConfigurationBuilder.cs" />
+    <Compile Include="Configuration\WelcomeHandlerAttribute.cs" />
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\PresentationControllerBase.cs" />
@@ -81,7 +83,10 @@
     <Compile Include="Logging\DefaultLoggingProvider.cs" />
     <Compile Include="Logging\LoggingProvider.cs" />
     <Compile Include="Logging\LoggingProviders.cs" />
-    <Compile Include="Mapping\IElementMapping.cs" />
+    <Compile Include="Mapping\Configuration\AssemblyMappingConfiguration.cs" />
+    <Compile Include="Mapping\Configuration\MappingConfiguration.cs" />
+    <Compile Include="Mapping\Configuration\TypeMappingConfiguration.cs" />
+    <Compile Include="Mapping\IMappingElement.cs" />
     <Compile Include="Mapping\MethodMapping.cs" />
     <Compile Include="Mapping\ModelMappingManager.cs" />
     <Compile Include="Mapping\NamespaceMapping.cs" />
@@ -90,7 +95,6 @@
     <Compile Include="Member.cs" />
     <Compile Include="MemberExtensions.cs" />
     <Compile Include="Model.cs" />
-    <Compile Include="ModelAssemblies.cs" />
     <Compile Include="ModelBinder.cs" />
     <Compile Include="MethodDescriptor.cs" />
     <Compile Include="MethodBinder.cs" />
@@ -98,6 +102,9 @@
     <Compile Include="ModelDescriptor.cs" />
     <Compile Include="ModelExtensions.cs" />
     <Compile Include="NotScaffoldAttribute.cs" />
+    <Compile Include="Persistence\EmptyRepository.cs" />
+    <Compile Include="Persistence\EntityFrameworkRepository.cs" />
+    <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="QueryAttribute.cs" />
     <Compile Include="RunningObjectsViewEngineExtensions.cs" />
     <Compile Include="RunningObjectsSetup.cs" />
@@ -152,8 +159,6 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ParameterUIHintAttribute.cs" />
     <Compile Include="ValidationContextExtensions.cs" />
-    <Compile Include="WelcomeConfigurationBuilder.cs" />
-    <Compile Include="WelcomeHandlerAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

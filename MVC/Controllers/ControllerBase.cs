@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Reflection;
@@ -119,30 +117,30 @@ namespace RunningObjects.MVC.Controllers
         #region Base Actions
         protected Query.Query GetQueryById(Type modelType)
         {
-            var context = ModelAssemblies.GetContext(modelType);
-            var source = context.Set(modelType);
+            var mapping = ModelMappingManager.MappingFor(modelType);
+            var source = mapping.Configuration.Repository().All();
             var query = QueryParser.Parse(modelType, source, Request["q"]);
             return query;
         }
 
         protected Query.Query GetDefaultQueryOf(Type modelType)
         {
-            var context = ModelAssemblies.GetContext(modelType);
-            var source = context.Set(modelType);
+            var mapping = ModelMappingManager.MappingFor(modelType);
+            var source = mapping.Configuration.Repository().All();
             var query = QueryParser.Parse(modelType, source);
             return query;
         }
 
         protected ActionResult CreateInstanceOf(Type modelType, Method method, Func<object, ActionResult> onSuccess, Func<Exception, ActionResult> onException)
         {
-            using (var context = ModelAssemblies.GetContext(modelType))
+            var mapping = ModelMappingManager.MappingFor(modelType);
+            using (var repository = mapping.Configuration.Repository())
             {
                 try
                 {
                     var instance = method.Invoke(null);
-                    var set = context.Set(modelType);
-                    set.Add(instance);
-                    context.SaveChanges();
+                    repository.Add(instance);
+                    repository.SaveChanges();
                     return onSuccess(instance);
                 }
                 catch (Exception ex)
@@ -155,33 +153,26 @@ namespace RunningObjects.MVC.Controllers
 
         protected static object GetInstanceOf(Type modelType, object key, ModelDescriptor descriptor)
         {
-            var context = ModelAssemblies.GetContext(modelType);
-            var set = context.Set(modelType);
-            //context.Configuration.ProxyCreationEnabled = false;
-            context.Configuration.LazyLoadingEnabled = true;
-            var instance = set.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
-            //context.Configuration.ProxyCreationEnabled = true;
-            return instance;
+            var mapping = ModelMappingManager.MappingFor(modelType);
+            return mapping.Configuration.Repository().Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
         }
 
         protected ActionResult EditInstanceOf(Type modelType, Model model, Func<object, ActionResult> onSuccess, Func<Exception, ActionResult> onException, Func<ActionResult> onNotFound)
         {
-            using (var context = ModelAssemblies.GetContext(modelType))
+            var mapping = ModelMappingManager.MappingFor(modelType);
+            using (var repository = mapping.Configuration.Repository())
             {
                 try
                 {
                     if (model.Instance == null)
                         return onNotFound();
 
-                    var set = context.Set(modelType);
-                    var attached = set.Attach(model.Instance);
-
-                    if (attached == null)
+                    var updated = repository.Update(model.Instance);
+                    if (updated == null)
                         return onNotFound();
 
-                    context.Entry(attached).State = EntityState.Modified;
-                    context.SaveChanges();
-                    return onSuccess(attached);
+                    repository.SaveChanges();
+                    return onSuccess(updated);
                 }
                 catch (Exception ex)
                 {
@@ -193,19 +184,19 @@ namespace RunningObjects.MVC.Controllers
 
         protected ActionResult DeleteInstanceOf(Type modelType, object key, Func<ActionResult> onSuccess, Func<Exception, ActionResult> onException, Func<ActionResult> onNotFound)
         {
-            using (var context = ModelAssemblies.GetContext(modelType))
+            var mapping = ModelMappingManager.MappingFor(modelType);
+            using (var repository = mapping.Configuration.Repository())
             {
                 try
                 {
-                    var set = context.Set(modelType);
-                    var descriptor = new ModelDescriptor(ModelMappingManager.FindByType(modelType));
-                    var instance = set.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
+                    var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(modelType));
+                    var instance = repository.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
 
                     if (instance == null)
                         return onNotFound();
 
-                    set.Remove(instance);
-                    context.SaveChanges();
+                    repository.Remove(instance);
+                    repository.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -218,22 +209,22 @@ namespace RunningObjects.MVC.Controllers
 
         protected ActionResult ExecuteMethodOf(Type modelType, Method model, Func<ActionResult> onSuccess, Func<object, ActionResult> onSuccessWithReturn, Func<Exception, ActionResult> onException, Func<ActionResult> onNotFound, string key = null)
         {
-            using (var context = ModelAssemblies.GetContext(modelType))
+            var mapping = ModelMappingManager.MappingFor(modelType);
+            using (var repository = mapping.Configuration.Repository())
             {
                 try
                 {
                     object @return;
                     if (!model.Descriptor.Method.IsStatic)
                     {
-                        var descriptor = new ModelDescriptor(ModelMappingManager.FindByType(modelType));
-                        var set = context.Set(modelType);
-                        var instance = set.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
+                        var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(modelType));
+                        var instance = repository.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
 
                         if (instance == null)
                             return onNotFound();
 
                         @return = model.Invoke(instance);
-                        context.SaveChanges();
+                        repository.SaveChanges();
 
                         if (@return == instance)
                             @return = null;
@@ -267,7 +258,7 @@ namespace RunningObjects.MVC.Controllers
                         var returnType = collectionType.GetGenericArguments()[0];
                         if (returnType != null && ModelMappingManager.Exists(returnType))
                         {
-                            var mapping = ModelMappingManager.FindByType(returnType);
+                            var mapping = ModelMappingManager.MappingFor(returnType);
                             var descriptor = new ModelDescriptor(mapping);
                             return new ModelCollection(returnType, descriptor, (IEnumerable)@return);
                         }

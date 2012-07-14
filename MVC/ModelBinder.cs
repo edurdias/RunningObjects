@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Data;
 using System.Globalization;
 using System.Web.Mvc;
 using RunningObjects.MVC.Mapping;
@@ -14,13 +13,12 @@ namespace RunningObjects.MVC
             var modelType = ModelBinders.Binders[typeof(Type)].BindModel(controllerContext, bindingContext) as Type;
 
             var key = controllerContext.RouteData.Values["key"];
-            var mapping = ModelMappingManager.FindByType(modelType);
+            var mapping = ModelMappingManager.MappingFor(modelType);
             var descriptor = new ModelDescriptor(mapping);
 
-            using (var context = ModelAssemblies.GetContext(modelType))
+            using (var repository = mapping.Configuration.Repository())
             {
-                var set = context.Set(modelType);
-                var instance = set.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
+                var instance = repository.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
 
                 var model = new Model(modelType, descriptor, instance);
                 foreach (var property in model.Properties)
@@ -39,14 +37,15 @@ namespace RunningObjects.MVC
                         }
                         else
                         {
-                            var propertyTypeMapping = ModelMappingManager.FindByType(property.MemberType);
+                            var propertyTypeMapping = ModelMappingManager.MappingFor(property.MemberType);
                             var propertyDescriptor = new ModelDescriptor(propertyTypeMapping);
                             var propertyValue = result.ConvertTo(propertyDescriptor.KeyProperty.PropertyType);
-                            property.Value = context.Set(property.MemberType).Find(propertyValue);
+                            property.Value = repository.Find(propertyValue);
                         }
                     }
                 }
-                context.Entry(model.Instance).State = EntityState.Detached;
+                //TODO:Check detaching with Repository pattern
+                //context.Entry(model.Instance).State = EntityState.Detached;
                 return model; 
             }
         }

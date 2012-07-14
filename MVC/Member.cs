@@ -26,7 +26,7 @@ namespace RunningObjects.MVC
                     if (underliningModel == null)
                     {
                         var type = IsModel ? MemberType : GetElementType(MemberType);
-                        var mapping = ModelMappingManager.FindByType(type);
+                        var mapping = ModelMappingManager.MappingFor(type);
                         var descriptor = new ModelDescriptor(mapping);
                         underliningModel = new Model(type, descriptor, Value);
                     }

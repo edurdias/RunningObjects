@@ -1,5 +1,5 @@
 using System.Web.Mvc;
-using System.Collections.Generic;
+using RunningObjects.MVC.Mapping.Configuration;
 
 namespace RunningObjects.MVC
 {
@@ -13,14 +13,14 @@ namespace RunningObjects.MVC
             if (result != null)
             {
                 var partialTypeName = result.AttemptedValue;
-                foreach (var pair in ModelAssemblies.Assemblies)
+                foreach (var pair in MappingConfiguration.Assemblies)
                 {
                     var typeName = ConvertTypeName(string.Format("{0}.{1}", pair.Key, partialTypeName));
-                    foreach (var asmType in pair.Value.GetTypes())
+                    foreach (var asmType in pair.Value.Types)
                     {
-                        var asmTypeName = ConvertTypeName(asmType.FullName);
+                        var asmTypeName = ConvertTypeName(asmType.UnderlineType.FullName);
                         if (typeName == asmTypeName)
-                            return asmType;
+                            return asmType.UnderlineType;
                     }
                 }
                 throw new RunningObjectsException(string.Format("Model type '{0}' cannot be found. Please check the correct type name.", partialTypeName));

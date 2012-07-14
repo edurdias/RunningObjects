@@ -1,6 +1,5 @@
 ﻿using RunningObjects.MVC;
-using System.Web.Mvc;
-using System.Web.Routing;
+using RunningObjects.MVC.Persistence;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.RunningObjectsBootstrapper), "Start")]
 namespace $rootnamespace$
@@ -9,14 +8,16 @@ namespace $rootnamespace$
     {
         public static void Start()
         {
-            //ModelAssemblies.Add
-            //(
-            //    typeof(MyContext).Namespace, // Root Namespace
-            //    Assembly.GetAssembly(typeof(MyContext)), // Assembly
-            //    () => new MyContext() // Entity Framework Context
-            //);
-
-            RunningObjectsSetup.Initialize();
+            RunningObjectsSetup.Initialize(config =>
+            {
+                //var referenceType = typeof(MyDomainClass);
+                //config.Mapping.MapAssembly
+                //(
+                //    referenceType.Assembly, 
+                //    referenceType.Namespace, 
+                //    type => new EntityFrameworkRepository(type, new MyDbContext())
+                //);
+            });
         }
     }
 }

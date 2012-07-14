@@ -91,7 +91,7 @@ namespace RunningObjects.MVC.Query
                 }
                 else
                 {
-                    var mapping = ModelMappingManager.FindByType(ModelType);
+                    var mapping = ModelMappingManager.MappingFor(ModelType);
                     var descriptor = new ModelDescriptor(mapping);
 
                     if (descriptor.Properties.Any())
