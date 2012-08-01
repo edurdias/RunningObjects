@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Linq;
 
 namespace RunningObjects.MVC.Persistence
@@ -32,7 +31,7 @@ namespace RunningObjects.MVC.Persistence
 
         public IQueryable All()
         {
-            return new ArrayList().AsQueryable();
+            return default(IQueryable);
         }
 
         public void Dispose()

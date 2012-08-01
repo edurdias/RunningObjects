@@ -18,6 +18,7 @@ namespace RunningObjects.MVC.Mapping.Configuration
             Assembly = assembly;
             RootNamespace = rootNamespace;
             Types = assembly.GetTypes().Where(TypePredicate).Select(t => new TypeMappingConfiguration(t, this)).ToList();
+            UseThisRepository(type => new EmptyRepository<object>());
         }
 
         public string RootNamespace { get; set; }

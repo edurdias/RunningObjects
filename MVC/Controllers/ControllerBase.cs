@@ -119,8 +119,9 @@ namespace RunningObjects.MVC.Controllers
         {
             var mapping = ModelMappingManager.MappingFor(modelType);
             var source = mapping.Configuration.Repository().All();
-            var query = QueryParser.Parse(modelType, source, Request["q"]);
-            return query;
+            return source != null 
+                ? QueryParser.Parse(modelType, source, Request["q"]) 
+                : QueryParser.Empty(modelType);
         }
 
         protected Query.Query GetDefaultQueryOf(Type modelType)
@@ -133,21 +134,22 @@ namespace RunningObjects.MVC.Controllers
 
         protected ActionResult CreateInstanceOf(Type modelType, Method method, Func<object, ActionResult> onSuccess, Func<Exception, ActionResult> onException)
         {
-            var mapping = ModelMappingManager.MappingFor(modelType);
-            using (var repository = mapping.Configuration.Repository())
+            try
             {
-                try
+                var instance = method.Invoke(null);
+
+                var mapping = ModelMappingManager.MappingFor(modelType);
+                using (var repository = mapping.Configuration.Repository())
                 {
-                    var instance = method.Invoke(null);
                     repository.Add(instance);
                     repository.SaveChanges();
                     return onSuccess(instance);
                 }
-                catch (Exception ex)
-                {
-                    HandleException(ex);
-                    return onException(ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+                return onException(ex);
             }
         }
 

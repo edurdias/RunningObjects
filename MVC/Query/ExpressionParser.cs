@@ -871,8 +871,7 @@ namespace RunningObjects.MVC.Query
             }
             MemberInfo member = FindPropertyOrField(type, id, instance == null);
             if (member == null)
-                throw ParseError(errorPos, Res.UnknownPropertyOrField,
-                                 id, GetTypeName(type));
+                throw ParseError(errorPos, Res.UnknownPropertyOrField, id, GetTypeName(type));
             return member is PropertyInfo ?
                                               Expression.Property(instance, (PropertyInfo)member) :
                                                                                                       Expression.Field(instance, (FieldInfo)member);
@@ -1078,14 +1077,12 @@ namespace RunningObjects.MVC.Query
                               opName, GetTypeName(left.Type), GetTypeName(right.Type));
         }
 
-        MemberInfo FindPropertyOrField(Type type, string memberName, bool staticAccess)
+        static MemberInfo FindPropertyOrField(Type type, string memberName, bool staticAccess)
         {
-            BindingFlags flags = BindingFlags.Public | BindingFlags.DeclaredOnly |
-                                 (staticAccess ? BindingFlags.Static : BindingFlags.Instance);
-            foreach (Type t in SelfAndBaseTypes(type))
+            var flags = BindingFlags.Public | BindingFlags.DeclaredOnly | (staticAccess ? BindingFlags.Static : BindingFlags.Instance);
+            foreach (var t in SelfAndBaseTypes(type))
             {
-                MemberInfo[] members = t.FindMembers(MemberTypes.Property | MemberTypes.Field,
-                                                     flags, Type.FilterNameIgnoreCase, memberName);
+                var members = t.FindMembers(MemberTypes.Property | MemberTypes.Field, flags, Type.FilterNameIgnoreCase, memberName);
                 if (members.Length != 0) return members[0];
             }
             return null;

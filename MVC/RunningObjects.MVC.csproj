@@ -104,6 +104,7 @@
     <Compile Include="NotScaffoldAttribute.cs" />
     <Compile Include="Persistence\EmptyRepository.cs" />
     <Compile Include="Persistence\EntityFrameworkRepository.cs" />
+    <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="QueryAttribute.cs" />
     <Compile Include="RunningObjectsViewEngineExtensions.cs" />

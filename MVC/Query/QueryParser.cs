@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using RunningObjects.MVC.Mapping;
@@ -7,6 +9,14 @@ namespace RunningObjects.MVC.Query
 {
     public static class QueryParser
     {
+        public static Query Empty(Type modelType)
+        {
+            var prototype = typeof (List<>);
+            var genericType = prototype.MakeGenericType(modelType);
+            var source = Activator.CreateInstance(genericType) as IEnumerable;
+            return new Query(modelType, source.AsQueryable());
+        }
+
         public static Query Parse(Type modelType, IQueryable source)
         {
             var queries = modelType.GetCustomAttributes(true).OfType<QueryAttribute>();

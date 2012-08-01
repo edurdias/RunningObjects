@@ -1,6 +1,6 @@
 ﻿@using RunningObjects.MVC
 @using RunningObjects.MVC.Html
-@model ModelCollection
+@model RunningObjects.MVC.ModelCollection
 <div id="deleteModal" class="modal hide">
     <div class="modal-header">
         <button class="close" data-dismiss="modal">
@@ -13,10 +13,10 @@
     </div>
     <div class="modal-footer">
         <form id="deleteForm" action="@Url.Action("Delete", "Presentation", new { key = "k" })" method="POST" class="form-inline" style="margin:0;">
-        <button class="btn" data-dismiss="modal">
-            Cancel</button>
-        <button class="btn btn-danger">
-            Delete</button>
+            <button class="btn" data-dismiss="modal">
+                Cancel</button>
+            <button class="btn btn-danger">
+                Delete</button>
         </form>
     </div>
 </div>

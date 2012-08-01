@@ -26,9 +26,10 @@ namespace RunningObjects.MVC
                         parameter.Value = result.ConvertTo(parameter.MemberType);
                     else
                     {
-                        var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(parameter.MemberType));
+                        var memberMapping = ModelMappingManager.MappingFor(parameter.MemberType);
+                        var descriptor = new ModelDescriptor(memberMapping);
                         var value = result.ConvertTo(descriptor.KeyProperty.PropertyType);
-                        parameter.Value = mapping.Type.Configuration.Repository().Find(value);
+                        parameter.Value = memberMapping.Configuration.Repository().Find(value);
                     }
                 }
             }

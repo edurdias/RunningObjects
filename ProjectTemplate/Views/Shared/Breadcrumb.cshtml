@@ -1,8 +1,8 @@
 ﻿@using RunningObjects.MVC.Mapping
-@model IElementMapping
+@model IMappingElement
 @if(Model != null)
 {
-    var reversed = new List<IElementMapping>();
+    var reversed = new List<IMappingElement>();
     var parent = Model.Parent;
     while(parent != null && parent.Visible)
     {
