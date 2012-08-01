@@ -256,9 +256,16 @@ namespace RunningObjects.MVC.Query
                         }
                         else
                             capv = propDesc.GetValue(attr);
-                        caPropertyValues.Add(capv != null
-                                                 ? Convert.ChangeType(capv, propDesc.PropertyType)
-                                                 : GetDefault(propDesc.PropertyType));
+
+                        if (capv == null)
+                            caPropertyValues.Add(GetDefault(propDesc.PropertyType));
+                        else
+                        {
+                            var item = propDesc.PropertyType == typeof(Guid)
+                                ? Guid.Parse(capv.ToString())
+                                : Convert.ChangeType(capv, propDesc.PropertyType);
+                            caPropertyValues.Add(item);
+                        }
                     }
                 }
                 try

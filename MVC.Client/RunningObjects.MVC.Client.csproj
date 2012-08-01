@@ -78,6 +78,7 @@
     <Compile Include="RunningObjectsBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\AdventureWorks.mdf" />
     <Content Include="App_Data\NORTHWND.MDF" />
     <Content Include="App_Data\NORTHWND_log.ldf">
       <DependentUpon>NORTHWND.MDF</DependentUpon>

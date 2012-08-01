@@ -18,7 +18,10 @@ namespace RunningObjects.MVC
 
             using (var repository = mapping.Configuration.Repository())
             {
-                var instance = repository.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
+                var keyValues = descriptor.KeyProperty.PropertyType == typeof (Guid)
+                    ? Guid.Parse(key.ToString())
+                    : Convert.ChangeType(key, descriptor.KeyProperty.PropertyType);
+                var instance = repository.Find(keyValues);
 
                 var model = new Model(modelType, descriptor, instance);
                 foreach (var property in model.Properties)

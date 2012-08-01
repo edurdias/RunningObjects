@@ -35,7 +35,10 @@ namespace RunningObjects.MVC
                     var parameterType = p.Descriptor.ParameterType;
                     if (parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof (Nullable<>))
                         parameterType = parameterType.GetGenericArguments()[0];
-                    return Convert.ChangeType(p.Value, parameterType);
+
+                    return parameterType == typeof (Guid)
+                               ? Guid.Parse(p.Value.ToString())
+                               : Convert.ChangeType(p.Value, parameterType);
                 }
                 return p.Value;
             }).ToArray();

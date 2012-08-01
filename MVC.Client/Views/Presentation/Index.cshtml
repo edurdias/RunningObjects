@@ -55,7 +55,7 @@
                                 foreach (var method in Model.Descriptor.ModelMapping.InstanceMethods)
                                 {
                                 <li>
-                                    @Html.ActionLink(method.Name, Model.ModelType, RunningObjectsAction.Execute, new { key = item.KeyValue, methodName = method.Name, index = method.Index })
+                                    @Html.ActionLink(method.Name, Model.ModelType, RunningObjectsAction.Execute, new { key = item.KeyValue, methodName = method.MethodName, index = method.Index })
                                 </li>
                                 }
                                 <li class="divider"></li>

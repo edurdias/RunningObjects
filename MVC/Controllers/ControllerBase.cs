@@ -155,8 +155,16 @@ namespace RunningObjects.MVC.Controllers
 
         protected static object GetInstanceOf(Type modelType, object key, ModelDescriptor descriptor)
         {
-            var mapping = ModelMappingManager.MappingFor(modelType);
-            return mapping.Configuration.Repository().Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
+            return ModelMappingManager.MappingFor(modelType).Configuration.Repository().Find(GetKeyValues(key, descriptor));
+        }
+
+        private static object GetKeyValues(object key, ModelDescriptor descriptor)
+        {
+            var keyProperty = descriptor.KeyProperty;
+            var keyValues = keyProperty.PropertyType == typeof (Guid)
+                                ? Guid.Parse(key.ToString())
+                                : Convert.ChangeType(key, keyProperty.PropertyType);
+            return keyValues;
         }
 
         protected ActionResult EditInstanceOf(Type modelType, Model model, Func<object, ActionResult> onSuccess, Func<Exception, ActionResult> onException, Func<ActionResult> onNotFound)
@@ -192,7 +200,7 @@ namespace RunningObjects.MVC.Controllers
                 try
                 {
                     var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(modelType));
-                    var instance = repository.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
+                    var instance = repository.Find(GetKeyValues(key, descriptor));
 
                     if (instance == null)
                         return onNotFound();
@@ -220,7 +228,7 @@ namespace RunningObjects.MVC.Controllers
                     if (!model.Descriptor.Method.IsStatic)
                     {
                         var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(modelType));
-                        var instance = repository.Find(Convert.ChangeType(key, descriptor.KeyProperty.PropertyType));
+                        var instance = repository.Find(GetKeyValues(key, descriptor));
 
                         if (instance == null)
                             return onNotFound();
