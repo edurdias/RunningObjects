@@ -44,6 +44,7 @@
                                 }
                             </ul>
                             <div class="tab-content" style="margin: 0;">
+                                
                                 @foreach (var property in Model.Properties.Where(p => p.IsModelCollection && p.Metadata.ShowForDisplay))
                                 {
                                     <div class="tab-pane" id="@property.Descriptor.Name">
@@ -63,6 +64,16 @@
                         <i class="icon-edit icon-white"></i>&nbsp;Edit </a>
                     <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                         <i class="icon-trash icon-white"></i>&nbsp;Delete</button>
+
+                    @if (Model.Descriptor.ModelMapping.InstanceMethods.Any())
+                    { 
+                        foreach (var method in Model.Descriptor.ModelMapping.InstanceMethods)
+                        {
+                            <a class="btn" href="@Url.Action(Model.ModelType, method.UnderlineAction, new { key = Model.KeyValue, methodName = method.MethodName })">
+                                @method.Name
+                            </a>
+                        }
+                    }
                 </th>
             </tr>
         </tfoot>

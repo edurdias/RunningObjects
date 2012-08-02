@@ -1248,3 +1248,86 @@ The statement has been terminated.
 2012-04-27 21:28:32.4454|INFO|Index:Executed:GET:/Category:200
 2012-04-27 21:28:35.4166|INFO|Execute:Executing:GET:/Category/1/ShowProducts
 2012-04-27 21:28:35.4286|INFO|Execute:Executed:GET:/Category/1/ShowProducts:200
+2012-08-02 14:11:59.4590|INFO|Welcome:Executing:GET:/
+2012-08-02 14:11:59.4960|INFO|Welcome:Executed:GET:/:200
+2012-08-02 14:12:03.0832|ERROR|Index:Error:GET:/favicon.ico: Model type 'favicon.ico' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:12:12.6748|INFO|Execute:Executing:GET:/User/Login
+2012-08-02 14:12:12.6788|INFO|Execute:Executed:GET:/User/Login:200
+2012-08-02 14:12:14.2329|ERROR|Execute:Error:GET:/Scripts/jquery-ui-1.8.11.min.js: Model type 'Scripts' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:12:14.2659|ERROR|Execute:Error:GET:/Scripts/modernizr-1.7.min.js: Model type 'Scripts' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:12:14.4949|ERROR|Index:Error:GET:/favicon.ico: Model type 'favicon.ico' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:12:28.8077|ERROR|Index:Error:GET:/favicon.ico: Model type 'favicon.ico' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:12:37.2652|INFO|Execute:Executing:GET:/User/Register
+2012-08-02 14:12:37.2652|INFO|Execute:Executed:GET:/User/Register:200
+2012-08-02 14:12:37.8162|ERROR|Index:Error:GET:/favicon.ico: Model type 'favicon.ico' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:12:42.3555|INFO|Index:Executing:GET:/User?q=4101b1c75f894dd89a6f9ee3e63bed70
+2012-08-02 14:13:04.5477|INFO|Index:Executed:GET:/User?q=4101b1c75f894dd89a6f9ee3e63bed70:200
+2012-08-02 14:13:04.5497|ERROR|Index:Error:GET:/User?q=4101b1c75f894dd89a6f9ee3e63bed70: Failed to generate a user instance of SQL Server due to a failure in starting the process for the user instance. The connection will be closed. 
+    at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, SqlConnection owningObject)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, Boolean redirectedUserInstance, SqlConnection owningObject, SqlConnectionString connectionOptions, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(SqlConnection owningObject, TimeoutTimer timeout, SqlConnectionString connectionOptions, String newPassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, Object providerInfo, String newPassword, SqlConnection owningObject, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnection owningConnection, DbConnectionPool pool, DbConnectionOptions options)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionPool.GetConnection(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at System.Data.SqlClient.SqlProviderServices.UsingConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.UsingMasterConnection(SqlConnection sqlConnection, Action`1 act)
+   at System.Data.SqlClient.SqlProviderServices.GetDbProviderManifestToken(DbConnection connection)
+   at System.Data.Common.DbProviderServices.GetProviderManifestToken(DbConnection connection)
+2012-08-02 14:13:04.8668|ERROR|Index:Error:GET:/favicon.ico: Model type 'favicon.ico' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:14:50.3058|INFO|Execute:Executing:GET:/User/Register
+2012-08-02 14:14:50.3058|ERROR|Index:Error:GET:/favicon.ico: Model type 'favicon.ico' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:14:50.3198|INFO|Execute:Executed:GET:/User/Register:200
+2012-08-02 14:14:52.0049|ERROR|Index:Error:GET:/favicon.ico: Model type 'favicon.ico' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2012-08-02 14:46:54.7949|INFO|Create:Executing:GET:/Products.Category/Create
+2012-08-02 14:46:54.7949|INFO|Create:Executed:GET:/Products.Category/Create:200
+2012-08-02 14:46:55.3039|ERROR|Index:Error:GET:/favicon.ico: Model type 'favicon.ico' cannot be found. Please check the correct type name. 
+    at RunningObjects.MVC.TypeBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) in C:\Users\Eduardo\Development\RunningObjects\RunningObjects\MVC\TypeBinder.cs:line 26
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)

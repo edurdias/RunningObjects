@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <version>1.0.9</version>
+    <version>1.1.0</version>
     <authors>Eduardo Dias</authors>
     <owners />
     <licenseUrl>http://www.opensource.org/licenses/ms-pl</licenseUrl>
@@ -27,7 +27,5 @@ It’s built on top of ASP.NET MVC using a refined mix of concepts such as Domai
     <file src=".\RunningObjects.MVC.dll" target="lib\net40\RunningObjects.MVC.dll" />
     <file src=".\web.config.transform" target="content\web.config.transform" />
     <file src=".\RunningObjectsBootstrapper.cs.pp" target="content\RunningObjectsBootstrapper.cs.pp" />
-    <file src=".\Controllers\PresentationController.cs.pp" target="content\Controllers\PresentationController.cs.pp" />
-    <file src=".\Controllers\ServiceController.cs.pp" target="content\Controllers\ServiceController.cs.pp" />
   </files>
 </package>

@@ -17,6 +17,7 @@ namespace RunningObjects.MVC
         }
         public static void Initialize(Action<ConfigurationBuilder> expression)
         {
+            InitializeControllerFactory();
             InitializeViewEngine();
             InitializeBinders();
             InitializeMetadataProvider();
@@ -26,6 +27,11 @@ namespace RunningObjects.MVC
             InitializeWelcome(Configuration.Welcome);
             InitializeSecurity(Configuration.Security);
             InitializeMapping();
+        }
+
+        private static void InitializeControllerFactory()
+        {
+            ControllerBuilder.Current.DefaultNamespaces.Add(typeof(Controllers.ControllerBase).Namespace);
         }
 
         #region Initialization Steps

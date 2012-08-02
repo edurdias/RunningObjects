@@ -68,8 +68,8 @@
     <Compile Include="Configuration\WelcomeHandlerAttribute.cs" />
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
-    <Compile Include="Controllers\PresentationControllerBase.cs" />
-    <Compile Include="Controllers\ServiceControllerBase.cs" />
+    <Compile Include="Controllers\PresentationController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Data\RunningObjectsDbContext.cs" />
     <Compile Include="Html\DisplayExtensions.cs" />
     <Compile Include="Html\EditorExtensions.cs" />
