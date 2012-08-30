@@ -114,9 +114,7 @@ namespace RunningObjects.MVC.Controllers
                 protected override JsonProperty CreateProperty(System.Reflection.MemberInfo member, MemberSerialization memberSerialization)
                 {
                     var property = base.CreateProperty(member, memberSerialization);
-                    property.ShouldSerialize =
-                        o => !member.GetCustomAttributes(true).OfType<NotScaffoldAttribute>().Any()
-                             && !member.GetCustomAttributes(true).OfType<ScriptIgnoreAttribute>().Any();
+                    property.ShouldSerialize = o => !member.GetCustomAttributes(true).OfType<ScriptIgnoreAttribute>().Any();
                     return property;
                 }
             }

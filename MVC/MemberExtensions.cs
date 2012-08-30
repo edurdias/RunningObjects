@@ -1,6 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 using RunningObjects.MVC.Mapping;
 using RunningObjects.MVC.Query;
 
@@ -8,26 +9,23 @@ namespace RunningObjects.MVC
 {
     public static class MemberExtensions
     {
-        public static ModelCollection AsCollection(this Member member, ControllerContext controllerContext)
+        public static ModelCollection ToModelCollection(this Member member)
         {
             if (member.IsModelCollection)
             {
                 var model = member.UnderliningModel;
-                
-                var items = default(IQueryable);
-                if (member.Value != null)
-                    items = ((IEnumerable)member.Value).AsQueryable();
-                else if (member is Parameter)
-                {
-                    var mapping = model.Descriptor.ModelMapping;
-                    items = mapping.Configuration.Repository().All();
-                }
-                
-                var attr = member.Attributes.OfType<QueryAttribute>().FirstOrDefault();
-                var result = QueryParser.Parse(model.ModelType, items, attr).Execute(true);
 
-                var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(result.ElementType));
-                return new ModelCollection(model.ModelType, descriptor, result);
+                var items = (member.Value != null)
+                                ? ((IEnumerable)member.Value)
+                                : ((IEnumerable)Activator.CreateInstance(typeof(List<>).MakeGenericType(member.UnderliningModel.ModelType)));
+
+                var attr = member.Attributes.OfType<QueryAttribute>().FirstOrDefault();
+                var result = QueryParser.Parse(model.ModelType, items.AsQueryable(), attr).Execute(true);
+
+                var type = result != null ? result.ElementType : model.ModelType;
+                var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(type));
+                return new ModelCollection(type, descriptor, result);
+
             }
             return null;
         }

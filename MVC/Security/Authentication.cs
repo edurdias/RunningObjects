@@ -15,7 +15,7 @@ namespace RunningObjects.MVC.Security
         public Type Type { get { return typeof(T); } }
 
         private Func<IEnumerable<string>> getRolesFrom;
-        private Func<bool> getStatusFrom;
+        private Func<bool> getAuthenticationStatus;
         private Action logoutWith;
         private MethodInfo loginWith;
 
@@ -32,14 +32,14 @@ namespace RunningObjects.MVC.Security
 
         #region Implementation of IAuthentication<out T>
 
-        public Func<IEnumerable<string>> GetRolesFrom()
+        public Func<IEnumerable<string>> GetRoles()
         {
             return getRolesFrom;
         }
 
-        public Func<bool> GetStatusFrom()
+        public bool IsAuthenticated()
         {
-            return getStatusFrom;
+            return getAuthenticationStatus != null && getAuthenticationStatus();
         }
 
         public Action LogoutWith()
@@ -57,9 +57,9 @@ namespace RunningObjects.MVC.Security
             getRolesFrom = expression;
         }
 
-        public void GetStatusFrom(Func<bool> expression)
+        public void GetAuthenticationStatusFrom(Func<bool> expression)
         {
-            getStatusFrom = expression;
+            getAuthenticationStatus = expression;
         }
 
         public void LogoutWith(Action action)

@@ -21,26 +21,21 @@ namespace RunningObjects.MVC
             InitializeViewEngine();
             InitializeBinders();
             InitializeMetadataProvider();
-            InitializeValidatorProviders();
+            InitializeValidation();
             InitializeRoutes();
             expression(Configuration);
-            InitializeWelcome(Configuration.Welcome);
             InitializeSecurity(Configuration.Security);
             InitializeMapping();
         }
+
+        
+
+        #region Initialization Steps
 
         private static void InitializeControllerFactory()
         {
             ControllerBuilder.Current.DefaultNamespaces.Add(typeof(Controllers.ControllerBase).Namespace);
         }
-
-        #region Initialization Steps
-
-        private static void InitializeWelcome(WelcomeConfigurationBuilder welcomeConfiguration)
-        {
-            GlobalFilters.Filters.Add(new WelcomeHandlerAttribute(welcomeConfiguration), 0);
-        }
-
 
         private static void InitializeSecurity(SecurityConfigurationBuilder securityConfiguration)
         {
@@ -52,7 +47,7 @@ namespace RunningObjects.MVC
             ModelMappingManager.LoadFromConfiguration();
         }
 
-        private static void InitializeValidatorProviders()
+        private static void InitializeValidation()
         {
             ModelValidatorProviders.Providers.Clear();
             ModelValidatorProviders.Providers.Add(new RunningObjectsValidatorProvider());

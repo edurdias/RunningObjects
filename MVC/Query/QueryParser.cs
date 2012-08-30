@@ -39,6 +39,7 @@ namespace RunningObjects.MVC.Query
                 query.Select = ParseSelect(modelType, attr);
                 query.Where = ParseWhere(attr);
                 query.OrderBy = ParseOrderBy(modelType, attr);
+                //query.GroupBy = attr.GroupBy;
                 query.Skip = ParseSkip(attr);
                 query.Take = ParseTake(attr);
                 query.CacheDuration = attr.CacheDuration;

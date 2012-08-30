@@ -17,6 +17,7 @@ namespace RunningObjects.MVC
         {
             Method = mapping.Method;
             Index = mapping.Index;
+            Mapping = mapping;
             AttributeArray = Method.GetCustomAttributes(true).OfType<Attribute>().ToArray();
             parameters.AddRange(Method.GetParameters().Select(info => new ReflectedParameterDescriptor(info, actionDescriptor)));
         }
@@ -25,9 +26,13 @@ namespace RunningObjects.MVC
 
         public int Index { get; private set; }
 
+        public MethodMapping Mapping { get; private set; }
+
         public IEnumerable<ParameterDescriptor> Parameters
         {
             get { return parameters; }
         }
+
+        
     }
 }

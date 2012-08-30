@@ -8,13 +8,13 @@ namespace RunningObjects.MVC.Security
     {
         Type Type { get; }
 
-        Func<IEnumerable<string>> GetRolesFrom();
-        Func<bool> GetStatusFrom();
+        Func<IEnumerable<string>> GetRoles();
+        bool IsAuthenticated();
         Action LogoutWith();
         MethodInfo LoginWith();
 
         void GetRolesFrom(Func<IEnumerable<string>> expression);
-        void GetStatusFrom(Func<bool> expression);
+        void GetAuthenticationStatusFrom(Func<bool> expression);
         void LogoutWith(Action action);
         void LoginWith(Action expression);
         void LoginWith<T1>(Action<T1> expression);

@@ -119,8 +119,8 @@ namespace RunningObjects.MVC.Controllers
         {
             var mapping = ModelMappingManager.MappingFor(modelType);
             var source = mapping.Configuration.Repository().All();
-            return source != null 
-                ? QueryParser.Parse(modelType, source, Request["q"]) 
+            return source != null
+                ? QueryParser.Parse(modelType, source, Request["q"])
                 : QueryParser.Empty(modelType);
         }
 
@@ -136,11 +136,10 @@ namespace RunningObjects.MVC.Controllers
         {
             try
             {
-                var instance = method.Invoke(null);
-
                 var mapping = ModelMappingManager.MappingFor(modelType);
                 using (var repository = mapping.Configuration.Repository())
                 {
+                    var instance = method.Invoke(null);
                     repository.Add(instance);
                     repository.SaveChanges();
                     return onSuccess(instance);
@@ -161,7 +160,7 @@ namespace RunningObjects.MVC.Controllers
         private static object GetKeyValues(object key, ModelDescriptor descriptor)
         {
             var keyProperty = descriptor.KeyProperty;
-            var keyValues = keyProperty.PropertyType == typeof (Guid)
+            var keyValues = keyProperty.PropertyType == typeof(Guid)
                                 ? Guid.Parse(key.ToString())
                                 : Convert.ChangeType(key, keyProperty.PropertyType);
             return keyValues;
@@ -234,13 +233,17 @@ namespace RunningObjects.MVC.Controllers
                             return onNotFound();
 
                         @return = model.Invoke(instance);
-                        repository.SaveChanges();
+                        repository.Update(instance);
 
                         if (@return == instance)
                             @return = null;
                     }
                     else
                         @return = model.Invoke(null);
+
+                    foreach (var parameter in model.Parameters.Where(p => p.IsModel && p.Value != null))
+                        repository.Update(parameter.Value);
+                    repository.SaveChanges();
 
                     if (@return != null)
                         return onSuccessWithReturn(@return);

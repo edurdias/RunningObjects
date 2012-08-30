@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using RunningObjects.MVC.Mapping;
@@ -9,35 +10,46 @@ namespace RunningObjects.MVC
     {
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            var modelType = ModelBinders.Binders[typeof(Type)].BindModel(controllerContext, bindingContext) as Type;
-            var index = int.Parse(controllerContext.RouteData.Values["index"].ToString());
             var actionName = (string)controllerContext.RouteData.Values["action"];
-
-            var mapping = GetMethodMapping(controllerContext, modelType, actionName, index);
+            var mapping = GetMethodMapping(controllerContext, bindingContext, actionName);
 
             var method = new Method(new MethodDescriptor(mapping, controllerContext.GetActionDescriptor(actionName)));
 
             foreach (var parameter in method.Parameters)
             {
-                var result = bindingContext.ValueProvider.GetValue(parameter.Name);
-                if (result != null)
+                ValueProviderResult result;
+                if (parameter.IsModelCollection)
                 {
-                    if (!parameter.IsModel)
-                        parameter.Value = result.ConvertTo(parameter.MemberType);
-                    else
+                    var type = typeof(List<>).MakeGenericType(parameter.UnderliningModel.ModelType);
+                    var collection = Activator.CreateInstance(type);
+                    var index = 0;
+                    while ((result = bindingContext.ValueProvider.GetValue(string.Format("{0}[{1}]", parameter.Name, index))) != null)
                     {
-                        var memberMapping = ModelMappingManager.MappingFor(parameter.MemberType);
-                        var descriptor = new ModelDescriptor(memberMapping);
-                        var value = result.ConvertTo(descriptor.KeyProperty.PropertyType);
-                        parameter.Value = memberMapping.Configuration.Repository().Find(value);
+                        type.GetMethod("Add").Invoke(collection, new[] { ModelBinder.GetModelValue(result, parameter.UnderliningModel.ModelType) });
+                        index++;
+                    }
+                    parameter.Value = collection;
+                }
+                else
+                {
+                    result = bindingContext.ValueProvider.GetValue(parameter.Name);
+                    if (result != null)
+                    {
+                        parameter.Value = !parameter.IsModel
+                            ? ModelBinder.GetNonModelValue(result, parameter.MemberType)
+                            : ModelBinder.GetModelValue(result, parameter.MemberType);
                     }
                 }
             }
             return method;
         }
 
-        private MethodMapping GetMethodMapping(ControllerContext controllerContext, Type modelType, string actionName, int index)
+        
+
+        public static MethodMapping GetMethodMapping(ControllerContext controllerContext, ModelBindingContext bindingContext, string actionName)
         {
+            var modelType = ModelBinders.Binders[typeof(Type)].BindModel(controllerContext, bindingContext) as Type;
+            var index = int.Parse(controllerContext.RouteData.Values["index"].ToString());
             var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
             switch (action)
             {
@@ -63,6 +75,17 @@ namespace RunningObjects.MVC
         {
             var typeMapping = ModelMappingManager.MappingFor(modelType);
             return typeMapping.Constructors.FirstOrDefault(m => m.Index == index);
+        }
+
+        public static ModelBindingContext CreateBindingContext(ControllerContext controllerContext)
+        {
+            return new ModelBindingContext
+            {
+                ModelState = controllerContext.Controller.ViewData.ModelState,
+                ModelMetadata = controllerContext.Controller.ViewData.ModelMetadata,
+                ModelName = "methodName",
+                ValueProvider = controllerContext.Controller.ValueProvider
+            };
         }
     }
 }

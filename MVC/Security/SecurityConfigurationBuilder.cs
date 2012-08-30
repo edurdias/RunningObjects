@@ -4,7 +4,7 @@ using RunningObjects.MVC.Configuration;
 
 namespace RunningObjects.MVC.Security
 {
-    public class SecurityConfigurationBuilder
+    public class SecurityConfigurationBuilder : IDisposable
     {
         private readonly Dictionary<Type, ITypeSecurityConfiguration<Object>> configurations = new Dictionary<Type, ITypeSecurityConfiguration<Object>>();
         private IAuthentication<Object> authentication;
@@ -41,6 +41,12 @@ namespace RunningObjects.MVC.Security
             return For<object>();
         }
 
+        public ISecurityPolicyContainer<object> ForWelcome()
+        {
+            var welcome = ForEverything();
+            return welcome.OnWelcome();
+        }
+
         public bool Exists(Type type)
         {
             return configurations.ContainsKey(type);
@@ -62,7 +68,7 @@ namespace RunningObjects.MVC.Security
             return null;
         }
 
-        internal bool IsAuthenticationConfigured
+        public bool IsAuthenticationConfigured
         {
             get { return authentication != null; }
         }
@@ -74,6 +80,8 @@ namespace RunningObjects.MVC.Security
             return (IAuthentication<T>)authentication;
         }
 
-
+        public void Dispose()
+        {
+        }
     }
 }

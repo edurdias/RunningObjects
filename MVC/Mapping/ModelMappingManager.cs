@@ -53,7 +53,7 @@ namespace RunningObjects.MVC.Mapping
                 {
                     case RunningObjectsAction.Index:
                         var queryId = controllerContext.HttpContext.Request["q"];
-                        return currentType.Queries.FirstOrDefault(q => q.ID == queryId) 
+                        return currentType.Queries.FirstOrDefault(q => q.ID == queryId)
                             ?? currentType.Queries.FirstOrDefault();
                     case RunningObjectsAction.Create:
                         var constructorIndex = int.Parse(controllerContext.RouteData.Values["index"].ToString());
@@ -156,27 +156,28 @@ namespace RunningObjects.MVC.Mapping
                                : type.Name;
 
             var scaffold = attributes.OfType<ScaffoldTableAttribute>().FirstOrDefault();
-            mapping.Visible = scaffold == null || scaffold.Scaffold;
+            mapping.Visible = (scaffold == null || scaffold.Scaffold) && !type.GetCustomAttributes(false).OfType<ScriptOnlyAttribute>().Any();
 
-            var properties = TypeDescriptor.GetProperties(type).OfType<PropertyDescriptor>();
-
-            mapping.Properties = properties;
-            mapping.Key = properties.FirstOrDefault(p => p.Attributes.OfType<KeyAttribute>().Any());
-            mapping.Text = properties.FirstOrDefault(p => p.Attributes.OfType<TextAttribute>().Any());
-
+            var properties = OrderProperties(type, TypeDescriptor.GetProperties(type).OfType<PropertyDescriptor>());
 
             var ignoredNames = new List<string>
-                {
-                    "Equals",
-                    "GetHashCode",
-                    "ToString",
-                    "GetType"
-                };
+            {
+                "Equals",
+                "GetHashCode",
+                "ToString",
+                "GetType",
+                "ReferenceEquals"
+            };
+
             foreach (var property in properties)
             {
                 ignoredNames.Add("get_" + property.Name);
                 ignoredNames.Add("set_" + property.Name);
             }
+
+            mapping.Properties = properties.Where(p => !p.Attributes.OfType<ScriptOnlyAttribute>().Any());
+            mapping.Key = properties.FirstOrDefault(p => p.Attributes.OfType<KeyAttribute>().Any());
+            mapping.Text = properties.FirstOrDefault(p => p.Attributes.OfType<TextAttribute>().Any());
 
             var constructors = type.GetConstructors()
                 .Where(ctor => ctor.IsPublic && ctor.GetParameters().Any())
@@ -184,8 +185,8 @@ namespace RunningObjects.MVC.Mapping
 
             mapping.Constructors = constructors.Select(m => CreateMethodMapping(mapping, m, constructors.IndexOf(m))).ToList();
 
-            mapping.StaticMethods = type.GetMethods()
-                .Where(m => m.IsStatic && m.IsPublic)
+            mapping.StaticMethods = type.GetMethods(BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Static)
+                .Where(m => m.IsStatic && m.IsPublic && !ignoredNames.Any(nm => nm == m.Name))
                 .GroupBy(m => m.Name)
                 .SelectMany(g => g.Select(m => CreateMethodMapping(mapping, m, g.ToList().IndexOf(m))))
                 .ToList();
@@ -205,9 +206,21 @@ namespace RunningObjects.MVC.Mapping
                    .ToList();
             }
             else
-                mapping.Queries = new[] {new QueryAttribute()}.Select(q => CreateQueryMapping(q, mapping)).ToList();
+                mapping.Queries = new[] { new QueryAttribute() }.Select(q => CreateQueryMapping(q, mapping)).ToList();
 
             return mapping;
+        }
+
+        private static IEnumerable<PropertyDescriptor> OrderProperties(Type componentType, IEnumerable<PropertyDescriptor> properties)
+        {
+            var componentTypes = new List<Type>();
+            do
+            {
+                componentTypes.Add(componentType);
+                componentType = componentType.BaseType;
+            } while (componentType != null && (componentType.BaseType != null || componentType.BaseType != typeof(object)));
+            componentTypes.Reverse();
+            return componentTypes.SelectMany(ct => properties.Where(pd => pd.ComponentType == ct));
         }
 
         private static MethodMapping CreateMethodMapping(TypeMapping type, MethodBase method, int index)
@@ -225,7 +238,7 @@ namespace RunningObjects.MVC.Mapping
                            Type = type,
                            ReturnType = method is ConstructorInfo ? typeof(void) : ((MethodInfo)method).ReturnType,
                            UnderlineAction = method.IsConstructor ? RunningObjectsAction.Create : RunningObjectsAction.Execute,
-                           Visible = true,
+                           Visible = !ScriptOnlyAttribute.Contains(method),
                            Method = method
                        };
         }
@@ -253,7 +266,5 @@ namespace RunningObjects.MVC.Mapping
             var configuration = asms.SelectMany(asm => asm.Types).FirstOrDefault(config => config.UnderlineType == type);
             return CreateTypeMapping(type, null, configuration);
         }
-
-        
     }
 }

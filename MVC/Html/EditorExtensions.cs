@@ -8,7 +8,7 @@ namespace RunningObjects.MVC.Html
     {
         public static MvcHtmlString EditorFor<TModel>(this HtmlHelper<TModel> htmlHelper, Member member)
         {
-            foreach (var name in GetTemplateNames(member))
+            foreach (var name in DisplayExtensions.GetTemplateNames(member))
             {
                 var result = GetEditorFor(htmlHelper, member, name);
                 if (result != null && !string.IsNullOrEmpty(result.ToHtmlString()))
@@ -16,33 +16,6 @@ namespace RunningObjects.MVC.Html
             }
 
             return new MvcHtmlString(htmlHelper.Encode(member.Value));
-        }
-
-        private static IEnumerable<string> GetTemplateNames(Member member)
-        {
-            var names = new List<string>();
-
-            var specificName = member is Parameter
-                ? "Parameter" 
-                : member is Property 
-                    ? "Property" 
-                    : "Member";
-
-            if (member.IsModelCollection)
-            {
-                names.Add(specificName + "Collection");
-                names.Add("MemberCollection");
-            }
-            else if (member.IsModel)
-            {
-                names.Add(specificName);
-                names.Add("Member");
-            }
-
-            names.Add(member.Name);
-            names.Add(member.MemberType.Name);
-            names.Add(null);
-            return names;
         }
 
         private static MvcHtmlString GetEditorFor<TModel>(HtmlHelper<TModel> htmlHelper, Member member, string templateName)

@@ -10,7 +10,7 @@ namespace RunningObjects.MVC.Mapping.Configuration
 {
     public class AssemblyMappingConfiguration
     {
-        public static readonly Func<Type, bool> TypePredicate = t => t.IsPublic && !t.IsGenericType && !t.IsInterface && !t.IsSubclassOf(typeof(DbContext));
+        public static readonly Func<Type, bool> TypePredicate = t => t.IsPublic && !t.IsGenericType && !t.IsInterface && !t.IsSubclassOf(typeof(DbContext)) && !t.IsEnum;
 
         public AssemblyMappingConfiguration(ConfigurationBuilder configuration, Assembly assembly, string rootNamespace)
         {

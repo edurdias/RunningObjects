@@ -17,72 +17,68 @@ namespace RunningObjects.MVC.Security
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var controllerContext = filterContext.Controller.ControllerContext;
+            ApplyConfigurationFor(filterContext, ModelBinder.GetModelType(filterContext.Controller.ControllerContext));
+            base.OnActionExecuting(filterContext);
+        }
 
-            var bindingContext = new ModelBindingContext
-            {
-                ModelState = controllerContext.Controller.ViewData.ModelState,
-                ModelMetadata = controllerContext.Controller.ViewData.ModelMetadata,
-                ModelName = TypeBinder.ModeTypeKey,
-                ValueProvider = controllerContext.Controller.ValueProvider
-            };
-
-            var type = (Type)ModelBinders.Binders[typeof(Type)].BindModel(controllerContext, bindingContext);
-
+        private void ApplyConfigurationFor(ActionExecutingContext filterContext, Type type)
+        {
             var configuration = Builder.For(type);
             if (configuration != null)
             {
-                var container = configuration.FindPolicyContainer(controllerContext);
+                var container = configuration.FindPolicyContainer(filterContext.Controller.ControllerContext);
                 if (container != null)
-                {
-                    var context = new SecurityPolicyContext
-                    {
-                        ControllerContext = controllerContext
-                    };
+                    ApplyPolicies(filterContext, container);
+                else if(type != typeof(object))
+                    ApplyConfigurationFor(filterContext, typeof (object));
+            }
+        }
 
-                    if (Builder.IsAuthenticationConfigured)
-                    {
-                        var authentication = Builder.Authentication<Object>();
-                        context.AuthenticationStatus = authentication.GetStatusFrom();
-                        context.CurrentUserRoles = authentication.GetRolesFrom();
-                    }
+        private void ApplyPolicies(ActionExecutingContext filterContext, ISecurityPolicyContainer<object> container)
+        {
+            var context = new SecurityPolicyContext
+            {
+                ControllerContext = filterContext.Controller.ControllerContext
+            };
 
-                    if (container.Policies.Any(policy => !policy.Authorize(context)))
-                    {
-                        if (Builder.IsAuthenticationConfigured)
-                        {
-                            var authentication = Builder.Authentication<Object>();
-                            if (!authentication.GetStatusFrom()())
-                            {
-                                var mapping = ModelMappingManager.MappingFor(authentication.Type);
-                                var method = mapping.StaticMethods.FirstOrDefault(m => m.Name == authentication.LoginWith().Name);
-                                if (method != null)
-                                {
-
-                                    var route = new
-                                    {
-                                        action = "Execute",
-                                        controller = "Presentation",
-                                        methodName = method.MethodName,
-                                        index = method.Index,
-                                        modelType = mapping.ModelType.PartialName(),
-                                        redirectTo = filterContext.HttpContext.Request.Url.ToString()
-                                    };
-                                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(route));
-                                }
-                                else
-                                    filterContext.Result = new HttpNotFoundResult();
-                            }
-                            else
-                                filterContext.Result = new HttpNotFoundResult();
-                        }
-                        else
-                            filterContext.Result = new HttpUnauthorizedResult();
-                    }
-                }
+            if (Builder.IsAuthenticationConfigured)
+            {
+                var authentication = Builder.Authentication<Object>();
+                context.IsAuthenticated = authentication.IsAuthenticated();
+                context.CurrentUserRoles = authentication.GetRoles();
             }
 
-            base.OnActionExecuting(filterContext);
+            if (container.Policies.Any(policy => !policy.Authorize(context)))
+            {
+                if (Builder.IsAuthenticationConfigured)
+                {
+                    var authentication = Builder.Authentication<Object>();
+                    if (!authentication.IsAuthenticated())
+                    {
+                        var mapping = ModelMappingManager.MappingFor(authentication.Type);
+                        var method = mapping.StaticMethods.FirstOrDefault(m => m.Name == authentication.LoginWith().Name);
+                        if (method != null)
+                        {
+                            var route = new
+                                            {
+                                                action = "Execute",
+                                                controller = "Presentation",
+                                                methodName = method.MethodName,
+                                                index = method.Index,
+                                                modelType = mapping.ModelType.PartialName(),
+                                                redirectTo = filterContext.HttpContext.Request.Url.ToString()
+                                            };
+                            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(route));
+                        }
+                        else
+                            filterContext.Result = new HttpNotFoundResult();
+                    }
+                    else
+                        filterContext.Result = new HttpNotFoundResult();
+                }
+                else
+                    filterContext.Result = new HttpUnauthorizedResult();
+            }
         }
     }
 }

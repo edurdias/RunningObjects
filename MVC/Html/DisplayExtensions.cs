@@ -16,15 +16,29 @@ namespace RunningObjects.MVC.Html
             return new MvcHtmlString(htmlHelper.Encode(member.Value));
         }
 
-        private static IEnumerable<string> GetTemplateNames(Member member)
+        internal static IEnumerable<string> GetTemplateNames(Member member)
         {
             var names = new List<string>();
-            if (member.IsModel)
-                names.Add("Member");
-            else if (member.IsModelCollection)
+
+            var specificName = member is Parameter
+                ? "Parameter"
+                : member is Property
+                    ? "Property"
+                    : "Member";
+
+            if (member.IsModelCollection)
+            {
+                names.Add(specificName + "Collection");
                 names.Add("MemberCollection");
-            else
-                names.Add(member.MemberType.Name);
+            }
+            else if (member.IsModel)
+            {
+                names.Add(specificName);
+                names.Add("Member");
+            }
+
+            names.Add(member.Name);
+            names.Add(member.MemberType.Name);
             names.Add(null);
             return names;
         }

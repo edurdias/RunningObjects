@@ -23,10 +23,10 @@ namespace RunningObjects.MVC.Persistence
 
         public object Update(object item)
         {
-            var attach = Context.Set(Type).Attach(item);
-            if(attach != null)
-                Context.Entry(item).State = EntityState.Modified;
-            return attach;
+            if(item == null)
+                throw new ArgumentNullException("item");
+            Context.Entry(item).State = EntityState.Modified;
+            return item;
         }
 
         public object Remove(object item)
@@ -41,7 +41,8 @@ namespace RunningObjects.MVC.Persistence
 
         public object Find(params object[] keyValues)
         {
-            return Context.Set(Type).Find(keyValues);
+            var item = Context.Set(Type).Find(keyValues);
+            return item;
         }
 
         public IQueryable All()
@@ -51,7 +52,6 @@ namespace RunningObjects.MVC.Persistence
 
         public void Dispose()
         {
-            Context.Dispose();
         }
     }
 }

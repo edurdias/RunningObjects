@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Web.Mvc;
@@ -26,31 +27,63 @@ namespace RunningObjects.MVC
                 var model = new Model(modelType, descriptor, instance);
                 foreach (var property in model.Properties)
                 {
-                    var result = bindingContext.ValueProvider.GetValue(property.Name);
-                    if (result != null)
+                    ValueProviderResult result;
+                    if (property.IsModelCollection)
                     {
-                        if (!property.IsModel)
+                        var type = typeof(List<>).MakeGenericType(property.UnderliningModel.ModelType);
+                        var collection = Activator.CreateInstance(type);
+                        var index = 0;
+                        while ((result = bindingContext.ValueProvider.GetValue(string.Format("{0}[{1}]", property.Name, index))) != null)
                         {
-                            var converter = TypeDescriptor.GetConverter(property.MemberType);
-                            var value = property.MemberType == typeof (Boolean)
-                                            ? result.AttemptedValue.Split(',')[0]
-                                            : result.AttemptedValue;
-
-                            property.Value = converter.ConvertFrom(null, CultureInfo.CurrentCulture, value);
+                            type.GetMethod("Add").Invoke(collection, new[] { GetModelValue(result, property.UnderliningModel.ModelType) });
+                            index++;
                         }
-                        else
+                        property.Value = collection;
+                    }
+                    else
+                    {
+                        result = bindingContext.ValueProvider.GetValue(property.Name);
+                        if (result != null)
                         {
-                            var propertyTypeMapping = ModelMappingManager.MappingFor(property.MemberType);
-                            var propertyDescriptor = new ModelDescriptor(propertyTypeMapping);
-                            var propertyValue = result.ConvertTo(propertyDescriptor.KeyProperty.PropertyType);
-                            property.Value = repository.Find(propertyValue);
+                            property.Value = !property.IsModel
+                                ? GetNonModelValue(result, property.MemberType)
+                                : GetModelValue(result, property.MemberType);
                         }
                     }
                 }
-                //TODO:Check detaching with Repository pattern
-                //context.Entry(model.Instance).State = EntityState.Detached;
                 return model; 
             }
+        }
+
+        internal static object GetNonModelValue(ValueProviderResult result, Type memberType)
+        {
+            var converter = TypeDescriptor.GetConverter(memberType);
+            var value = memberType == typeof(Boolean)
+                            ? result.AttemptedValue.Split(',')[0]
+                            : result.AttemptedValue;
+
+            return converter.ConvertFrom(null, CultureInfo.CurrentCulture, value);
+        }
+
+        internal static object GetModelValue(ValueProviderResult result, Type memberType)
+        {
+            var memberMapping = ModelMappingManager.MappingFor(memberType);
+            var descriptor = new ModelDescriptor(memberMapping);
+            var value = result.ConvertTo(descriptor.KeyProperty.PropertyType);
+            return memberMapping.Configuration.Repository().Find(value);
+        }
+
+        public static Type GetModelType(ControllerContext controllerContext)
+        {
+            var bindingContext = new ModelBindingContext
+            {
+                ModelState = controllerContext.Controller.ViewData.ModelState,
+                ModelMetadata = controllerContext.Controller.ViewData.ModelMetadata,
+                ModelName = TypeBinder.ModeTypeKey,
+                ValueProvider = controllerContext.Controller.ValueProvider
+            };
+
+            return (Type)ModelBinders.Binders[typeof(Type)].BindModel(controllerContext, bindingContext);
         }
     }
 }

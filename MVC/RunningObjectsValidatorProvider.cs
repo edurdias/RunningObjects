@@ -13,7 +13,6 @@ namespace RunningObjects.MVC
                 var model = metadata.Model as Member;
                 attributes = attributes.Concat(model.Attributes);
             }
-
             return base.GetValidators(metadata, context, attributes);
         }
     }

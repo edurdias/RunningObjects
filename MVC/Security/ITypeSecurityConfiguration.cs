@@ -6,8 +6,10 @@ namespace RunningObjects.MVC.Security
 {
     public interface ITypeSecurityConfiguration<out T>
     {
-        ISecurityPolicyContainer<T> OnAnything();
 
+        ISecurityPolicyContainer<T> OnAnything();
+        ISecurityPolicyContainer<T> OnWelcome();
+        
         ISecurityPolicyContainer<T> OnCreate();
         ISecurityPolicyContainer<T> OnIndex();
         ISecurityPolicyContainer<T> OnView();
@@ -16,8 +18,8 @@ namespace RunningObjects.MVC.Security
 
         IEnumerable<ISecurityPolicyContainer<T>> AllExecutions();
 
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1>(Func<T,Func<T1, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn(Func<T,Func<Object>> expression);
+        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1>(Func<T, Func<T1, Object>> expression);
+        ISecurityPolicyContainer<T> OnExecuteWithReturn(Func<T, Func<Object>> expression);
         ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2>(Func<T, Func<T1, T2, Object>> expression);
         ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3>(Func<T, Func<T1, T2, T3, Object>> expression);
         ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4>(Func<T, Func<T1, T2, T3, T4, Object>> expression);

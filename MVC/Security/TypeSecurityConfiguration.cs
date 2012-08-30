@@ -7,9 +7,10 @@ using RunningObjects.MVC.Security.Containers;
 
 namespace RunningObjects.MVC.Security
 {
-    public class TypeSecurityConfiguration<T> : ITypeSecurityConfiguration<T>
+    public class TypeSecurityConfiguration<T> : ITypeSecurityConfiguration<T> where T : class
     {
         private AnythingSecurityContainer<T> anything;
+        private ActionSecurityContainer<T> welcome;
         private ConstructorSecurityContainer<T> constructor;
         private ActionSecurityContainer<T> view;
         private ActionSecurityContainer<T> edit;
@@ -19,32 +20,37 @@ namespace RunningObjects.MVC.Security
 
         public ISecurityPolicyContainer<T> OnAnything()
         {
-            return anything ?? (anything = new AnythingSecurityContainer<T>());
+            return anything ?? (anything = new AnythingSecurityContainer<T>(this));
+        }
+
+        public ISecurityPolicyContainer<T> OnWelcome()
+        {
+            return welcome ?? (welcome = new ActionSecurityContainer<T>(this, RunningObjectsAction.Welcome));
         }
 
         public ISecurityPolicyContainer<T> OnCreate()
         {
-            return constructor ?? (constructor = new ConstructorSecurityContainer<T>());
+            return constructor ?? (constructor = new ConstructorSecurityContainer<T>(this));
         }
 
         public ISecurityPolicyContainer<T> OnIndex()
         {
-            return index ?? (index = new ActionSecurityContainer<T>(RunningObjectsAction.Index));
+            return index ?? (index = new ActionSecurityContainer<T>(this, RunningObjectsAction.Index));
         }
 
         public ISecurityPolicyContainer<T> OnView()
         {
-            return view ?? (view = new ActionSecurityContainer<T>(RunningObjectsAction.View));
+            return view ?? (view = new ActionSecurityContainer<T>(this, RunningObjectsAction.View));
         }
 
         public ISecurityPolicyContainer<T> OnEdit()
         {
-            return edit ?? (edit = new ActionSecurityContainer<T>(RunningObjectsAction.Edit));
+            return edit ?? (edit = new ActionSecurityContainer<T>(this, RunningObjectsAction.Edit));
         }
 
         public ISecurityPolicyContainer<T> OnDelete()
         {
-            return delete ?? (delete = new ActionSecurityContainer<T>(RunningObjectsAction.Delete));
+            return delete ?? (delete = new ActionSecurityContainer<T>(this, RunningObjectsAction.Delete));
         }
 
         public IEnumerable<ISecurityPolicyContainer<T>> AllExecutions()
@@ -56,7 +62,7 @@ namespace RunningObjects.MVC.Security
         {
             var key = method.ToString();
             if (!executes.ContainsKey(key))
-                executes.Add(key, new MethodSecurityContainer<T>(method));
+                executes.Add(key, new MethodSecurityContainer<T>(this, method));
             return executes[key];
         }
 
@@ -401,6 +407,10 @@ namespace RunningObjects.MVC.Security
             var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
             switch (action)
             {
+                case RunningObjectsAction.Welcome:
+                    if (welcome != null)
+                        return OnWelcome();
+                    break;
                 case RunningObjectsAction.Create:
                     if (constructor != null)
                         return OnCreate();
@@ -427,11 +437,11 @@ namespace RunningObjects.MVC.Security
                     var isStatic = !controllerContext.RouteData.Values.ContainsKey("key");
                     var containers = AllExecutions().OfType<MethodSecurityContainer<T>>().Where(m => m.Method.Name == methodName).ToList();
                     containers.RemoveAll(m => m.Method.IsStatic != isStatic);
-                    if(methodIndex < containers.Count)
+                    if (methodIndex < containers.Count)
                         return containers.ElementAt(methodIndex);
                     break;
             }
-            return OnAnything();
+            return typeof (T) == typeof (object) ? OnAnything() : null;
         }
     }
 }

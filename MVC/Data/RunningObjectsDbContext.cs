@@ -16,10 +16,10 @@ namespace RunningObjects.MVC.Data
 
         protected DbModelBuilder Builder { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder builder)
         {
-            Builder = modelBuilder;
-            base.OnModelCreating(modelBuilder);
+            Builder = builder;
+            base.OnModelCreating(builder);
         }
 
         protected override bool ShouldValidateEntity(DbEntityEntry entityEntry)

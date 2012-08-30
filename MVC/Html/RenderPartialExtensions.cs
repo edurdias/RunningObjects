@@ -97,7 +97,6 @@ namespace RunningObjects.MVC.Html
         } 
         #endregion
 
-
         #region Static Actions
         public static void RenderPartial<TModel, T1>(this HtmlHelper htmlHelper, Action<T1> expression)
         {

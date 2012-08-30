@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace RunningObjects.MVC.Security.Containers
+﻿namespace RunningObjects.MVC.Security.Containers
 {
-    public class AnythingSecurityContainer<T> : SecurityPolicyContainer<T>
+    public class AnythingSecurityContainer<T> : SecurityPolicyContainer<T> where T : class
     {
+        public AnythingSecurityContainer(ITypeSecurityConfiguration<T> configuration)
+            : base(configuration)
+        {
+        }
     }
 }

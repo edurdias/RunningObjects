@@ -65,7 +65,6 @@
     </Compile>
     <Compile Include="Configuration\ConfigurationBuilder.cs" />
     <Compile Include="Configuration\WelcomeConfigurationBuilder.cs" />
-    <Compile Include="Configuration\WelcomeHandlerAttribute.cs" />
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\PresentationController.cs" />
@@ -101,12 +100,13 @@
     <Compile Include="ModelCollection.cs" />
     <Compile Include="ModelDescriptor.cs" />
     <Compile Include="ModelExtensions.cs" />
-    <Compile Include="NotScaffoldAttribute.cs" />
     <Compile Include="Persistence\EmptyRepository.cs" />
     <Compile Include="Persistence\EntityFrameworkRepository.cs" />
     <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="QueryAttribute.cs" />
+    <Compile Include="ScriptOnlyAttribute.cs" />
+    <Compile Include="ValidateRequestAttribute.cs" />
     <Compile Include="RunningObjectsViewEngineExtensions.cs" />
     <Compile Include="RunningObjectsSetup.cs" />
     <Compile Include="Security\Containers\AnythingSecurityContainer.cs" />
@@ -118,6 +118,8 @@
     <Compile Include="Security\IAuthentication.cs" />
     <Compile Include="Security\ISecurityPolicyContainer.cs" />
     <Compile Include="Security\ITypeSecurityConfiguration.cs" />
+    <Compile Include="Security\OnlyAnonymousSecurityPolicy.cs" />
+    <Compile Include="Security\OnlyAuthenticatedSecurityPolicy.cs" />
     <Compile Include="Security\Policies\AlloRolesSecurityPolicy.cs" />
     <Compile Include="Security\Policies\AllowAllSecurityPolicy.cs" />
     <Compile Include="Security\Policies\DenyAllSecurityPolicy.cs" />

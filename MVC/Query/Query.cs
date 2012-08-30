@@ -29,6 +29,8 @@ namespace RunningObjects.MVC.Query
 
         public OrderBy OrderBy { get; set; }
 
+        //public string GroupBy { get; set; }
+
         public int? Skip { get; set; }
 
         public int? Take { get; set; }

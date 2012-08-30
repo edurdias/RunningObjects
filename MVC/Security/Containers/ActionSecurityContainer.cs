@@ -1,8 +1,9 @@
 namespace RunningObjects.MVC.Security.Containers
 {
-    public class ActionSecurityContainer<T> : SecurityPolicyContainer<T>
+    public class ActionSecurityContainer<T> : SecurityPolicyContainer<T> where T : class
     {
-        public ActionSecurityContainer(RunningObjectsAction action)
+        public ActionSecurityContainer(ITypeSecurityConfiguration<T> configuration, RunningObjectsAction action)
+            : base(configuration)
         {
             Action = action;
         }

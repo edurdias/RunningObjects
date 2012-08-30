@@ -6,10 +6,17 @@ namespace RunningObjects.MVC.Security
 {
     public class SecurityPolicyContext
     {
-        public Func<bool> AuthenticationStatus { get; set; }
+        private static SecurityPolicyContext Instance;
+
+        public bool IsAuthenticated { get; set; }
 
         public Func<IEnumerable<string>> CurrentUserRoles { get; set; }
 
         public ControllerContext ControllerContext { get; set; }
+
+        public static SecurityPolicyContext Current
+        {
+            get { return Instance ?? (Instance = new SecurityPolicyContext()); }
+        }
     }
 }

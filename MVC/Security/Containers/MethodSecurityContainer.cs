@@ -2,9 +2,10 @@ using System.Reflection;
 
 namespace RunningObjects.MVC.Security.Containers
 {
-    public class MethodSecurityContainer<T> : SecurityPolicyContainer<T>
+    public class MethodSecurityContainer<T> : SecurityPolicyContainer<T> where T : class
     {
-        public MethodSecurityContainer(MethodInfo method)
+        public MethodSecurityContainer(ITypeSecurityConfiguration<T> configuration, MethodInfo method)
+            : base(configuration)
         {
             Method = method;
         }

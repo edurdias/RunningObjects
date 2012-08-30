@@ -10,7 +10,12 @@ namespace RunningObjects.MVC.Controllers
     {
         public virtual ActionResult Welcome()
         {
-            return View();
+            var welcome = RunningObjectsSetup.Configuration.Welcome;
+            var redirect = welcome.Redirect != null ? welcome.Redirect() : null;
+            if (redirect != null)
+                return redirect;
+            var model = welcome.GetModel != null ? welcome.GetModel() : null;
+            return View(welcome.ViewName, model);
         }
 
         public ActionResult Index(Type modelType, int page = 1, int? size = null)
@@ -48,7 +53,7 @@ namespace RunningObjects.MVC.Controllers
             return !ControllerContext.IsChildAction ? (ActionResult) View(method) : PartialView(method);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
         public ActionResult Create(Type modelType, Method model)
         {
             return CreateInstanceOf
@@ -82,7 +87,7 @@ namespace RunningObjects.MVC.Controllers
             return !ControllerContext.IsChildAction ? (ActionResult) View(model) : PartialView(model);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
         public ActionResult Edit(Type modelType, Model model)
         {
             return EditInstanceOf
@@ -135,7 +140,7 @@ namespace RunningObjects.MVC.Controllers
             return !ControllerContext.IsChildAction ? (ActionResult) View(method) : PartialView(method);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
         public ActionResult Execute(Type modelType, Method model, string key = null)
         {
             return ExecuteMethodOf
