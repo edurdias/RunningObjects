@@ -90,32 +90,47 @@
 	
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-	<Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LayoutClean.cshtml" />
-    <Content Include="Views\Shared\404.cshtml" />
-    <Content Include="Views\Shared\Breadcrumb.cshtml" />
+	<Content Include="Views\Shared\404.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+	<Content Include="Views\Shared\Breadcrumb.cshtml" />
     <Content Include="Views\Shared\Exceptions.cshtml" />
-    <Content Include="Views\Shared\Menu.cshtml" />
-    <Content Include="Views\Shared\MultiLevelMenu.cshtml" />
+    <Content Include="Views\Shared\Navigation.cshtml" />
+    <Content Include="Views\Shared\SecurityMenu.cshtml" />
+    <Content Include="Views\Shared\ContextMenu.cshtml" />
 	
-    <Content Include="Views\Presentation\Create.cshtml" />
-    <Content Include="Views\Presentation\Edit.cshtml" />
-    <Content Include="Views\Presentation\Execute.cshtml" />
-    <Content Include="Views\Presentation\Index.cshtml" />
-    <Content Include="Views\Presentation\View.cshtml" />
-    <Content Include="Views\Presentation\Welcome.cshtml" />
+    <Content Include="Views\Shared\Create.cshtml" />
+    <Content Include="Views\Shared\Edit.cshtml" />
+    <Content Include="Views\Shared\Execute.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Shared\View.cshtml" />
+    <Content Include="Views\Shared\Welcome.cshtml" />
 	
-    <Content Include="Views\Presentation\DisplayTemplates\Member.cshtml" />
-    <Content Include="Views\Presentation\DisplayTemplates\MemberCollection.cshtml" />
-    <Content Include="Views\Presentation\DisplayTemplates\PropertyCollection.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Body.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Content.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Description.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Member.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PropertyCollection.cshtml" />
 	
-    <Content Include="Views\Presentation\EditorTemplates\Member.cshtml" />
-    <Content Include="Views\Presentation\EditorTemplates\Password.cshtml" />
-    <Content Include="Views\Presentation\EditorTemplates\MemberCollection.cshtml" />
-    <Content Include="Views\Presentation\EditorTemplates\PropertyCollection.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Member.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Title.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Body.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Content.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Description.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NewPassword.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\OldPassword.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CurrentPassword.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ConfirmPassword.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ConfirmNewPassword.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ParameterCollection.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PropertyCollection.cshtml" />
 	
-    <Content Include="Views\Presentation\View\DisplayTemplates\MemberCollection.cshtml" />
+    <Content Include="Views\Shared\Index\DisplayTemplates\PropertyCollection.cshtml" />
+	
+    <Content Include="Views\Shared\View\DisplayTemplates\MemberCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

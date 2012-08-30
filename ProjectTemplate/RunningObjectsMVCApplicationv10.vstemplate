@@ -68,38 +68,60 @@
                 <ProjectItem ReplaceParameters="true" TargetFileName="Web.config">Web.config</ProjectItem>
                 <ProjectItem ReplaceParameters="true" TargetFileName="_ViewStart.cshtml">_ViewStart.cshtml</ProjectItem>
                 <Folder Name="Shared" TargetFolderName="Shared">
-                    <ProjectItem ReplaceParameters="true" TargetFileName="Error.cshtml">Error.cshtml</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="_Layout.cshtml">_Layout.cshtml</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="_LayoutClean.cshtml">_LayoutClean.cshtml</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="404.cshtml">404.cshtml</ProjectItem>
+					<ProjectItem ReplaceParameters="true" TargetFileName="Error.cshtml">Error.cshtml</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="Breadcrumb.cshtml">Breadcrumb.cshtml</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="Exceptions.cshtml">Exceptions.cshtml</ProjectItem>
-                    <ProjectItem ReplaceParameters="true" TargetFileName="Menu.cshtml">Menu.cshtml</ProjectItem>
-                    <ProjectItem ReplaceParameters="true" TargetFileName="MultiLevelMenu.cshtml">MultiLevelMenu.cshtml</ProjectItem>
-                </Folder>
-				<Folder Name="Presentation" TargetFolderName="Presentation">
+                    <ProjectItem ReplaceParameters="true" TargetFileName="Navigation.cshtml">Navigation.cshtml</ProjectItem>
+                    <ProjectItem ReplaceParameters="true" TargetFileName="SecurityMenu.cshtml">SecurityMenu.cshtml</ProjectItem>
+                    <ProjectItem ReplaceParameters="true" TargetFileName="ContextMenu.cshtml">ContextMenu.cshtml</ProjectItem>
+					
+					
 					<ProjectItem ReplaceParameters="true" TargetFileName="Create.cshtml">Create.cshtml</ProjectItem>
 					<ProjectItem ReplaceParameters="true" TargetFileName="Edit.cshtml">Edit.cshtml</ProjectItem>
 					<ProjectItem ReplaceParameters="true" TargetFileName="Execute.cshtml">Execute.cshtml</ProjectItem>
 					<ProjectItem ReplaceParameters="true" TargetFileName="Index.cshtml">Index.cshtml</ProjectItem>
 					<ProjectItem ReplaceParameters="true" TargetFileName="View.cshtml">View.cshtml</ProjectItem>
 					<ProjectItem ReplaceParameters="true" TargetFileName="Welcome.cshtml">Welcome.cshtml</ProjectItem>
+					
 					<Folder Name="DisplayTemplates" TargetFolderName="DisplayTemplates">
+						<ProjectItem ReplaceParameters="true" TargetFileName="Body.cshtml">Body.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="Content.cshtml">Content.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="Description.cshtml">Description.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="Password.cshtml">Password.cshtml</ProjectItem>
 						<ProjectItem ReplaceParameters="true" TargetFileName="Member.cshtml">Member.cshtml</ProjectItem>
-						<ProjectItem ReplaceParameters="true" TargetFileName="MemberCollection.cshtml">MemberCollection.cshtml</ProjectItem>
 						<ProjectItem ReplaceParameters="true" TargetFileName="PropertyCollection.cshtml">PropertyCollection.cshtml</ProjectItem>
 					</Folder>
 					<Folder Name="EditorTemplates" TargetFolderName="EditorTemplates">
 						<ProjectItem ReplaceParameters="true" TargetFileName="Member.cshtml">Member.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="Title.cshtml">Title.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="Body.cshtml">Body.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="Content.cshtml">Content.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="Description.cshtml">Description.cshtml</ProjectItem>
 						<ProjectItem ReplaceParameters="true" TargetFileName="Password.cshtml">Password.cshtml</ProjectItem>
-						<ProjectItem ReplaceParameters="true" TargetFileName="MemberCollection.cshtml">MemberCollection.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="NewPassword.cshtml">NewPassword.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="OldPassword.cshtml">OldPassword.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="CurrentPassword.cshtml">CurrentPassword.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="ConfirmPassword.cshtml">ConfirmPassword.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="ConfirmNewPassword.cshtml">ConfirmNewPassword.cshtml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="ParameterCollection.cshtml">ParameterCollection.cshtml</ProjectItem>
 						<ProjectItem ReplaceParameters="true" TargetFileName="PropertyCollection.cshtml">PropertyCollection.cshtml</ProjectItem>
+					</Folder>
+					<Folder Name="Index" TargetFolderName="Index">
+						<Folder Name="DisplayTemplates" TargetFolderName="DisplayTemplates">
+							<ProjectItem ReplaceParameters="true" TargetFileName="PropertyCollection.cshtml">PropertyCollection.cshtml</ProjectItem>
+						</Folder>
 					</Folder>
 					<Folder Name="View" TargetFolderName="View">
 						<Folder Name="DisplayTemplates" TargetFolderName="DisplayTemplates">
 							<ProjectItem ReplaceParameters="true" TargetFileName="MemberCollection.cshtml">MemberCollection.cshtml</ProjectItem>
 						</Folder>
 					</Folder>
+                </Folder>
+				<Folder Name="Presentation" TargetFolderName="Presentation">
+					
                 </Folder>
             </Folder>
             <ProjectItem ReplaceParameters="true" TargetFileName="Web.config">Web.config</ProjectItem>
@@ -123,7 +145,7 @@
           <package id="Newtonsoft.Json" version="4.5.7.0"  />
           <package id="NLog" version="2.0.0.2000"  />
           <package id="WebActivator" version="1.5.1.0"  />
-          <package id="RunningObjects" version="1.1.0"  />
+          <package id="RunningObjects" version="1.1.1"  />
         </packages>
     </WizardData>
 </VSTemplate>

@@ -1,13 +1,18 @@
 ﻿@using RunningObjects.MVC.Mapping
+@using RunningObjects.MVC.Mapping.Configuration
 @model IMappingElement
+
 @if(Model != null)
 {
     var reversed = new List<IMappingElement>();
-    var parent = Model.Parent;
-    while(parent != null && parent.Visible)
+    var currentParent = Model.Parent;
+    while(currentParent != null && currentParent.Visible)
     {
-        reversed.Add(parent);
-        parent = parent.Parent;
+        if (!(currentParent is NamespaceMapping) || !MappingConfiguration.Assemblies.ContainsKey(((NamespaceMapping) currentParent).FullName))
+        {
+            reversed.Add(currentParent);
+        }
+        currentParent = currentParent.Parent;
     }
     reversed.Reverse();
     
