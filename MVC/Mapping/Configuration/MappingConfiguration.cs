@@ -30,11 +30,18 @@ namespace RunningObjects.MVC.Mapping.Configuration
             return configuration;
         }
 
-        public AssemblyMappingConfiguration MapAssembly(Assembly assembly, string rootNamespace, Func<Type, IRepository<Object>> repositoryForAllTypes)
-        {
-            var configuration = MapAssembly(assembly, rootNamespace);
-            configuration.UseThisRepository(repositoryForAllTypes);
-            return configuration;
-        }
+		public AssemblyMappingConfiguration MapAssembly(Assembly assembly, string rootNamespace, Func<Type, IRepository<Object>> repositoryForAllTypes)
+		{
+			var configuration = MapAssembly(assembly, rootNamespace);
+			configuration.UseThisRepository(repositoryForAllTypes);
+			return configuration;
+		}
+
+		public AssemblyMappingConfiguration MapAssembly(Assembly assembly, string rootNamespace, Func<Type, IRepository<Object>> repositoryForAllTypes, Func<Type,bool> typeFilter)
+		{
+			var configuration = MapAssembly(assembly, rootNamespace, repositoryForAllTypes);
+			configuration.TypeFilter = typeFilter;
+			return configuration;
+		}
     }
 }

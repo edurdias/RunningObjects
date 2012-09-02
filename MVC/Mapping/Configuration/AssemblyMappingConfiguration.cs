@@ -12,7 +12,9 @@ namespace RunningObjects.MVC.Mapping.Configuration
     {
         public static readonly Func<Type, bool> TypePredicate = t => t.IsPublic && !t.IsGenericType && !t.IsInterface && !t.IsSubclassOf(typeof(DbContext)) && !t.IsEnum;
 
-        public AssemblyMappingConfiguration(ConfigurationBuilder configuration, Assembly assembly, string rootNamespace)
+	    public Func<Type, bool> TypeFilter { get; set; }
+
+	    public AssemblyMappingConfiguration(ConfigurationBuilder configuration, Assembly assembly, string rootNamespace)
         {
             Configuration = configuration;
             Assembly = assembly;
@@ -21,7 +23,13 @@ namespace RunningObjects.MVC.Mapping.Configuration
             UseThisRepository(type => new EmptyRepository<object>());
         }
 
-        public string RootNamespace { get; set; }
+		public AssemblyMappingConfiguration(ConfigurationBuilder configuration, Assembly assembly, string rootNamespace, Func<Type, bool> typeFilter)
+			: this(configuration, assembly, rootNamespace)
+		{
+			TypeFilter = typeFilter;
+		}
+
+	    public string RootNamespace { get; set; }
         public Assembly Assembly { get; set; }
         internal ConfigurationBuilder Configuration { get; set; }
 
@@ -40,5 +48,13 @@ namespace RunningObjects.MVC.Mapping.Configuration
         {
             return Types.FirstOrDefault(configuration => configuration.UnderlineType == type);
         }
+
+	    public IEnumerable<Type> FilterTypes(IEnumerable<Type> types)
+	    {
+			if (TypeFilter == null)
+				return types;
+
+		    return types.Where(t => TypeFilter(t));
+	    }
     }
 }
