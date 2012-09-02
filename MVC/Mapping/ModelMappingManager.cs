@@ -91,7 +91,8 @@ namespace RunningObjects.MVC.Mapping
 
         private static void LoadFromAssembly(AssemblyMappingConfiguration assembly)
         {
-            var types = assembly.Types.Select(t => t.UnderlineType).OrderBy(t => t.Namespace);
+            var types = assembly.Types.Select(t => t.UnderlineType).OrderBy(t => t.Namespace).AsEnumerable();
+	        types = assembly.FilterTypes(types);
             var ns = CreateNamespace(assembly.RootNamespace, types, assembly);
             if (ns != null)
                 Namespaces.Add(ns);
