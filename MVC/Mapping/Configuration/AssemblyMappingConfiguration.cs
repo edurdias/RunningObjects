@@ -12,8 +12,6 @@ namespace RunningObjects.MVC.Mapping.Configuration
     {
         public static readonly Func<Type, bool> TypePredicate = t => t.IsPublic && !t.IsGenericType && !t.IsInterface && !t.IsSubclassOf(typeof(DbContext)) && !t.IsEnum;
 
-	    public Func<Type, bool> TypeFilter { get; set; }
-
 	    public AssemblyMappingConfiguration(ConfigurationBuilder configuration, Assembly assembly, string rootNamespace)
         {
             Configuration = configuration;
@@ -22,12 +20,6 @@ namespace RunningObjects.MVC.Mapping.Configuration
             Types = assembly.GetTypes().Where(TypePredicate).Select(t => new TypeMappingConfiguration(t, this)).ToList();
             UseThisRepository(type => new EmptyRepository<object>());
         }
-
-		public AssemblyMappingConfiguration(ConfigurationBuilder configuration, Assembly assembly, string rootNamespace, Func<Type, bool> typeFilter)
-			: this(configuration, assembly, rootNamespace)
-		{
-			TypeFilter = typeFilter;
-		}
 
 	    public string RootNamespace { get; set; }
         public Assembly Assembly { get; set; }
@@ -42,19 +34,11 @@ namespace RunningObjects.MVC.Mapping.Configuration
             }
         }
 
-        public IEnumerable<TypeMappingConfiguration> Types { get; private set; }
+        public IEnumerable<TypeMappingConfiguration> Types { get; internal set; }
 
         public TypeMappingConfiguration For(Type type)
         {
             return Types.FirstOrDefault(configuration => configuration.UnderlineType == type);
         }
-
-	    public IEnumerable<Type> FilterTypes(IEnumerable<Type> types)
-	    {
-			if (TypeFilter == null)
-				return types;
-
-		    return types.Where(t => TypeFilter(t));
-	    }
     }
 }

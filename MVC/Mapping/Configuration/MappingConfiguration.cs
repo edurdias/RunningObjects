@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using RunningObjects.MVC.Configuration;
 using RunningObjects.MVC.Persistence;
@@ -40,7 +41,7 @@ namespace RunningObjects.MVC.Mapping.Configuration
 		public AssemblyMappingConfiguration MapAssembly(Assembly assembly, string rootNamespace, Func<Type, IRepository<Object>> repositoryForAllTypes, Func<Type,bool> typeFilter)
 		{
 			var configuration = MapAssembly(assembly, rootNamespace, repositoryForAllTypes);
-			configuration.TypeFilter = typeFilter;
+		    configuration.Types = configuration.Types.Where(t => typeFilter(t.UnderlineType));
 			return configuration;
 		}
     }

@@ -1,4 +1,3 @@
-using RunningObjects.MVC.Mapping;
 using RunningObjects.MVC.Mapping.Configuration;
 using RunningObjects.MVC.Security;
 
