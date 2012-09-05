@@ -3,5 +3,5 @@
 @model Member
 @if (Model.UnderliningModel.KeyValue != null)
 {
-    Html.ActionLink(Model.ToString(), Model.MemberType, RunningObjectsAction.View, new {key = Model.UnderliningModel.KeyValue});
+    <text>@Html.ActionLink(Model.ToString(), Model.MemberType, RunningObjectsAction.View, new {key = Model.UnderliningModel.KeyValue})</text>
 }

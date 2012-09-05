@@ -39,10 +39,5 @@ namespace RunningObjects.MVC
         {
             get { return Descriptor.Attributes.OfType<Attribute>(); }
         }
-
-        public override string ToString()
-        {
-            return Value != null ? Value.ToString() : UnderliningModel != null && UnderliningModel.TextValue != null ? UnderliningModel.TextValue.ToString() : string.Empty;
-        }
     }
 }
