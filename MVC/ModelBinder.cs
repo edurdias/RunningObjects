@@ -35,7 +35,19 @@ namespace RunningObjects.MVC
                         var index = 0;
                         while ((result = bindingContext.ValueProvider.GetValue(string.Format("{0}[{1}]", property.Name, index))) != null)
                         {
-                            type.GetMethod("Add").Invoke(collection, new[] { GetModelValue(result, property.UnderliningModel.ModelType) });
+                            var item = GetModelValue(result, property.UnderliningModel.ModelType);
+                            foreach (var itemProperty in property.UnderliningModel.Properties)
+                            {
+                                var itemPropertyName = string.Format("{0}[{1}].{2}", property.Name, index, itemProperty.Name);
+                                var itemResult = bindingContext.ValueProvider.GetValue(itemPropertyName);
+                                if (itemResult != null)
+                                {
+                                    itemProperty.Value = !itemProperty.IsModel
+                                        ? GetNonModelValue(itemResult, itemProperty.MemberType)
+                                        : GetModelValue(itemResult, itemProperty.MemberType);
+                                }
+                            }
+                            type.GetMethod("Add").Invoke(collection, new[] { item });
                             index++;
                         }
                         property.Value = collection;
@@ -57,12 +69,16 @@ namespace RunningObjects.MVC
 
         internal static object GetNonModelValue(ValueProviderResult result, Type memberType)
         {
-            var converter = TypeDescriptor.GetConverter(memberType);
-            var value = memberType == typeof(Boolean)
+            var innerType = Nullable.GetUnderlyingType(memberType) ?? memberType;
+
+            if(innerType.IsEnum)
+                return Enum.Parse(innerType, result.AttemptedValue);
+
+            var value = innerType == typeof(Boolean)
                             ? result.AttemptedValue.Split(',')[0]
                             : result.AttemptedValue;
 
-            return converter.ConvertFrom(null, CultureInfo.CurrentCulture, value);
+            return TypeDescriptor.GetConverter(innerType).ConvertFrom(null, CultureInfo.CurrentCulture, value);
         }
 
         internal static object GetModelValue(ValueProviderResult result, Type memberType)

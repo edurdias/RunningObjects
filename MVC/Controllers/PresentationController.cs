@@ -26,15 +26,16 @@ namespace RunningObjects.MVC.Controllers
             return CacheableView("Index", query, () =>
             {
                 var items = query.Execute(true);
-                var quantity = size.HasValue ? size.Value : query.Paging ? query.PageSize : items.Count();
+                var count = items.Count();
+                var quantity = size.HasValue ? size.Value : query.Paging ? query.PageSize : count;
                 var fetched = items.Skip((page - 1) * quantity).Take(quantity);
 
                 var mapping = ModelMappingManager.MappingFor(fetched.ElementType);
                 var descriptor = new ModelDescriptor(mapping);
-                
+
                 return new ModelCollection(modelType, descriptor, fetched)
                 {
-                    PageCount = quantity > 0 ? (int)Math.Ceiling((decimal)items.Count() / quantity) : items.Count(),
+                    PageCount = quantity > 0 ? (int)Math.Ceiling((decimal)count / quantity) : count,
                     PageNumber = page,
                     PageSize = quantity
                 };
@@ -50,7 +51,7 @@ namespace RunningObjects.MVC.Controllers
                 throw new RunningObjectsException(string.Format("No constructor found at index {0} for type {1}", index, modelType.PartialName()));
 
             var method = new Method(new MethodDescriptor(mapping, ControllerContext.GetActionDescriptor(RunningObjectsAction.Create)));
-            return !ControllerContext.IsChildAction ? (ActionResult) View(method) : PartialView(method);
+            return !ControllerContext.IsChildAction ? (ActionResult)View(method) : PartialView(method);
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
@@ -73,7 +74,7 @@ namespace RunningObjects.MVC.Controllers
             if (instance == null)
                 return HttpNotFound();
             var model = new Model(modelType, descriptor, instance);
-            return !ControllerContext.IsChildAction ? (ActionResult) View(model) : PartialView(model);
+            return !ControllerContext.IsChildAction ? (ActionResult)View(model) : PartialView(model);
         }
 
         public ActionResult Edit(Type modelType, object key)
@@ -84,7 +85,7 @@ namespace RunningObjects.MVC.Controllers
             if (instance == null)
                 return HttpNotFound();
             var model = new Model(modelType, descriptor, instance);
-            return !ControllerContext.IsChildAction ? (ActionResult) View(model) : PartialView(model);
+            return !ControllerContext.IsChildAction ? (ActionResult)View(model) : PartialView(model);
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
@@ -136,13 +137,21 @@ namespace RunningObjects.MVC.Controllers
                     key
                 );
             }
+            
+            if (!method.Descriptor.Mapping.Method.IsStatic)
+            {
+                method.Instance = GetInstanceOf(modelType, key, new ModelDescriptor(typeMapping));
+                    RunningObjectsSetup.Configuration.Query.RemoveKeywordEvaluator("{instance}");
+                RunningObjectsSetup.Configuration.Query.KeywordEvaluators.Add("{instance}", q => method.Instance);
+            }
 
-            return !ControllerContext.IsChildAction ? (ActionResult) View(method) : PartialView(method);
+            return !ControllerContext.IsChildAction ? (ActionResult)View(method) : PartialView(method);
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
         public ActionResult Execute(Type modelType, Method model, string key = null)
         {
+            RunningObjectsSetup.Configuration.Query.RemoveKeywordEvaluator("{instance}");
             return ExecuteMethodOf
             (
                 modelType,

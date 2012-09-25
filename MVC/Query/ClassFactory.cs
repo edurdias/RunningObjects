@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Castle.DynamicProxy;
 
 namespace RunningObjects.MVC.Query
 {
@@ -92,22 +93,19 @@ namespace RunningObjects.MVC.Query
 #endif
 				try
 				{
-					//Type exists = module.GetType(typeName);
-					//if (exists != null)
-					//    return exists;
 
-					TypeBuilder tb = module.DefineType(typeName, TypeAttributes.Class | TypeAttributes.Public, typeof(DynamicClass));
+				    TypeBuilder tb = module.DefineType(typeName, TypeAttributes.Class | TypeAttributes.Public, typeof(DynamicClass));
 
-					GenerateTypeAttributes(tb, type);
-					GenerateFields(tb, type);
-					GenerateConstructorSignatures(tb, type);
-					GenerateMethods(tb, type);
-					var fields = GenerateProperties(tb, properties);
-					GenerateEquals(tb, fields);
-					GenerateGetHashCode(tb, fields);
+                    GenerateTypeAttributes(tb, type);
+                    GenerateFields(tb, type);
+                    GenerateConstructorSignatures(tb, type);
+                    GenerateMethods(tb, type);
+                    var fields = GenerateProperties(tb, properties);
+                    GenerateEquals(tb, fields);
+                    GenerateGetHashCode(tb, fields);
+
 					var result = tb.CreateType();
 					classCount++;
-
 					return result;
 				}
 				finally

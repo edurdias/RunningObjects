@@ -25,7 +25,20 @@ namespace RunningObjects.MVC
                     var index = 0;
                     while ((result = bindingContext.ValueProvider.GetValue(string.Format("{0}[{1}]", parameter.Name, index))) != null)
                     {
-                        type.GetMethod("Add").Invoke(collection, new[] { ModelBinder.GetModelValue(result, parameter.UnderliningModel.ModelType) });
+                        var item = ModelBinder.GetModelValue(result, parameter.UnderliningModel.ModelType);
+                        var itemModel = new Model(parameter.UnderliningModel.ModelType, parameter.UnderliningModel.Descriptor, item);
+                        foreach (var itemProperty in itemModel.Properties)
+                        {
+                            var itemPropertyName = string.Format("{0}[{1}].{2}", parameter.Name, index, itemProperty.Name);
+                            var itemResult = bindingContext.ValueProvider.GetValue(itemPropertyName);
+                            if (itemResult != null)
+                            {
+                                itemProperty.Value = !itemProperty.IsModel
+                                    ? ModelBinder.GetNonModelValue(itemResult, itemProperty.MemberType)
+                                    : ModelBinder.GetModelValue(itemResult, itemProperty.MemberType);
+                            }
+                        }
+                        type.GetMethod("Add").Invoke(collection, new[] { item });
                         index++;
                     }
                     parameter.Value = collection;

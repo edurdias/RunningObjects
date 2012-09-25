@@ -233,7 +233,8 @@ namespace RunningObjects.MVC.Controllers
                             return onNotFound();
 
                         @return = model.Invoke(instance);
-                        repository.Update(instance);
+                        instance = repository.Update(instance);
+                        repository.SaveChanges();
 
                         if (@return == instance)
                             @return = null;
@@ -241,9 +242,21 @@ namespace RunningObjects.MVC.Controllers
                     else
                         @return = model.Invoke(null);
 
-                    foreach (var parameter in model.Parameters.Where(p => p.IsModel && p.Value != null))
-                        repository.Update(parameter.Value);
-                    repository.SaveChanges();
+                    foreach (var parameter in model.Parameters.Where(p => (p.IsModel || p.IsModelCollection) && p.Value != null))
+                    {
+                        var paramRepository = parameter.UnderliningModel.Descriptor.ModelMapping.Configuration.Repository();
+                        if (parameter.IsModelCollection)
+                        {
+                            //foreach (var paramItem in parameter.ToModelCollection().Items)
+                            //{
+                            //    paramRepository.Update(paramItem.Instance);
+                            //}
+                        }
+                        else
+                            paramRepository.Update(parameter.Value);
+                        paramRepository.SaveChanges();
+                    }
+                    
 
                     if (@return != null)
                         return onSuccessWithReturn(@return);

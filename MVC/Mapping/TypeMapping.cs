@@ -52,7 +52,6 @@ namespace RunningObjects.MVC.Mapping
 
         public IEnumerable<QueryMapping> Queries
         {
-            //TODO:Create resource for string value
             get { return queries ?? (queries = new List<QueryMapping> { new QueryMapping { Name = "All Items", Type = this } }); }
             set { queries = value; }
         }

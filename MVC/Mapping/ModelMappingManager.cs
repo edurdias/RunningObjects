@@ -230,7 +230,6 @@ namespace RunningObjects.MVC.Mapping
             return new MethodMapping
                        {
                            ID = Guid.NewGuid().ToString("N"),
-                           //TODO:Create resource for string value
                            Name = display == null ? method.IsConstructor ? "New" : method.Name : display.GetName(),
                            MethodName = method.Name,
                            Parameters = method.GetParameters(),
@@ -248,7 +247,6 @@ namespace RunningObjects.MVC.Mapping
             return new QueryMapping
             {
                 ID = query.Id ?? Guid.NewGuid().ToString("N"),
-                //TODO:Create resource for string value
                 Name = string.IsNullOrEmpty(query.Name) ? "All Items" : query.Name,
                 Type = type,
                 Visible = true

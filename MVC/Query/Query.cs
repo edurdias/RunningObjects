@@ -82,9 +82,12 @@ namespace RunningObjects.MVC.Query
             if (Source != null)
             {
                 if (Where != null)
+                {
+                    RunningObjectsSetup.Configuration.Query.ParseKeywords(this);
                     Source = (Parameters != null && Parameters.Any())
-                        ? Source.Where(Where.Expression, Parameters)
-                        : Source.Where(Where.Expression);
+                                 ? Source.Where(Where.Expression, Parameters)
+                                 : Source.Where(Where.Expression);
+                }
 
                 if (OrderBy != null && OrderBy.Elements.Any())
                 {

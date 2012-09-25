@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\ArchitectureReview\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Fulcrum\Stroz\Raven\PoC\UsingRunningObjects\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
@@ -105,7 +108,9 @@
     <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="QueryAttribute.cs" />
+    <Compile Include="Query\QueryConfigurationBuilder.cs" />
     <Compile Include="ScriptOnlyAttribute.cs" />
+    <Compile Include="ShowMethodsAttribute.cs" />
     <Compile Include="ValidateRequestAttribute.cs" />
     <Compile Include="RunningObjectsViewEngineExtensions.cs" />
     <Compile Include="RunningObjectsSetup.cs" />

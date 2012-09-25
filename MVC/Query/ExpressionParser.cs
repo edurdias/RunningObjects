@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace RunningObjects.MVC.Query
 {
@@ -130,6 +131,7 @@ namespace RunningObjects.MVC.Query
 
         interface IEnumerableSignatures
         {
+            void Contains(object selector);
             void Where(bool predicate);
             void Any();
             void Any(bool predicate);
@@ -739,24 +741,27 @@ namespace RunningObjects.MVC.Query
                     propName = me.Member.Name;
                 }
                 expressions.Add(expr);
-                
+
                 var descriptor = TypeDescriptor.GetProperties(it.Type)
                     .Cast<PropertyDescriptor>()
                     .FirstOrDefault(pd => pd.Name.Equals(propName));
 
                 var ignoredAttrTypes = new[]
-                {
-                    typeof (CLSCompliantAttribute),
-                    typeof (DefaultMemberAttribute),
-                    typeof (SerializableAttribute),
-                    typeof (ComVisibleAttribute)
-                };
+                    {
+                        typeof (CLSCompliantAttribute),
+                        typeof (DefaultMemberAttribute),
+                        typeof (SerializableAttribute),
+                        typeof (ComVisibleAttribute)
+                    };
 
                 var attrs = new List<Attribute>();
                 if (descriptor != null)
-                    attrs.AddRange(descriptor.Attributes.Cast<Attribute>().Where(attr => !ignoredAttrTypes.Contains(attr.GetType())));
-
+                {
+                    var attributes = descriptor.Attributes.Cast<Attribute>().Where(attr => !ignoredAttrTypes.Contains(attr.GetType()));
+                    attrs.AddRange(attributes);
+                }
                 properties.Add(new DynamicProperty(propName, expr.Type, attrs.ToArray()));
+
                 if (token.id != TokenId.Comma) break;
                 NextToken();
             }
@@ -765,7 +770,10 @@ namespace RunningObjects.MVC.Query
             Type type = DynamicExpression.CreateClass(it.Type, properties);
             var bindings = new MemberBinding[properties.Count];
             for (int i = 0; i < bindings.Length; i++)
-                bindings[i] = Expression.Bind(type.GetProperty(properties[i].Name), expressions[i]);
+            {
+                var propertyInfo = type.GetProperty(properties[i].Name);
+                bindings[i] = Expression.Bind(propertyInfo, expressions[i]);
+            }
             return Expression.MemberInit(Expression.New(type), bindings);
         }
 
@@ -897,31 +905,41 @@ namespace RunningObjects.MVC.Query
 
         Expression ParseAggregate(Expression instance, Type elementType, string methodName, int errorPos)
         {
-            ParameterExpression outerIt = it;
-            ParameterExpression innerIt = Expression.Parameter(elementType, "");
+            var outerIt = it;
+            var innerIt = Expression.Parameter(elementType, "");
             it = innerIt;
-            Expression[] args = ParseArgumentList();
+            var args = ParseArgumentList();
             it = outerIt;
             MethodBase signature;
             if (FindMethod(typeof(IEnumerableSignatures), methodName, false, args, out signature) != 1)
                 throw ParseError(errorPos, Res.NoApplicableAggregate, methodName);
             Type[] typeArgs;
+
             if (signature.Name == "Min" || signature.Name == "Max")
             {
-                typeArgs = new Type[] { elementType, args[0].Type };
+                typeArgs = new[] { elementType, args[0].Type };
             }
             else
             {
-                typeArgs = new Type[] { elementType };
+                typeArgs = new[] { elementType };
             }
+
             if (args.Length == 0)
             {
-                args = new Expression[] { instance };
+                args = new[] { instance };
             }
             else
             {
-                args = new Expression[] { instance, Expression.Lambda(args[0], innerIt) };
+                args = signature.Name == "Contains"
+                    ? new[] { instance, args[0] }
+                    : new[] { instance, Expression.Lambda(args[0], innerIt) };
+                //args = new[] { instance, Expression.Lambda(args[0], innerIt) };
             }
+            //if(signature.Name == "Contains")
+            //{
+            //    var containsMethod = typeof (Enumerable).GetMethods().FirstOrDefault(m => m.Name == signature.Name);
+            //    return Expression.Call(instance, containsMethod, args);
+            //}
             return Expression.Call(typeof(Enumerable), signature.Name, typeArgs, args);
         }
 
@@ -937,7 +955,7 @@ namespace RunningObjects.MVC.Query
 
         Expression[] ParseArguments()
         {
-            List<Expression> argList = new List<Expression>();
+            var argList = new List<Expression>();
             while (true)
             {
                 argList.Add(ParseExpression());
