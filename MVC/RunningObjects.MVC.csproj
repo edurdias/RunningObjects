@@ -32,15 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Fulcrum\Stroz\Raven\PoC\UsingRunningObjects\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\Fulcrum\Stroz\Raven\PoC\UsingRunningObjects\packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\..\..\..\..\..\Fulcrum\Stroz\Raven\PoC\UsingRunningObjects\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
