@@ -13,7 +13,7 @@
 	  <dependency id="Newtonsoft.Json" version="4.5.7.0" />
     </dependencies>
     <id>RunningObjects</id>
-    <title>Running Objects for ASP.NET MVC</title>
+    <title>Running Objects</title>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Running Objects is a framework that allows you to use simple OO concepts, focus on your business domain and do not waste time with areas that are not relevant to your application. You will build better software, with less time and with no pain.
 

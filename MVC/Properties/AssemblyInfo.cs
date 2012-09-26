@@ -1,36 +1,17 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("MVC")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Running Objects")]
+[assembly: AssemblyDescription(@"Running Objects is a framework that allows you to use simple OO concepts, focus on your business domain and do not waste time with areas that are not relevant to your application. You will build better software, with less time and with no pain.
+
+It’s built on top of ASP.NET MVC using a refined mix of concepts such as Domain-Driven Design, Naked Objects, Object-Oriented UI and Design Patterns. Basically, everything that is necessary to let you aggregate the highest business value in the shortest time to your application.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MVC")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCompany("Eduardo Dias")]
+[assembly: AssemblyProduct("Running Objects")]
+[assembly: AssemblyCopyright("Eduardo Dias")]
+[assembly: AssemblyTrademark("Eduardo Dias")]
+[assembly: AssemblyCulture("en-US")]
+[assembly: AssemblyVersion("1.1.1.*")]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("6011298d-4be1-4a52-805d-73bec3bd2daa")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
