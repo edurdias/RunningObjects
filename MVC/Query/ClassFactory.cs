@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Castle.DynamicProxy;
 
 namespace RunningObjects.MVC.Query
 {
