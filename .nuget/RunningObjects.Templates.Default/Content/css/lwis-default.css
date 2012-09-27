@@ -1,0 +1,93 @@
+/** 
+ * Default CSS Drop-Down Menu Theme
+ *
+ * @file		default.css
+ * @name		Default
+ * @version		0.1.1
+ * @type		transitional
+ * @browsers	Windows: IE5+, Opera7+, Firefox1+
+ *				Mac OS: Safari2+, Firefox2+
+ *
+ * @link		http://www.lwis.net/
+ * @copyright	2008 Live Web Institute. All Rights Reserved.
+ *
+ * Module Classes: *.dir {} *.on {} *.open {} li.hover {} li.first {} li.last {}
+ * Expected directory tag - li
+ *
+ */
+
+
+/*-------------------------------------------------/
+ * @section		Base Drop-Down Styling
+ * @structure	ul (unordered list)
+ *				ul li (list item)
+ *				ul li a (links)
+ *				/*\.class|(li|a):hover/
+ * @level sep	ul
+ */
+
+
+ul.dropdown {
+    padding: 5px;
+    font-weight: normal;
+    background-color: transparent;
+}
+
+ul.dropdown li {
+    padding: 7px 10px;
+    
+}
+
+ul.dropdown span a {
+    padding: 0;
+    color: #999;
+}
+
+ul.dropdown span a:link, ul.dropdown span a:visited {
+    padding: 0;
+    color: #999;
+}
+
+ul.dropdown span a:hover {
+    padding: 0;
+    color: #fff;
+}
+
+ul.dropdown li.hover, ul.dropdown li:hover {
+    /* background-color: #2C2C2C; */
+    color: #2c2c2c;
+}
+
+ul.dropdown a:link, ul.dropdown a:visited {
+    /* background-color: #2C2C2C; */
+    color: #2c2c2c;
+    text-decoration: none;
+}
+ul.dropdown a:hover {
+    /* background-color: #2C2C2C; */
+    color: white;
+}
+ul.dropdown a:active {
+    /* background-color: #2C2C2C; */
+    color: white;
+    
+}
+
+
+/* -- level mark -- */
+
+ul.dropdown ul {
+    margin-top: 1px;
+    padding-right: 0px;
+    white-space: nowrap;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+
+ul.dropdown ul li {
+    font-weight: normal;
+}

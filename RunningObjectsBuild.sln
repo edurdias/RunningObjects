@@ -9,9 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{81D210
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 		.nuget\RunningObjects.nuspec = .nuget\RunningObjects.nuspec
-		.nuget\RunningObjectsBootstrapper.cs.pp = .nuget\RunningObjectsBootstrapper.cs.pp
-		.nuget\web.config.transform = .nuget\web.config.transform
+		.nuget\RunningObjects.Templates.Default.nuspec = .nuget\RunningObjects.Templates.Default.nuspec
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vsix", "vsix", "{B1A3AC53-8BAD-4B32-9C2E-E82688C03450}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -51,7 +51,9 @@
     <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
     <!-- Commands -->
     <RestoreCommand>$(NuGetCommand) install "$(PackagesConfig)" -source "$(PackageSources)"  $(RequireConsentSwitch) -o "$(PackagesDir)"</RestoreCommand>
-    <BuildCommand>$(NuGetCommand) pack "$(NuGetToolsPath)\RunningObjects.nuspec" -p Configuration=$(Configuration);assembly=$(TargetPath) -o "$(PackageOutputDir)"</BuildCommand>
+    <BuildRunningObjects>$(NuGetCommand) pack "$(NuGetToolsPath)\RunningObjects.nuspec" -p Configuration=$(Configuration);assembly=$(TargetPath) -o "$(PackageOutputDir)"</BuildRunningObjects>
+    <!-- Create the default template package -->
+    <BuildDefaultTemplate>$(NuGetCommand) pack "$(NuGetToolsPath)\RunningObjects.Templates.Default.nuspec" -o "$(PackageOutputDir)"</BuildDefaultTemplate>
 
     <!-- Make the build depend on restore packages -->
     <BuildDependsOn Condition="$(RestorePackages) == 'true'">
@@ -62,7 +64,7 @@
     <!-- Make the build depend on restore packages -->
     <BuildDependsOn Condition="$(BuildPackage) == 'true'">
       $(BuildDependsOn);
-      BuildPackage;
+      BuildPackages;
     </BuildDependsOn>
   </PropertyGroup>
 
@@ -90,15 +92,26 @@
           Condition="'$(OS)' == 'Windows_NT' And Exists('$(PackagesConfig)')" />
   </Target>
 
-  <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites;GetVersion">
+  <Target Name="BuildPackages" DependsOnTargets="CheckPrerequisites;GetVersion">
     <RemoveDir Directories="$(PackageOutputDir)" />
     <MakeDir Directories="$(PackageOutputDir)" />
-    <Exec Command="$(BuildCommand) -version %(assembly.Version)"
+    
+    <!-- build running objects core package -->
+    <Exec Command="$(BuildRunningObjects) -version %(assembly.Version)"
           Condition=" '$(OS)' != 'Windows_NT' " />
 
-    <Exec Command="$(BuildCommand) -version %(assembly.Version)"
+    <Exec Command="$(BuildRunningObjects) -version %(assembly.Version)"
           LogStandardErrorAsError="true"
           Condition=" '$(OS)' == 'Windows_NT' " />
+
+    <!-- build default template -->
+    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
+          Condition=" '$(OS)' != 'Windows_NT' " />
+
+    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
+          LogStandardErrorAsError="true"
+          Condition=" '$(OS)' == 'Windows_NT' " />    
+    
   </Target>
 
 

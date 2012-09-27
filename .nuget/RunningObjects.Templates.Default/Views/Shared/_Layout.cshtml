@@ -1,0 +1,136 @@
+﻿@using RunningObjects.MVC.Html
+@using RunningObjects.MVC.Mapping
+@{
+    ViewBag.Title = ViewBag.Title ?? "Running Objects for ASP.NET MVC 3";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap-responsive.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/lwis-dropdown.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/lwis-default.ultimate.css")">
+    <style type="text/css">
+        body
+        {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav
+        {
+            padding: 9px 0;
+        }
+        
+        .navbar .container .brand
+        {
+            padding: 7px 20px 0 20px;
+        }
+        
+        .sidebar-nav
+        {
+            padding: 9px 0;
+        }
+        
+        .alert ul
+        {
+            padding: 0;
+            margin: 0 0 0 15px;
+        }
+    </style>
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/modernizr-2.5.3.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"> </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.min.js")"> </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"> </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.infinitescroll.js")"> </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-typeahead.js")"></script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="@Url.WelcomeAction()">
+                    <img src="@Url.Content("~/Content/img/running-objects-153x25.png")" alt="@ViewBag.Title"/>
+                </a>
+                <div class="nav-collapse">
+                    @{
+                        Html.RenderPartial("Navigation", ModelMappingManager.Namespaces);
+                    }
+                </div>
+                @{
+                    Html.RenderPartial("SecurityMenu");
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            @{
+                var currentType = ModelMappingManager.CurrentType(ViewContext.Controller.ControllerContext);
+                var currentElement = ModelMappingManager.CurrentElement(ViewContext.Controller.ControllerContext);
+                if (currentType != null)
+                {
+                    <div class="span3">
+                        <div class="well">
+                            <h3>@currentType.Name</h3>
+                        </div>
+                        <div class="well sidebar-nav">
+                            @{
+                                Html.RenderPartial("ContextMenu", new { Type = currentType, Element = currentElement });
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            <div class="span9">
+                @{
+                    if (currentElement != null)
+                    {
+                        Html.RenderPartial("Breadcrumb", currentElement);
+                    }
+                    Html.RenderPartial("Exceptions");
+                }
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if ($(".navbar.dropdown").length) {
+                $(".navbar.dropdown li").dropdown();
+            }
+        });
+
+        $.fn.dropdown = function () {
+
+            return this.each(function () {
+
+                $(this).hover(function () {
+                    $(this).addClass("hover");
+                    $('> .dir', this).addClass("open");
+                    $('i[class^="icon-"]:first,i[class*=" icon-"]:first', this).addClass('icon-white');
+                    $('ul:first', this).css('visibility', 'visible');
+                }, function () {
+                    $(this).removeClass("hover");
+                    $('.open', this).removeClass("open");
+                    $('i[class^="icon-"]:first,i[class*=" icon-"]:first', this).removeClass('icon-white');
+                    $('ul:first', this).css('visibility', 'hidden');
+                });
+
+            });
+
+        };
+    </script>
+</body>
+</html>

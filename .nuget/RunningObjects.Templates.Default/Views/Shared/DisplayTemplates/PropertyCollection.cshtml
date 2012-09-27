@@ -1,0 +1,58 @@
+﻿@using RunningObjects.MVC
+@using RunningObjects.MVC.Html
+@using RunningObjects.MVC.Mapping
+@model Member
+@{
+    var collection = Model.ToModelCollection();
+    var showMethods = Model.Attributes.OfType<ShowMethodsAttribute>().Any();
+    var mapping = ModelMappingManager.MappingFor(Model.UnderliningModel.ModelType);
+}
+@if (collection != null)
+{
+    <table class="table table-bordered">
+        <thead style="position: relative">
+            <tr>
+                @foreach (var header in collection.Properties.Where(p => p.Metadata.ShowForDisplay))
+                {
+                    <th>
+                        @Html.TextFor(header)
+                    </th>
+                }
+                @if (showMethods)
+                {
+                    <th>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in collection.Items)
+            {
+                <tr>
+                    @foreach (var property in item.Properties.Where(p => p.Metadata.ShowForDisplay))
+                    {
+                        <td>
+                            @Html.DisplayFor(property)
+                        </td>
+                    }
+                    @if (showMethods)
+                    {
+                        <td class="span2" style="white-space: nowrap">
+                            @if (mapping.InstanceMethods.Any(m => m.Visible))
+                            {
+                                foreach (var method in mapping.InstanceMethods.Where(m => m.Visible))
+                                {
+                                    <a class="btn btn-mini" href="@Url.Action(mapping.ModelType, method.UnderlineAction, new { key = item.KeyValue, methodName = method.MethodName })">
+                                        @method.Name
+                                    </a>
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    
+}

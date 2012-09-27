@@ -33,7 +33,7 @@
   </metadata>
   <files>
     <file src="$assembly$" target="lib\net40\RunningObjects.MVC.dll" />
-    <file src="web.config.transform" target="content\web.config.transform" />
-    <file src="RunningObjectsBootstrapper.cs.pp" target="content\RunningObjectsBootstrapper.cs.pp" />
+    <file src="RunningObjects\web.config.transform" target="content\web.config.transform" />
+    <file src="RunningObjects\RunningObjectsBootstrapper.cs.pp" target="content\RunningObjectsBootstrapper.cs.pp" />
   </files>
 </package>
