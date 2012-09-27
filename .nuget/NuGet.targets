@@ -91,6 +91,8 @@
   </Target>
 
   <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites;GetVersion">
+    <RemoveDir Directories="$(PackageOutputDir)" />
+    <MakeDir Directories="$(PackageOutputDir)" />
     <Exec Command="$(BuildCommand) -version %(assembly.Version)"
           Condition=" '$(OS)' != 'Windows_NT' " />
 
