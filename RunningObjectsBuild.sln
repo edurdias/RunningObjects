@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{81D210
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
-		.nuget\RunningObjects.MVC.nuspec = .nuget\RunningObjects.MVC.nuspec
+		.nuget\RunningObjects.nuspec = .nuget\RunningObjects.nuspec
 		.nuget\RunningObjectsBootstrapper.cs.pp = .nuget\RunningObjectsBootstrapper.cs.pp
 		.nuget\web.config.transform = .nuget\web.config.transform
 	EndProjectSection
