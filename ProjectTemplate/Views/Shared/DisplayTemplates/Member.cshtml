@@ -1,7 +1,0 @@
-﻿@using RunningObjects.MVC
-@using RunningObjects.MVC.Html
-@model Member
-@if (Model.UnderliningModel.KeyValue != null)
-{
-    <text>@Html.ActionLink(Model.ToString(), Model.MemberType, RunningObjectsAction.View, new {key = Model.UnderliningModel.KeyValue})</text>
-}
