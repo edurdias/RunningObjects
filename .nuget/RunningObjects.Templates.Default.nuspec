@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>RunningObjects.Templates.Default</id>
-    <title>Default Template (Twitter Bootstrap) for Running Objects</title>
+    <title>Running Objects - Default Template (Twitter Bootstrap)</title>
     <version>1.0.0</version>
     <authors>Eduardo Dias</authors>
     <owners />
@@ -23,6 +23,9 @@
       <dependency id="jQuery.vsdoc" version="1.6"  />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
       <dependency id="Modernizr" version="2.6.2"  />
+      <dependency id="jQuery.Validation.Unobtrusive" version="2.0.20710.0"  />
+      <dependency id="jQuery.InfiniteScroll" version="2.120312"  />
+
     </dependencies>
     <language>en-US</language>
     <tags>asp.net mvc, twitter bootstrap, running objects, entity framework, domain-driven design, object-oriented user interface, ddd, ooui, naked objects, ef, code first, design patterns</tags>

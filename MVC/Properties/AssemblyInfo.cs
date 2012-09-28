@@ -11,7 +11,7 @@ It’s built on top of ASP.NET MVC using a refined mix of concepts such as Domai
 [assembly: AssemblyCopyright("Eduardo Dias")]
 [assembly: AssemblyTrademark("Eduardo Dias")]
 [assembly: AssemblyCulture("en-US")]
-[assembly: AssemblyVersion("1.1.1.*")]
+
 
 
 [assembly: ComVisible(false)]

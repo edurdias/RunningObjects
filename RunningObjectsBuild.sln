@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{81D210
 		.nuget\RunningObjects.Templates.Default.nuspec = .nuget\RunningObjects.Templates.Default.nuspec
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vsix", "vsix", "{B1A3AC53-8BAD-4B32-9C2E-E82688C03450}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningObjects.VSIX", "VSIXPackage\RunningObjects.VSIX.csproj", "{CFC76C30-D957-4106-8D90-A025F11EAFC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningObjects.ProjectTemplate", "ProjectTemplate\RunningObjects.ProjectTemplate.csproj", "{E85A6B51-B4C1-4933-8E52-51C7B02D20E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,14 @@ Global
 		{44B512B4-6DEA-4B1C-BB53-6DE6730B9D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44B512B4-6DEA-4B1C-BB53-6DE6730B9D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44B512B4-6DEA-4B1C-BB53-6DE6730B9D85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFC76C30-D957-4106-8D90-A025F11EAFC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFC76C30-D957-4106-8D90-A025F11EAFC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFC76C30-D957-4106-8D90-A025F11EAFC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFC76C30-D957-4106-8D90-A025F11EAFC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E85A6B51-B4C1-4933-8E52-51C7B02D20E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E85A6B51-B4C1-4933-8E52-51C7B02D20E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E85A6B51-B4C1-4933-8E52-51C7B02D20E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E85A6B51-B4C1-4933-8E52-51C7B02D20E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

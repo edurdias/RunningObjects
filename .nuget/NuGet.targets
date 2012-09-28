@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+
+    <ROVersion Condition="$(ROVersion) == ''">1.1.1</ROVersion>
+    
+    
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
     <!-- Enable the restore command to run before builds -->
@@ -24,6 +28,7 @@
         -->
   </ItemGroup>
 
+  
   <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
     <!-- Windows specific commands -->
     <NuGetToolsPath>$([System.IO.Path]::Combine($(SolutionDir), ".nuget"))</NuGetToolsPath>
@@ -46,7 +51,7 @@
     <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
     <NuGetCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 $(NuGetExePath)</NuGetCommand>
 
-    <PackageOutputDir Condition="$(PackageOutputDir) == ''">$(NuGetToolsPath)\output</PackageOutputDir>
+    <PackageOutputDir Condition="$(PackageOutputDir) == ''">$(SolutionDir)\Releases</PackageOutputDir>
 
     <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
     <!-- Commands -->
@@ -68,6 +73,12 @@
     </BuildDependsOn>
   </PropertyGroup>
 
+  <Target Name="GetFullPaths">
+    <ConvertToAbsolutePath Paths="$(SolutionDir)\ProjectTemplate">
+      <Output TaskParameter="AbsolutePaths" PropertyName="destinationPath"/>
+    </ConvertToAbsolutePath>
+  </Target>
+
   <Target Name="GetVersion">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output
@@ -75,6 +86,10 @@
           ItemName="assembly"/>
     </GetAssemblyIdentity>
   </Target>
+
+  <ItemGroup>
+    <GeneratedPackages Include="$(PackageOutputDir)\*.nupkg" />
+  </ItemGroup>
 
   <Target Name="CheckPrerequisites">
     <!-- Raise an error if we're unable to locate nuget.exe  -->
@@ -92,26 +107,35 @@
           Condition="'$(OS)' == 'Windows_NT' And Exists('$(PackagesConfig)')" />
   </Target>
 
-  <Target Name="BuildPackages" DependsOnTargets="CheckPrerequisites;GetVersion">
-    <RemoveDir Directories="$(PackageOutputDir)" />
-    <MakeDir Directories="$(PackageOutputDir)" />
+  <Target Name="BuildPackages" DependsOnTargets="CheckPrerequisites;GetVersion;GetFullPaths">
     
-    <!-- build running objects core package -->
-    <Exec Command="$(BuildRunningObjects) -version %(assembly.Version)"
+    <!--<RemoveDir Directories="$(PackageOutputDir)" />
+    <MakeDir Directories="$(PackageOutputDir)" />-->
+
+        <!-- build running objects core package -->
+    <Exec Command="$(BuildRunningObjects) -version $(ROVersion)"
           Condition=" '$(OS)' != 'Windows_NT' " />
 
-    <Exec Command="$(BuildRunningObjects) -version %(assembly.Version)"
+    <!--  -version %(assembly.Version)  -->
+    
+    <Exec Command="$(BuildRunningObjects)  -version $(ROVersion)"
           LogStandardErrorAsError="true"
           Condition=" '$(OS)' == 'Windows_NT' " />
 
     <!-- build default template -->
-    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
+    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=$(ROVersion)"
           Condition=" '$(OS)' != 'Windows_NT' " />
 
-    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
+    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=$(ROVersion)"
           LogStandardErrorAsError="true"
-          Condition=" '$(OS)' == 'Windows_NT' " />    
-    
+          Condition=" '$(OS)' == 'Windows_NT' " />
+
+    <!-- Copy NuGet packages for the Project Template -->
+    <Copy
+        SourceFiles="%(GeneratedPackages.FullPath)"
+        DestinationFolder="$(destinationPath)"
+        />
+    <!--DestinationFiles="@(outputPath->'$(destinationPath)\%(RecursiveDir)%(Filename)%(Extension)')"-->
   </Target>
 
 

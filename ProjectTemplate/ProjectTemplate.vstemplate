@@ -1,0 +1,99 @@
+﻿<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name Package="{1F372076-D9CE-432D-BC4F-ABFF39671C5C}" ID="21204"/>
+    <Description Package="{1F372076-D9CE-432D-BC4F-ABFF39671C5C}" ID="21205"/>
+    <Icon Package="{349c5850-65df-11da-9384-00065b846f21}" ID="9001" />
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>Web</ProjectSubType>
+    <TemplateGroupID>Web</TemplateGroupID>
+    <TemplateID>RunningObjectsMVCApplicationv10</TemplateID>
+    <SortOrder>51</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>RunningObjectsMvcWebApplication</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <Hidden>true</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <CustomParameters>
+      <CustomParameter Name="$language$" Value="C#" />
+      <CustomParameter Name="$languageext$" Value="cs" />
+      <CustomParameter Name="$autoeventwireup$" Value="true" />
+      <CustomParameter Name="$globalclassname$" Value="RunningObjectsMvcApplication" />
+      <CustomParameter Name="$sitemasterclassname$" Value="Views.Shared.Site" />
+      <CustomParameter Name="$indexerleft$" Value="[" />
+      <CustomParameter Name="$indexerright$" Value="]" />
+      <CustomParameter Name="$MVCReferences$" Value="System.Web.Mvc.dll"/>
+    </CustomParameters>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Global.asax.cs">Global.asax.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Global.asax">Global.asax</ProjectItem>
+      
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Web.config">Web.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Web.Debug.config">Web.Debug.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Web.Release.config">Web.Release.config</ProjectItem>
+      
+      <Folder Name="Controllers" TargetFolderName="Controllers" />
+      <Folder Name="Models" TargetFolderName="Models" />
+      <Folder Name="App_Data" TargetFolderName="App_Data">
+        <Folder Name="logs" TargetFolderName="logs" />
+      </Folder>
+      <Folder Name="Content" TargetFolderName="Content">
+      </Folder>
+      <Folder Name="Scripts" TargetFolderName="Scripts">
+      </Folder>
+
+      <ProjectItem ReplaceParameters="false" TargetFileName="EntityFramework.5.0.0.nupkg">EntityFramework.5.0.0.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.1.8.2.nupkg">jQuery.1.8.2.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.Ajax.Unobtrusive.2.0.20710.0.nupkg">jQuery.Ajax.Unobtrusive.2.0.20710.0.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.UI.Combined.1.8.23.nupkg">jQuery.UI.Combined.1.8.23.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.Validation.1.9.0.1.nupkg">jQuery.Validation.1.9.0.1.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Microsoft.jQuery.Unobtrusive.Ajax.2.0.20710.0.nupkg">Microsoft.jQuery.Unobtrusive.Ajax.2.0.20710.0.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Modernizr.2.6.2.nupkg">Modernizr.2.6.2.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Newtonsoft.Json.4.5.9.nupkg">Newtonsoft.Json.4.5.9.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="NLog.2.0.0.2000.nupkg">NLog.2.0.0.2000.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="WebActivator.1.5.1.nupkg">WebActivator.1.5.1.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Microsoft.Web.Infrastructure.1.0.0.0.nupkg">Microsoft.Web.Infrastructure.1.0.0.0.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="RunningObjects.1.1.1.nupkg">RunningObjects.1.1.1.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="RunningObjects.Templates.Default.1.0.0.nupkg">RunningObjects.Templates.Default.1.0.0.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.Validation.Unobtrusive.2.0.20710.0.nupkg">jQuery.Validation.Unobtrusive.2.0.20710.0.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.InfiniteScroll.2.120312.nupkg">jQuery.InfiniteScroll.2.120312.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Microsoft.jQuery.Unobtrusive.Validation.2.0.20710.0.nupkg">Microsoft.jQuery.Unobtrusive.Validation.2.0.20710.0.nupkg</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>NuGet.VisualStudio.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>NuGet.VisualStudio.TemplateWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <packages repository="template">
+
+      <!-- Packages from Running Objects -->
+      <package id="EntityFramework" version="5.0.0"  />
+      <package id="Newtonsoft.Json" version="4.5.9"  />
+      <package id="NLog" version="2.0.0.2000"  />
+      <package id="WebActivator" version="1.5.1.0"  />
+      <package id="RunningObjects" version="1.1.1"  />
+
+      <!-- Packages from Default Template -->
+      <package id="jQuery" version="1.8.2"  />
+      <package id="jQuery.UI.Combined" version="1.8.23"  />
+      <package id="jQuery.Validation" version="1.9.0.1"  />
+      <package id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+      <package id="Modernizr" version="2.6.2"  />
+      <package id="RunningObjects.Templates.Default" version="1.0.0"  />
+      
+      <!-- Packages from the Project itself -->
+      <package id="jQuery.Ajax.Unobtrusive" version="2.0.20710.0"  />
+      <package id="Microsoft.jQuery.Unobtrusive.Ajax" version="2.0.20710.0"  />
+      <package id="jQuery.Validation.Unobtrusive" version="2.0.20710.0"  />
+      <package id="jQuery.InfiniteScroll" version="2.120312"  />
+      <package id="Microsoft.jQuery.Unobtrusive.Validation" version="2.0.20710.0"  />
+
+    </packages>
+  </WizardData>
+</VSTemplate>
