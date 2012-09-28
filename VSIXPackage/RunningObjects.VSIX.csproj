@@ -80,14 +80,10 @@
   -->
   <Target Name="GetFullPaths">
     <ConvertToAbsolutePath Paths="$(SolutionDir)\Releases">
-      <Output TaskParameter="AbsolutePaths" PropertyName="destinationPath"/>
+      <Output TaskParameter="AbsolutePaths" PropertyName="destinationPath" />
     </ConvertToAbsolutePath>
   </Target>
-  
   <Target Name="AfterBuild" DependsOnTargets="GetFullPaths">
-    <Copy
-        SourceFiles="$(OutDir)\$(TargetName).vsix"
-        DestinationFolder="$(destinationPath)"
-        />
+    <Copy SourceFiles="$(OutDir)\$(TargetName).vsix" DestinationFolder="$(destinationPath)" />
   </Target>
 </Project>
