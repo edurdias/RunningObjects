@@ -3,7 +3,4 @@
   <Target Name="CoreCompile">
     <Message Text="Not compiling VSIX project..." />
   </Target>
-  <Target Name="CopyFilesToOutputDirectory">
-    <Message Text="Not copying the default output (compiled) VSIX project..." />
-  </Target>
 </Project>
