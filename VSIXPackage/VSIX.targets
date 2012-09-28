@@ -3,4 +3,8 @@
   <Target Name="CoreCompile">
     <Message Text="Not compiling VSIX project..." />
   </Target>
+  <Target Name="DeployVsixExtensionFiles">
+    <Message Text="Not deploying the VSIX project..." />
+  </Target>
+  
 </Project>
