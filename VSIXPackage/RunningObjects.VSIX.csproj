@@ -64,13 +64,17 @@
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>
     </ProjectReference>
   </ItemGroup>
-  
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\VSSDK\Microsoft.VsSDK.targets" />
 
-  <Target Name="CoreCompile" />
-  <Target Name="CopyFilesToOutputDirectory" />
-  
+  <Target Name="CoreCompile">
+    <Message Text="Not compiling VSIX project..." />
+  </Target>
+  <Target Name="CopyFilesToOutputDirectory">
+    <Message Text="Not copying the default output (compiled) VSIX project..." />
+  </Target>
+
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
