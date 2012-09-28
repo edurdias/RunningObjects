@@ -60,9 +60,9 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="Microsoft.Web.Infrastructure.1.0.0.0.nupkg">Microsoft.Web.Infrastructure.1.0.0.0.nupkg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="RunningObjects.1.1.1.nupkg">RunningObjects.1.1.1.nupkg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="RunningObjects.Templates.Default.1.0.0.nupkg">RunningObjects.Templates.Default.1.0.0.nupkg</ProjectItem>
-      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.Validation.Unobtrusive.2.0.20710.0.nupkg">jQuery.Validation.Unobtrusive.2.0.20710.0.nupkg</ProjectItem>
-      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.InfiniteScroll.2.120312.nupkg">jQuery.InfiniteScroll.2.120312.nupkg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="Microsoft.jQuery.Unobtrusive.Validation.2.0.20710.0.nupkg">Microsoft.jQuery.Unobtrusive.Validation.2.0.20710.0.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.Validation.Unobtrusive.2.0.20710.0.nupkg">jQuery.Validation.Unobtrusive.2.0.20710.0.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.InfiniteScroll.2.120312.nupkg">jQuery.InfiniteScroll.2.120312.nupkg</ProjectItem>      
     </Project>
   </TemplateContent>
   <WizardExtension>

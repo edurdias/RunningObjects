@@ -20,7 +20,6 @@
       <dependency id="jQuery" version="1.8.2"  />
       <dependency id="jQuery.UI.Combined" version="1.8.23"  />
       <dependency id="jQuery.Validation" version="1.9.0.1"  />
-      <dependency id="jQuery.vsdoc" version="1.6"  />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
       <dependency id="Modernizr" version="2.6.2"  />
       <dependency id="jQuery.Validation.Unobtrusive" version="2.0.20710.0"  />

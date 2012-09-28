@@ -46,7 +46,9 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="VSIX.targets" />
+    <None Include="VSIX.targets">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="RunningObjects.pkgdef">
