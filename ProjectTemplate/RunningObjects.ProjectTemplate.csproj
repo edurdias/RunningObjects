@@ -71,6 +71,7 @@
     <None Include="Newtonsoft.Json.4.5.9.nupkg" />
     <None Include="NLog.2.0.0.2000.nupkg" />
     <None Include="ProjectTemplate.csproj" />
+    <None Include="ProjectTemplate.targets" />
     <None Include="Web.config" />
     <None Include="Web.Debug.config" />
     <None Include="Web.Release.config" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\VSSDK\Microsoft.VsSDK.targets" />
+  <Import Project="ProjectTemplate.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
