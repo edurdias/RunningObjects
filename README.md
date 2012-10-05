@@ -3,12 +3,61 @@ __Running Objects__ is a framework that allows you to use simple OO concepts, fo
 
 It's built on top of __ASP.NET MVC__ using a refined mix of concepts such as __Domain-Driven Design__, __Naked Objects__, __Object-Oriented UI__ and __Design Patterns__. Basically, everything that is necessary to let you aggregate the highest business value in the shortest time to your application.
 
-#**WYDIWYG** - **W**hat **Y**ou **D**esign **I**s **W**hat **Y**ou **G**et
-You domain model, with all classes, enumerators, properties, methods and constructors will be automatically and transparently rendered to the browser.
-
-The example below demonstrate a constructor for a class called Category and how it will be rendered in the browser.
-
 ![](http://dl.dropbox.com/u/1625447/Virb/running-objects-sample.png)
+
+#**Features**
+
+----------
+
+###Domain-Driven Design & Pure Object-Oriented Modeling
+
+Use the power of DDD and OO to develop your applications. Your OO design
+and model will be your application. You don’t need to worry with
+developing Data Access Components and/or User Interface code. Keep the
+focus in your business requirements.
+
+----------
+
+###Unit Test by Nature
+
+Making use of OO concepts, **Running Objects** let you create a clean
+code, ready for unit testing. You can ask "*But do I need to do
+something else to create the unit tests?*“, we will answer”*Yes, the
+unit tests!*".
+
+----------
+
+###RESTful Services
+
+Expose your objects as REST services automatically. **Running Objects**
+follows the HATEOAS (Hypermedia as the Engine of Application State) REST
+constraint to generate the RESTful service layer of your objects.
+
+----------
+
+###Fluent Security API
+
+No more hassles configuring security of your application. Use the code
+based configuration to create high-coherent security settings. You will
+never have an out of date security configuration again!
+
+----------
+
+###Customizable UI
+
+**Running Objects** provides a default set of views that automatically
+generates the user interface based on your objects. But if you want to
+customize them, feel free to take the control and create your own views,
+templates and mix them all!
+
+----------
+
+###Transparent Persistence
+
+Using the Repository Pattern, **Running Objects** let you use the
+persistence you want! It has an Entity Framework Repository ready to
+use, so if you are using Entity Framework, it will be just 1 line of
+configuration to use it!
 
 #**How I get it?**
 You have two options to get Running Objects, the first one is downloading our Visual Studio Project Template that will let you create a new ASP.NET MVC project and will install all necessary packages and references; the second option and more used if you have a existing application is to install the package from NuGet.
@@ -29,10 +78,10 @@ To install our NuGet package you just need to run the following command in your 
 	PM> Install-Package RunningObjects
 
 #**Documentation**
-We are working to improve the documentation, including blog posts and webcasts. You can always check our [Get Started](http://runningobjects.com/get-started "Get Started") page.
+We are working to improve the documentation, including blog posts and webcasts. You can always check our [Getting Started](http://runningobjects.com/p/getting-started "Getting Started") page.
 
 #**License**
-Running Objects uses the Microsoft Public License, you can check it out [here](http://opensource.org/licenses/ms-pl "Running Objects License (MS-PL)").
+Running Objects uses the Microsoft Public License, you can check it out [here](http://runningobjects.com/p/license "Running Objects License (MS-PL)").
 
 #**Issues**
 We track our development and also issues using the GitHub Issues. Please check it out [here](https://github.com/edurdias/RunningObjects/issues?state=open "Running Objects Issues").
