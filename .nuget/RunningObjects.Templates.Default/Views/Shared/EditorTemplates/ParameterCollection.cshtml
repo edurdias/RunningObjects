@@ -51,7 +51,7 @@
     $(document).ready(function () {
         $("#@(Model.Name)_typeahead").typeahead(
             {
-                property: "@collection.Descriptor.TextProperty.Name",
+                property: "@(collection.Descriptor.TextProperty != null ? collection.Descriptor.TextProperty.Name : string.Empty)",
                 
                 source: function (typeahead) {
                     $.ajax({
