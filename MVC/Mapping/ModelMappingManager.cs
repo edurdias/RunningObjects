@@ -150,7 +150,7 @@ namespace RunningObjects.MVC.Mapping
 
             var attributes = type.GetCustomAttributes(true);
 
-            var displayName = attributes.OfType<DisplayNameAttribute>().FirstOrDefault();
+            var displayName = attributes.OfType<System.ComponentModel.DisplayNameAttribute>().FirstOrDefault();
             mapping.Name = (displayName != null && !string.IsNullOrEmpty(displayName.DisplayName))
                                ? displayName.DisplayName
                                : type.Name;
@@ -226,11 +226,15 @@ namespace RunningObjects.MVC.Mapping
         private static MethodMapping CreateMethodMapping(TypeMapping type, MethodBase method, int index)
         {
             var display = method.GetCustomAttributes(false).OfType<DisplayAttribute>().SingleOrDefault();
+            var displayName = method.GetCustomAttributes(false).OfType<System.ComponentModel.DisplayNameAttribute>().FirstOrDefault();
+            var name = display == null
+                           ? displayName == null ? method.IsConstructor ? "New" : method.Name : displayName.DisplayName
+                           : display.GetName();
 
             return new MethodMapping
                        {
                            ID = Guid.NewGuid().ToString("N"),
-                           Name = display == null ? method.IsConstructor ? "New" : method.Name : display.GetName(),
+                           Name = name,
                            MethodName = method.Name,
                            Parameters = method.GetParameters(),
                            Index = index,

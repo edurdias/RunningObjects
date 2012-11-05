@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using RunningObjects.MVC.Html;
 using RunningObjects.MVC.Mapping;
 using RunningObjects.MVC.Query;
 
@@ -122,29 +123,30 @@ namespace RunningObjects.MVC.Controllers
             if (mapping == null)
                 throw new RunningObjectsException(string.Format("No method found with name {2} at index {0} for type {1}", index, modelType.PartialName(), methodName));
 
-            var method = new Method(new MethodDescriptor(mapping, ControllerContext.GetActionDescriptor(RunningObjectsAction.Execute)));
+            var method = Binders[typeof(Method)].BindModel(ControllerContext, MethodBinder.CreateBindingContext(ControllerContext)) as Method;
+            if (method != null)
+            {
+                if (!method.Parameters.Any() || method.Descriptor.Attributes.OfType<AutoInvokeAttribute>().Any())
+                {
+                    return ExecuteMethodOf
+                    (
+                        modelType,
+                        method,
+                        () => OnSuccess(modelType)(null),
+                        OnSuccessWithReturn(method),
+                        OnException(method),
+                        HttpNotFound,
+                        key
+                    );
+                }
 
-            if (!method.Parameters.Any())
-            {
-                return ExecuteMethodOf
-                (
-                    modelType,
-                    method,
-                    () => OnSuccess(modelType)(null),
-                    OnSuccessWithReturn(method),
-                    OnException(method),
-                    HttpNotFound,
-                    key
-                );
-            }
-            
-            if (!method.Descriptor.Mapping.Method.IsStatic)
-            {
-                method.Instance = GetInstanceOf(modelType, key, new ModelDescriptor(typeMapping));
+                if (!method.Descriptor.Mapping.Method.IsStatic)
+                {
+                    method.Instance = GetInstanceOf(modelType, key, new ModelDescriptor(typeMapping));
                     RunningObjectsSetup.Configuration.Query.RemoveKeywordEvaluator("{instance}");
-                RunningObjectsSetup.Configuration.Query.KeywordEvaluators.Add("{instance}", q => method.Instance);
+                    RunningObjectsSetup.Configuration.Query.KeywordEvaluators.Add("{instance}", q => method.Instance);
+                }
             }
-
             return !ControllerContext.IsChildAction ? (ActionResult)View(method) : PartialView(method);
         }
 
@@ -171,6 +173,16 @@ namespace RunningObjects.MVC.Controllers
                 var redirectTo = ControllerContext.HttpContext.Request["redirectTo"];
                 if (!string.IsNullOrEmpty(redirectTo))
                     return Redirect(redirectTo);
+
+                var defaultRedirect = RunningObjectsSetup.Configuration.DefaultRedirect;
+                if (defaultRedirect != null)
+                {
+                    var routeValues = defaultRedirect.Action != RunningObjectsAction.Welcome 
+                        ? LinkExtensions.CreateRouteValueDictionary(defaultRedirect.Type, defaultRedirect.Arguments) 
+                        : null;
+
+                    return RedirectToAction(defaultRedirect.Action.ToString(), "Presentation", routeValues);
+                }
                 return RedirectToAction("Index", new { modelType = modelType.PartialName() });
             };
         }
@@ -191,6 +203,13 @@ namespace RunningObjects.MVC.Controllers
                 var result = ParseResult(model, @return);
                 if (result is ModelCollection)
                     return View("Index", result);
+
+                if (result is Redirect)
+                {
+                    var redirect = result as Redirect;
+                    return RedirectToAction(redirect.Action.ToString(), "Presentation", LinkExtensions.CreateRouteValueDictionary(redirect.Type, redirect.Arguments));
+                }
+
                 var redirectTo = ControllerContext.HttpContext.Request["redirectTo"];
                 if (!string.IsNullOrEmpty(redirectTo))
                     return Redirect(redirectTo);

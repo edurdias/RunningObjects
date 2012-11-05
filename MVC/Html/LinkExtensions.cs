@@ -1,7 +1,9 @@
 using System;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using RunningObjects.MVC.Mapping;
 
 namespace RunningObjects.MVC.Html
 {
@@ -70,9 +72,40 @@ namespace RunningObjects.MVC.Html
             }
         }
 
-        private static RouteValueDictionary CreateRouteValueDictionary(Type modelType, object arguments)
+        public static RouteValueDictionary CreateRouteValueDictionary(Type modelType, object arguments)
         {
             return new RouteValueDictionary(arguments) { { "modelType", modelType.PartialName() } };
+        }
+
+        public static object GetRouteValues(MethodBase method, object key, MethodMapping methodMapping, TypeMapping typeMapping)
+        {
+            object routeValues = new
+            {
+                modelType = typeMapping.ModelType.PartialName(),
+                index = methodMapping.Index
+            };
+
+            if (!method.IsConstructor)
+            {
+                routeValues = new
+                {
+                    modelType = typeMapping.ModelType.PartialName(),
+                    index = methodMapping.Index,
+                    methodName = methodMapping.MethodName
+                };
+            }
+
+            if (!method.IsStatic && key != null)
+            {
+                routeValues = new
+                {
+                    modelType = typeMapping.ModelType.PartialName(),
+                    index = methodMapping.Index,
+                    methodName = methodMapping.MethodName,
+                    key
+                };
+            }
+            return routeValues;
         }
     }
 }

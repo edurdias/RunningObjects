@@ -80,7 +80,10 @@ namespace RunningObjects.MVC.Controllers
             if (ex is ArgumentException)
             {
                 var argex = ex as ArgumentException;
-                ModelState.AddModelError(argex.ParamName, argex.Message);
+                if (!string.IsNullOrEmpty(argex.ParamName))
+                    ModelState.AddModelError(argex.ParamName, argex.Message);
+                else
+                    Exceptions.Add(argex);
             }
             else if (ex is DbEntityValidationException)
             {
@@ -256,7 +259,7 @@ namespace RunningObjects.MVC.Controllers
                             paramRepository.Update(parameter.Value);
                         paramRepository.SaveChanges();
                     }
-                    
+
 
                     if (@return != null)
                         return onSuccessWithReturn(@return);
@@ -289,6 +292,9 @@ namespace RunningObjects.MVC.Controllers
                             return new ModelCollection(returnType, descriptor, (IEnumerable)@return);
                         }
                     }
+
+                    if (method.ReturnType == typeof(Redirect))
+                        return @return;
                 }
             }
             return null;

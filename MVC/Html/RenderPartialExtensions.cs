@@ -26,38 +26,7 @@ namespace RunningObjects.MVC.Html
             var methodMapping = methods.FirstOrDefault(m => m.Method == method);
             if (methodMapping == null)
                 throw new ArgumentNullException(string.Format("The method {0} was not found in type {1}.", method.Name, typeMapping.Name));
-            htmlHelper.RenderAction(methodMapping.UnderlineAction.ToString(), "Presentation", GetRouteValues(method, key, methodMapping, typeMapping));
-        }
-
-        private static object GetRouteValues(MethodBase method, object key, MethodMapping methodMapping, TypeMapping typeMapping)
-        {
-            object routeValues = new
-            {
-                modelType = typeMapping.ModelType.PartialName(),
-                index = methodMapping.Index
-            };
-
-            if (!method.IsConstructor)
-            {
-                routeValues = new
-                {
-                    modelType = typeMapping.ModelType.PartialName(),
-                    index = methodMapping.Index,
-                    methodName = methodMapping.MethodName
-                };
-            }
-
-            if (!method.IsStatic && key != null)
-            {
-                routeValues = new
-                {
-                    modelType = typeMapping.ModelType.PartialName(),
-                    index = methodMapping.Index,
-                    methodName = methodMapping.MethodName,
-                    key
-                };
-            }
-            return routeValues;
+            htmlHelper.RenderAction(methodMapping.UnderlineAction.ToString(), "Presentation", LinkExtensions.GetRouteValues(method, key, methodMapping, typeMapping));
         }
 
         #region Constructors

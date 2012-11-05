@@ -8,7 +8,7 @@ namespace RunningObjects.MVC
 {
     public class RunningObjectsViewEngine : RazorViewEngine
     {
-        private static readonly Dictionary<ISecurityPolicyContainer<Object>, KeyValuePair<Func<bool>, string>> themes = new Dictionary<ISecurityPolicyContainer<object>, KeyValuePair<Func<bool>, string>>();
+        private static readonly Dictionary<ISecurityPolicyContainer<Object>, KeyValuePair<Func<bool>, string>> Themes = new Dictionary<ISecurityPolicyContainer<object>, KeyValuePair<Func<bool>, string>>();
 
         public override ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName, bool useCache)
         {
@@ -80,9 +80,9 @@ namespace RunningObjects.MVC
             if (configuration != null)
             {
                 var container = configuration.FindPolicyContainer(controllerContext);
-                if(container != null && themes.ContainsKey(container))
+                if(container != null && Themes.ContainsKey(container))
                 {
-                    var pair = themes[container];
+                    var pair = Themes[container];
                     if(pair.Key())
                         return string.Format("{0}/", pair.Value);
                 }
@@ -123,10 +123,10 @@ namespace RunningObjects.MVC
         public static void RegisterTheme<T>(ISecurityPolicyContainer<T> container, string name, Func<bool> expression) where T : class
         {
             var pair = new KeyValuePair<Func<bool>, string>(expression, name);
-            if (themes.ContainsKey(container))
-                themes[container] = pair;
+            if (Themes.ContainsKey(container))
+                Themes[container] = pair;
             else
-                themes.Add(container, pair);
+                Themes.Add(container, pair);
         }
     }
 }

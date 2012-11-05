@@ -42,7 +42,10 @@ namespace RunningObjects.MVC
 
         public ModelMetadata Metadata
         {
-            get { return ModelMetadataProviders.Current.GetMetadataForProperty(() => this, Model.ModelType, Name); }
+            get
+            {
+                return ModelMetadataProviders.Current.GetMetadataForProperty(() => this, Model != null ? Model.ModelType : null, Name);
+            }
         }
 
         public bool IsModel
