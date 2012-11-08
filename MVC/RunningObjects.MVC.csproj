@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Configuration\ConfigurationBuilder.cs" />
     <Compile Include="Configuration\WelcomeConfigurationBuilder.cs" />
+    <Compile Include="Controllers\WorkflowController.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="QueryAttribute.cs" />
     <Compile Include="Query\QueryConfigurationBuilder.cs" />
+    <Compile Include="RunningObjectsActionExtensions.cs" />
     <Compile Include="ScriptOnlyAttribute.cs" />
     <Compile Include="ShowMethodsAttribute.cs" />
     <Compile Include="ValidateRequestAttribute.cs" />
@@ -169,6 +171,14 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ParameterUIHintAttribute.cs" />
     <Compile Include="ValidationContextExtensions.cs" />
+    <Compile Include="Workflow\IWorkflow.cs" />
+    <Compile Include="Workflow\IWorkflowActivity.cs" />
+    <Compile Include="Workflow\IWorkflowBuilder.cs" />
+    <Compile Include="Workflow\IWorkflowConditionalActivity.cs" />
+    <Compile Include="Workflow\SequentialWorkflow.cs" />
+    <Compile Include="Workflow\SequentialWorkflowActivity.cs" />
+    <Compile Include="Workflow\SequentialWorkflowConditionalActivity.cs" />
+    <Compile Include="Workflow\WorkflowConfigurationBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

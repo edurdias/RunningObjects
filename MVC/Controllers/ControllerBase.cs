@@ -250,6 +250,8 @@ namespace RunningObjects.MVC.Controllers
                         var paramRepository = parameter.UnderliningModel.Descriptor.ModelMapping.Configuration.Repository();
                         if (parameter.IsModelCollection)
                         {
+
+                            //TODO:Update parameters from collection
                             //foreach (var paramItem in parameter.ToModelCollection().Items)
                             //{
                             //    paramRepository.Update(paramItem.Instance);

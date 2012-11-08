@@ -63,7 +63,7 @@ namespace RunningObjects.MVC
         {
             var modelType = ModelBinders.Binders[typeof(Type)].BindModel(controllerContext, bindingContext) as Type;
             var index = int.Parse(controllerContext.RouteData.Values["index"].ToString());
-            var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
+            var action = RunningObjectsAction.Welcome.GetAction(actionName);
             switch (action)
             {
                 case RunningObjectsAction.Create:

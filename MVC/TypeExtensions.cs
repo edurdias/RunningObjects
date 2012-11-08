@@ -26,6 +26,14 @@ namespace RunningObjects.MVC
             return mapping != null ? mapping.Configuration.Repository() : null;
         }
 
+        public static IRepository<T> Repository<T>(this Type type) where T : class
+        {
+            var mapping = ModelMappingManager.MappingFor(type);
+            if (mapping != null)
+                return mapping.Configuration.Repository() as IRepository<T>;
+            return null;
+        }
+
         public static IRepository<object> Repository(this Object instance)
         {
             return instance != null ? instance.GetType().Repository() : null;

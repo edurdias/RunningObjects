@@ -115,7 +115,7 @@ namespace RunningObjects.MVC.Controllers
             );
         }
 
-        public ActionResult Execute(Type modelType, string methodName, int index, string key = null)
+        public virtual ActionResult Execute(Type modelType, string methodName, int index, string key = null)
         {
             var typeMapping = ModelMappingManager.MappingFor(modelType);
             var methods = key != null ? typeMapping.InstanceMethods : typeMapping.StaticMethods;
@@ -151,7 +151,7 @@ namespace RunningObjects.MVC.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
-        public ActionResult Execute(Type modelType, Method model, string key = null)
+        public virtual ActionResult Execute(Type modelType, Method model, string key = null)
         {
             RunningObjectsSetup.Configuration.Query.RemoveKeywordEvaluator("{instance}");
             return ExecuteMethodOf

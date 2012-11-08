@@ -29,7 +29,7 @@ namespace RunningObjects.MVC
 
             var controllerContext = filterContext.Controller.ControllerContext;
             var actionName = (string)controllerContext.RouteData.Values["action"];
-            var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
+            var action = RunningObjectsAction.Welcome.GetAction(actionName);
             var bindingContext = MethodBinder.CreateBindingContext(controllerContext);
 
             if (action == RunningObjectsAction.Create || action == RunningObjectsAction.Execute)

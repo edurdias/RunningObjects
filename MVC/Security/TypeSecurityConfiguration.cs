@@ -58,259 +58,82 @@ namespace RunningObjects.MVC.Security
             return executes.Values.ToList();
         }
 
-        internal ISecurityPolicyContainer<T> OnExecute(MethodInfo method)
-        {
-            var key = method.ToString();
-            if (!executes.ContainsKey(key))
-                executes.Add(key, new MethodSecurityContainer<T>(this, method));
-            return executes[key];
-        }
-
-        #region OnExecute
-
-        #region Static Functions
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn(Func<object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1>(Func<T1, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2>(Func<T1, T2, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3>(Func<T1, T2, T3, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4>(Func<T1, T2, T3, T4, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, object> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute(Action expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        #endregion
-
-        #region Static Actions
-        public ISecurityPolicyContainer<T> OnExecute<T1>(Action<T1> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2>(Action<T1, T2> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3>(Action<T1, T2, T3> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4>(Action<T1, T2, T3, T4> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-
-        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> expression)
-        {
-            return OnExecute(expression.Method);
-        }
-        #endregion
-
-        #region Instance Functions
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1>(Func<T, Func<T1, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<TResult>(Func<T, Func<TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn(Func<T, Func<object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, TResult>(Func<T, Func<T1, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2>(Func<T, Func<T1, T2, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, TResult>(Func<T, Func<T1, T2, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3>(Func<T, Func<T1, T2, T3, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, TResult>(Func<T, Func<T1, T2, T3, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4>(Func<T, Func<T1, T2, T3, T4, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, TResult>(Func<T, Func<T1, T2, T3, T4, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5>(Func<T, Func<T1, T2, T3, T4, T5, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, TResult>(Func<T, Func<T1, T2, T3, T4, T5, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6>(Func<T, Func<T1, T2, T3, T4, T5, T6, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        public ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, object>> expression)
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
@@ -320,9 +143,6 @@ namespace RunningObjects.MVC.Security
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
 
-        #endregion
-
-        #region Instance Actions
         public ISecurityPolicyContainer<T> OnExecute<T1>(Func<T, Action<T1>> expression)
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
@@ -397,14 +217,179 @@ namespace RunningObjects.MVC.Security
         {
             return OnExecute(expression(Activator.CreateInstance<T>()).Method);
         }
-        #endregion
 
-        #endregion
+        public ISecurityPolicyContainer<T> OnExecute<TResult>(Func<TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, TResult>(Func<T1, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, TResult>(Func<T1, T2, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute(Action expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1>(Action<T1> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2>(Action<T1, T2> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3>(Action<T1, T2, T3> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4>(Action<T1, T2, T3, T4> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        public ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> expression)
+        {
+            return OnExecute(expression.Method);
+        }
+
+        internal ISecurityPolicyContainer<T> OnExecute(MethodInfo method)
+        {
+            var key = method.ToString();
+            if (!executes.ContainsKey(key))
+                executes.Add(key, new MethodSecurityContainer<T>(this, method));
+            return executes[key];
+        }
 
         public ISecurityPolicyContainer<T> FindPolicyContainer(ControllerContext controllerContext)
         {
             var actionName = controllerContext.RouteData.Values["action"].ToString();
-            var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
+            var action = RunningObjectsAction.Welcome.GetAction(actionName);
             switch (action)
             {
                 case RunningObjectsAction.Welcome:

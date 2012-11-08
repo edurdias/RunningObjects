@@ -35,7 +35,7 @@ namespace RunningObjects.MVC
         private ViewEngineResult FindViewByConvention(ControllerContext controllerContext, string viewName, string masterName, bool useCache)
         {
             ViewEngineResult result;
-            var actionName = controllerContext.RouteData.Values["action"].ToString();
+            var actionName = RunningObjectsAction.Welcome.GetAction(controllerContext.RouteData.Values["action"].ToString()).ToString();
             var themePath = GetThemePath(controllerContext);
 
             if (controllerContext.RouteData.Values["modelType"] != null)
@@ -43,7 +43,7 @@ namespace RunningObjects.MVC
                 var modelTypeName = controllerContext.RouteData.Values["modelType"].ToString();
 
                 //Trying to get the partial view for a specific action and model and method
-                var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
+                var action = RunningObjectsAction.Welcome.GetAction(actionName);
                 if (action == RunningObjectsAction.Execute)
                 {
                     var methodName = controllerContext.RouteData.Values["methodName"].ToString();
@@ -94,7 +94,7 @@ namespace RunningObjects.MVC
         {
             ViewEngineResult result;
             var themePath = GetThemePath(controllerContext);
-            var actionName = controllerContext.RouteData.Values["action"].ToString();
+            var actionName = RunningObjectsAction.Welcome.GetAction(controllerContext.RouteData.Values["action"].ToString()).ToString();
             if (controllerContext.RouteData.Values["modelType"] != null)
             {
                 var modelTypeName = controllerContext.RouteData.Values["modelType"].ToString();

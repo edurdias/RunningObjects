@@ -18,22 +18,22 @@ namespace RunningObjects.MVC.Security
 
         IEnumerable<ISecurityPolicyContainer<T>> AllExecutions();
 
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1>(Func<T, Func<T1, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn(Func<T, Func<Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2>(Func<T, Func<T1, T2, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3>(Func<T, Func<T1, T2, T3, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4>(Func<T, Func<T1, T2, T3, T4, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5>(Func<T, Func<T1, T2, T3, T4, T5, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6>(Func<T, Func<T1, T2, T3, T4, T5, T6, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Object>> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Object>> expression);
+        ISecurityPolicyContainer<T> OnExecute<TResult>(Func<T, Func<TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, TResult>(Func<T, Func<T1, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, TResult>(Func<T, Func<T1, T2, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, TResult>(Func<T, Func<T1, T2, T3, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, TResult>(Func<T, Func<T1, T2, T3, T4, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, TResult>(Func<T, Func<T1, T2, T3, T4, T5, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>> expression);
 
         ISecurityPolicyContainer<T> OnExecute(Func<T, Action> expression);
         ISecurityPolicyContainer<T> OnExecute<T1>(Func<T, Action<T1>> expression);
@@ -52,22 +52,22 @@ namespace RunningObjects.MVC.Security
         ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> expression);
         ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> expression);
 
-        ISecurityPolicyContainer<T> OnExecuteWithReturn(Func<Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1>(Func<T1, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2>(Func<T1, T2, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3>(Func<T1, T2, T3, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4>(Func<T1, T2, T3, T4, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Object> expression);
-        ISecurityPolicyContainer<T> OnExecuteWithReturn<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Object> expression);
+        ISecurityPolicyContainer<T> OnExecute<TResult>(Func<TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1,TResult>(Func<T1, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2,TResult>(Func<T1, T2, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3,TResult>(Func<T1, T2, T3, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4,TResult>(Func<T1, T2, T3, T4, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5,TResult>(Func<T1, T2, T3, T4, T5, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6,TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> expression);
+        ISecurityPolicyContainer<T> OnExecute<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15,TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> expression);
 
         ISecurityPolicyContainer<T> OnExecute(Action expression);
         ISecurityPolicyContainer<T> OnExecute<T1>(Action<T1> expression);

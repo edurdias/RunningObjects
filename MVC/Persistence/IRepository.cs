@@ -11,7 +11,5 @@ namespace RunningObjects.MVC.Persistence
         bool SaveChanges();
         T Find(params object[] keyValues);
         IQueryable All();
-
-        
     }
 }

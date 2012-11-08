@@ -48,7 +48,7 @@ namespace RunningObjects.MVC.Mapping
             var currentType = CurrentType(controllerContext);
             if (currentType != null)
             {
-                var action = (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), controllerContext.RouteData.Values["action"].ToString(), true);
+                var action = RunningObjectsAction.Welcome.GetAction(controllerContext.RouteData.Values["action"].ToString());
                 switch (action)
                 {
                     case RunningObjectsAction.Index:

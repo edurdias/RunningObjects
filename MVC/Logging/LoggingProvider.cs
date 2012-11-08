@@ -7,12 +7,12 @@ namespace RunningObjects.MVC.Logging
     {
         public void ActionExecuting(ActionExecutingContext context)
         {
-            Executing(GetAction(context.ActionDescriptor.ActionName), context);
+            Executing(RunningObjectsAction.Welcome.GetAction(context.ActionDescriptor.ActionName), context);
         }
 
         public void ActionExecuted(ActionExecutedContext context)
         {
-            Executed(GetAction(context.ActionDescriptor.ActionName), context);
+            Executed(RunningObjectsAction.Welcome.GetAction(context.ActionDescriptor.ActionName), context);
         }
 
         public void OnException(ExceptionContext context)
@@ -21,14 +21,9 @@ namespace RunningObjects.MVC.Logging
             while (ex.InnerException != null)
                 ex = ex.InnerException;
 
-            OnException(GetAction(context.RequestContext.RouteData.Values["action"].ToString()), ex);
-        }
 
-        private static RunningObjectsAction GetAction(string actionName)
-        {
-            return (RunningObjectsAction)Enum.Parse(typeof(RunningObjectsAction), actionName);
+            OnException(RunningObjectsAction.Welcome.GetAction(context.RequestContext.RouteData.Values["action"].ToString()), ex);
         }
-
 
         public abstract void Executing(RunningObjectsAction action, ActionExecutingContext context);
         protected abstract void Executed(RunningObjectsAction action, ActionExecutedContext context);

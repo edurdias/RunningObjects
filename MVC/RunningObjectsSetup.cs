@@ -15,6 +15,7 @@ namespace RunningObjects.MVC
         {
             get { return configuration; }
         }
+
         public static void Initialize(Action<ConfigurationBuilder> expression)
         {
             InitializeControllerFactory();
@@ -28,7 +29,6 @@ namespace RunningObjects.MVC
             InitializeMapping();
         }
 
-        
 
         #region Initialization Steps
 
@@ -126,12 +126,33 @@ namespace RunningObjects.MVC
                 );
             #endregion
 
+            #region Running Objects Default Workflow Controller
+
+           
+
+            routes.MapRoute
+            (
+                "Running Objects - Workflow - Start",
+                "wf/{workflowKey}/Start/{modelType}/{methodName}/{index}",
+                new { controller = "Workflow", action = "Start", index = 0 }
+            );
+
+            routes.MapRoute
+           (
+               "Running Objects - Workflow - Execute Static Method",
+               "wf/{workflowKey}/{activityKey}/{modelType}/{methodName}/{index}",
+               new { controller = "Workflow", action = "Execute", index = 0 }
+           );
+
+            #endregion
+
             #region Running Objects Default Presentation Controller
-            routes.MapRoute(
+            routes.MapRoute
+            (
                 "Running Objects - All",
                 "{modelType}",
                 new { controller = "Presentation", action = "Index" }
-                );
+            );
 
             routes.MapRoute(
                 "Running Objects - Welcome",
@@ -164,6 +185,8 @@ namespace RunningObjects.MVC
                 new { controller = "Presentation", action = "Execute", index = 0 }
                 );
             #endregion
+
+
         }
         #endregion
     }
