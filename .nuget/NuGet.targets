@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
 
-    <ROVersion Condition="$(ROVersion) == ''">1.1.1</ROVersion>
-    
     
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
@@ -66,7 +64,7 @@
       $(BuildDependsOn);
     </BuildDependsOn>
 
-    <!-- Make the build depend on restore packages -->
+    <!-- Make the build depend on build packages -->
     <BuildDependsOn Condition="$(BuildPackage) == 'true'">
       $(BuildDependsOn);
       BuildPackages;
@@ -108,25 +106,27 @@
   </Target>
 
   <Target Name="BuildPackages" DependsOnTargets="CheckPrerequisites;GetVersion;GetFullPaths">
+
+    <Message Text="Assembly Version" />    
     
     <!--<RemoveDir Directories="$(PackageOutputDir)" />
     <MakeDir Directories="$(PackageOutputDir)" />-->
 
         <!-- build running objects core package -->
-    <Exec Command="$(BuildRunningObjects) -version $(ROVersion)"
+    <Exec Command="$(BuildRunningObjects) -version  %(assembly.Version)"
           Condition=" '$(OS)' != 'Windows_NT' " />
 
     <!--  -version %(assembly.Version)  -->
     
-    <Exec Command="$(BuildRunningObjects)  -version $(ROVersion)"
+    <Exec Command="$(BuildRunningObjects)  -version  %(assembly.Version)"
           LogStandardErrorAsError="true"
           Condition=" '$(OS)' == 'Windows_NT' " />
 
     <!-- build default template -->
-    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=$(ROVersion)"
+    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
           Condition=" '$(OS)' != 'Windows_NT' " />
 
-    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=$(ROVersion)"
+    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
           LogStandardErrorAsError="true"
           Condition=" '$(OS)' == 'Windows_NT' " />
 
