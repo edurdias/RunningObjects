@@ -8,7 +8,7 @@ namespace RunningObjects.MVC
         public DisplayNameAttribute(string displayName) 
             : base(displayName)
         {
-            
+             
         }
     }
 }

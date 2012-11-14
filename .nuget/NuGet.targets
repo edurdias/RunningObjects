@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-
-    
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
     <!-- Enable the restore command to run before builds -->
     <RestorePackages Condition="  '$(RestorePackages)' == '' ">true</RestorePackages>
 
     <!-- Property that enables building a package from a project -->
-    <BuildPackage Condition=" '$(BuildPackage)' == '' ">true</BuildPackage>
+    <BuildPackage Condition=" '$(BuildPackage)' == '' AND '$(Configuration)' == 'Package' ">true</BuildPackage>
 
     <!-- Determines if package restore consent is required to restore packages -->
     <RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' ">true</RequireRestoreConsent>
@@ -26,7 +24,7 @@
         -->
   </ItemGroup>
 
-  
+
   <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
     <!-- Windows specific commands -->
     <NuGetToolsPath>$([System.IO.Path]::Combine($(MSBuildProjectDirectory), "..\.nuget"))</NuGetToolsPath>
@@ -62,32 +60,29 @@
     <BuildDependsOn Condition="$(RestorePackages) == 'true'">
       RestorePackages;
       $(BuildDependsOn);
+      LoadVersion;
     </BuildDependsOn>
 
     <!-- Make the build depend on build packages -->
     <BuildDependsOn Condition="$(BuildPackage) == 'true'">
       $(BuildDependsOn);
+      LoadVersion;
       BuildPackages;
+      CopyPackagesToProjectTemplate;
     </BuildDependsOn>
   </PropertyGroup>
 
-  <Target Name="GetFullPaths">
-    <ConvertToAbsolutePath Paths="$(SolutionDir)\ProjectTemplate">
-      <Output TaskParameter="AbsolutePaths" PropertyName="destinationPath"/>
-    </ConvertToAbsolutePath>
-  </Target>
+  <!--<ItemGroup>
+    <GeneratedPackages Include="$(PackageOutputDir)\*.nupkg" />
+  </ItemGroup>-->
 
-  <Target Name="GetVersion">
+  <Target Name="LoadVersion">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output
           TaskParameter="Assemblies"
           ItemName="assembly"/>
     </GetAssemblyIdentity>
   </Target>
-
-  <ItemGroup>
-    <GeneratedPackages Include="$(PackageOutputDir)\*.nupkg" />
-  </ItemGroup>
 
   <Target Name="CheckPrerequisites">
     <!-- Raise an error if we're unable to locate nuget.exe  -->
@@ -97,6 +92,7 @@
   </Target>
 
   <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">
+
     <Exec Command="$(RestoreCommand)"
           Condition="'$(OS)' != 'Windows_NT' And Exists('$(PackagesConfig)')" />
 
@@ -105,19 +101,15 @@
           Condition="'$(OS)' == 'Windows_NT' And Exists('$(PackagesConfig)')" />
   </Target>
 
-  <Target Name="BuildPackages" DependsOnTargets="CheckPrerequisites;GetVersion;GetFullPaths">
+  <Target Name="BuildPackages" DependsOnTargets="CheckPrerequisites">
 
-    <Message Text="Assembly Version" />    
-    
-    <!--<RemoveDir Directories="$(PackageOutputDir)" />
-    <MakeDir Directories="$(PackageOutputDir)" />-->
+    <RemoveDir Directories="$(PackageOutputDir)" />
+    <MakeDir Directories="$(PackageOutputDir)" />
 
-        <!-- build running objects core package -->
+    <!-- build running objects core package -->
     <Exec Command="$(BuildRunningObjects) -version  %(assembly.Version)"
           Condition=" '$(OS)' != 'Windows_NT' " />
 
-    <!--  -version %(assembly.Version)  -->
-    
     <Exec Command="$(BuildRunningObjects)  -version  %(assembly.Version)"
           LogStandardErrorAsError="true"
           Condition=" '$(OS)' == 'Windows_NT' " />
@@ -129,16 +121,21 @@
     <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
           LogStandardErrorAsError="true"
           Condition=" '$(OS)' == 'Windows_NT' " />
-
-    <!-- Copy NuGet packages for the Project Template -->
-    <Copy
-        SourceFiles="%(GeneratedPackages.FullPath)"
-        DestinationFolder="$(destinationPath)"
-        />
-    <!--DestinationFiles="@(outputPath->'$(destinationPath)\%(RecursiveDir)%(Filename)%(Extension)')"-->
   </Target>
 
+  <!-- Copy the generated packages to project template -->
+  <Target Name="CopyPackagesToProjectTemplate">
 
+    <!-- Get the project template absolute path -->
+    <ConvertToAbsolutePath Paths="$(SolutionDir)ProjectTemplate">
+      <Output TaskParameter="AbsolutePaths" PropertyName="destinationPath"/>
+    </ConvertToAbsolutePath>
+
+    <DeleteRunningObjectsPackages DirName="$(destinationPath)" />
+    <CopyRunningObjectsPackages
+        SourcePath="$(PackageOutputDir)\" 
+        DestinationPath="$(destinationPath)" />
+  </Target>
 
   <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
@@ -171,6 +168,75 @@
     </Task>
   </UsingTask>
 
+  <UsingTask TaskName="DeleteRunningObjectsPackages" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <DirName ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+                try {
+                
+                    Log.LogMessage("Deleting existing Running Objects Packages on Template Project.");
+                    
+                    var files = Directory.GetFiles(DirName, "RunningObjects*.nupkg");
+                    foreach (var file in files)
+                    {
+                        File.Delete(file);
+                        //Log.LogMessage(string.Format("Deleting package: {0}", file));
+                    }
+                    
+                    return true;
+                }
+                catch (Exception ex) {
+                    Log.LogErrorFromException(ex);
+                    return false;
+                }
+            ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask TaskName="CopyRunningObjectsPackages" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <SourcePath ParameterType="System.String" Required="true" />
+      <DestinationPath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+                try {
+                    Log.LogMessage("Copying new Running Objects Packages on Template Project.");
+                    var files = Directory.GetFiles(SourcePath, "RunningObjects*.nupkg");
+                    foreach (var file in files)
+                    {
+                        var oldName = new FileInfo(file).Name;
+                        var newName = Regex.Replace(oldName, @"\.([0-9.]*).nupkg", ".nupkg");
+                        File.Copy(file, Path.Combine(DestinationPath, newName), true);
+                        Log.LogMessage(string.Format("Package {0} copied as {1}.", oldName, newName));
+                    }
+                    return true;
+                }
+                catch (Exception ex) {
+                    Log.LogErrorFromException(ex);
+                    return false;
+                }
+            ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
   <UsingTask TaskName="SetEnvironmentVariable" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
       <EnvKey ParameterType="System.String" Required="true" />
@@ -181,7 +247,7 @@
       <Code Type="Fragment" Language="cs">
         <![CDATA[
                 try {
-                    Environment.SetEnvironmentVariable(EnvKey, EnvValue, System.EnvironmentVariableTarget.Process);
+                    Environment.SetEnvironmentVariable(EnvKey, EnvValue);
                 }
                 catch  {
                 }
