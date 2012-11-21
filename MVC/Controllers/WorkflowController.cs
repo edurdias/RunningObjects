@@ -135,7 +135,7 @@ namespace RunningObjects.MVC.Controllers
             };
         }
 
-        private static IWorkflow GetWorkflow(string key)
+        internal static IWorkflow GetWorkflow(string key)
         {
             var workflows = RunningObjectsSetup.Configuration.Workflows;
             if (!workflows.Exists(key))

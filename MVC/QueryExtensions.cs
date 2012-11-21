@@ -10,13 +10,13 @@ namespace RunningObjects.MVC
     {
         public static Query.Query Query(this Member member, ControllerContext controllerContext)
         {
-            var typeMapping = ModelMappingManager.MappingFor(member.MemberType);
-            var repository = typeMapping.Configuration.Repository();
+            var modelType = member.UnderliningModel.ModelType;
+            var repository = modelType.Repository();
             var source = repository.All();
             var attr = member.Attributes.OfType<QueryAttribute>().FirstOrDefault();
-            return attr != null 
-                ? QueryParser.Parse(member.MemberType, source, attr) 
-                : QueryParser.Parse(member.MemberType, source);
+            return attr != null
+                ? QueryParser.Parse(modelType, source, attr)
+                : QueryParser.Parse(modelType, source);
         }
 
         public static IEnumerable<SelectListItem> GetSelectListItems(this Member member, ControllerContext controllerContext, object selectedValue)

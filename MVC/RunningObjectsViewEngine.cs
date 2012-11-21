@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web.Mvc;
 using System;
@@ -8,7 +9,7 @@ namespace RunningObjects.MVC
 {
     public class RunningObjectsViewEngine : RazorViewEngine
     {
-        private static readonly Dictionary<ISecurityPolicyContainer<Object>, KeyValuePair<Func<bool>, string>> Themes = new Dictionary<ISecurityPolicyContainer<object>, KeyValuePair<Func<bool>, string>>();
+        private static readonly Dictionary<ISecurityPolicyContainer<object>, ICollection<KeyValuePair<Func<bool>, string>>> Themes = new Dictionary<ISecurityPolicyContainer<object>, ICollection<KeyValuePair<Func<bool>, string>>>();
 
         public override ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName, bool useCache)
         {
@@ -40,36 +41,36 @@ namespace RunningObjects.MVC
 
             if (controllerContext.RouteData.Values["modelType"] != null)
             {
-                var modelTypeName = controllerContext.RouteData.Values["modelType"].ToString();
+                var modelTypeName = GetModelTypeName(controllerContext);
 
                 //Trying to get the partial view for a specific action and model and method
                 var action = RunningObjectsAction.Welcome.GetAction(actionName);
                 if (action == RunningObjectsAction.Execute)
                 {
                     var methodName = controllerContext.RouteData.Values["methodName"].ToString();
-                    result = base.FindView(controllerContext, string.Format("{4}{0}/{1}/{2}/{3}", modelTypeName, actionName, methodName, viewName, themePath), masterName, useCache);
+                    result = base.FindView(controllerContext, String.Format("{4}{0}/{1}/{2}/{3}", modelTypeName, actionName, methodName, viewName, themePath), masterName, useCache);
                     if (result.View != null)
                         return result;
                 }
 
                 //Trying to get the partial view for a specific action and model
-                result = base.FindView(controllerContext, string.Format("{3}{0}/{1}/{2}", modelTypeName, actionName, viewName, themePath), masterName, useCache);
+                result = base.FindView(controllerContext, String.Format("{3}{0}/{1}/{2}", modelTypeName, actionName, viewName, themePath), masterName, useCache);
                 if (result.View != null)
                     return result;
 
                 //Trying to get the partial view for a specific modelType only
-                result = base.FindView(controllerContext, string.Format("{2}{0}/{1}", modelTypeName, viewName, themePath), masterName, useCache);
+                result = base.FindView(controllerContext, String.Format("{2}{0}/{1}", modelTypeName, viewName, themePath), masterName, useCache);
                 if (result.View != null)
                     return result;
             }
 
             //Trying to get the partial view for a specific action only
-            result = base.FindView(controllerContext, string.Format("{2}{0}/{1}", actionName, viewName, themePath), masterName, useCache);
+            result = base.FindView(controllerContext, String.Format("{2}{0}/{1}", actionName, viewName, themePath), masterName, useCache);
             if (result.View != null)
                 return result;
 
             //Trying to get the partial view without action and model
-            result = base.FindView(controllerContext, string.Format("{0}{1}", themePath, viewName), masterName, useCache);
+            result = base.FindView(controllerContext, String.Format("{0}{1}", themePath, viewName), masterName, useCache);
             return result.View != null ? result : null;
         }
 
@@ -80,14 +81,16 @@ namespace RunningObjects.MVC
             if (configuration != null)
             {
                 var container = configuration.FindPolicyContainer(controllerContext);
-                if(container != null && Themes.ContainsKey(container))
+                if (container != null && Themes.ContainsKey(container))
                 {
-                    var pair = Themes[container];
-                    if(pair.Key())
-                        return string.Format("{0}/", pair.Value);
+                    foreach (var pair in Themes[container])
+                    {
+                        if(pair.Key())
+                            return String.Format("{0}/", pair.Value);
+                    }
                 }
             }
-            return string.Empty;
+            return String.Empty;
         }
 
         private ViewEngineResult FindPartialViewByConvention(ControllerContext controllerContext, string partialViewName, bool useCache)
@@ -97,36 +100,79 @@ namespace RunningObjects.MVC
             var actionName = RunningObjectsAction.Welcome.GetAction(controllerContext.RouteData.Values["action"].ToString()).ToString();
             if (controllerContext.RouteData.Values["modelType"] != null)
             {
-                var modelTypeName = controllerContext.RouteData.Values["modelType"].ToString();
+                var modelTypeName = GetModelTypeName(controllerContext);
+
+                //Trying to get the partial view for a specific action and model and method
+                var action = RunningObjectsAction.Welcome.GetAction(actionName);
+                if (action == RunningObjectsAction.Execute)
+                {
+                    var methodName = controllerContext.RouteData.Values["methodName"].ToString();
+                    result = base.FindPartialView(controllerContext, String.Format("{4}{0}/{1}/{2}/{3}", modelTypeName, actionName, methodName, partialViewName, themePath), useCache);
+                    if (result.View != null)
+                        return result;
+                }
 
                 //Trying to get the partial view for a specific action and model
-                result = base.FindPartialView(controllerContext, string.Format("{3}{0}/{1}/{2}", modelTypeName, actionName, partialViewName, themePath), useCache);
+                result = base.FindPartialView(controllerContext, String.Format("{3}{0}/{1}/{2}", modelTypeName, actionName, partialViewName, themePath), useCache);
                 if (result.View != null)
                     return result;
 
                 //Trying to get the partial view for a specific modelType only
-                result = base.FindPartialView(controllerContext, string.Format("{2}{0}/{1}", modelTypeName, partialViewName, themePath), useCache);
+                result = base.FindPartialView(controllerContext, String.Format("{2}{0}/{1}", modelTypeName, partialViewName, themePath), useCache);
                 if (result.View != null)
                     return result;
             }
 
             //Trying to get the partial view for a specific action only
-            result = base.FindPartialView(controllerContext, string.Format("{2}{0}/{1}", actionName, partialViewName, themePath), useCache);
+            result = base.FindPartialView(controllerContext, String.Format("{2}{0}/{1}", actionName, partialViewName, themePath), useCache);
             if (result.View != null)
                 return result;
 
             //Trying to get the partial view without action and model
-            result = base.FindPartialView(controllerContext, string.Format("{0}{1}", themePath, partialViewName), useCache);
+            result = base.FindPartialView(controllerContext, String.Format("{0}{1}", themePath, partialViewName), useCache);
             return result.View != null ? result : null;
         }
 
         public static void RegisterTheme<T>(ISecurityPolicyContainer<T> container, string name, Func<bool> expression) where T : class
         {
             var pair = new KeyValuePair<Func<bool>, string>(expression, name);
-            if (Themes.ContainsKey(container))
-                Themes[container] = pair;
-            else
-                Themes.Add(container, pair);
+            if (!Themes.ContainsKey(container))
+                Themes.Add(container, new Collection<KeyValuePair<Func<bool>, string>>());
+
+
+            if (!Themes[container].Contains(pair))
+                Themes[container].Add(pair);
+        }
+
+        private static string GetModelTypeName(ControllerContext controllerContext)
+        {
+            return controllerContext.RouteData.Values["modelType"].ToString().Replace(".", "/");
+        }
+
+        internal static IEnumerable<string> GetTemplateNames(Member member)
+        {
+            var names = new List<string>();
+
+            var specificName = member is Parameter
+                                   ? "Parameter"
+                                   : member is Property
+                                         ? "Property"
+                                         : "Member";
+
+            names.Add(member.Name);
+            if (member.IsModelCollection)
+            {
+                names.Add(specificName + "Collection");
+                names.Add("MemberCollection");
+            }
+            else if (member.IsModel)
+            {
+                names.Add(specificName);
+                names.Add("Member");
+            }
+            names.Add(member.MemberType.Name);
+            names.Add(null);
+            return names;
         }
     }
 }

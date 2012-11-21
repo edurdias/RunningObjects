@@ -25,7 +25,7 @@ namespace RunningObjects.MVC
                     var index = 0;
                     while ((result = bindingContext.ValueProvider.GetValue(string.Format("{0}[{1}]", parameter.Name, index))) != null)
                     {
-                        var item = ModelBinder.GetModelValue(result, parameter.UnderliningModel.ModelType);
+                        var item = ModelBinder.GetModelValue(result, parameter.UnderliningModel.ModelType) ?? Activator.CreateInstance(parameter.UnderliningModel.ModelType);
                         var itemModel = new Model(parameter.UnderliningModel.ModelType, parameter.UnderliningModel.Descriptor, item);
                         foreach (var itemProperty in itemModel.Properties)
                         {

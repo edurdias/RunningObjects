@@ -8,7 +8,7 @@ namespace RunningObjects.MVC.Html
     {
         public static MvcHtmlString EditorFor<TModel>(this HtmlHelper<TModel> htmlHelper, Member member)
         {
-            foreach (var name in DisplayExtensions.GetTemplateNames(member))
+            foreach (var name in RunningObjectsViewEngine.GetTemplateNames(member))
             {
                 var result = GetEditorFor(htmlHelper, member, name);
                 if (result != null && !string.IsNullOrEmpty(result.ToHtmlString()))

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Web;
 using System.Web.Mvc;
 using RunningObjects.MVC.Html;
@@ -10,11 +12,12 @@ namespace RunningObjects.MVC.Configuration
         public WelcomeConfigurationBuilder(ConfigurationBuilder configuration)
         {
             Configuration = configuration;
+            Redirects = new Collection<Func<RedirectResult>>();
         }
 
         public string ViewName { get; private set; }
         public Func<object> GetModel { get; private set; }
-        internal Func<RedirectResult> Redirect { get; private set; }
+        internal ICollection<Func<RedirectResult>> Redirects { get; private set; }
         public ConfigurationBuilder Configuration { get; set; }
 
         public WelcomeConfigurationBuilder SetModel(Func<object> expression)
@@ -29,20 +32,23 @@ namespace RunningObjects.MVC.Configuration
             return this;
         }
 
-        public WelcomeConfigurationBuilder RedirectTo(Type modelType, RunningObjectsAction action, Func<object> expression, Func<bool> condition)
+        public WelcomeConfigurationBuilder RedirectTo(Type modelType, RunningObjectsAction action, Func<object> expression, Func<bool> condition = null)
         {
 
-            Redirect = () =>
-            {
-                if (condition())
+            Redirects.Add
+            (
+                () =>
                 {
-                    var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
-                    var completeUrl = urlHelper.Action(modelType, action, expression());
-                    if (!string.IsNullOrEmpty(completeUrl))
-                        return new RedirectResult(completeUrl);
+                    if (condition == null || condition())
+                    {
+                        var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+                        var completeUrl = urlHelper.Action(modelType, action, expression());
+                        if (!string.IsNullOrEmpty(completeUrl))
+                            return new RedirectResult(completeUrl);
+                    }
+                    return null;
                 }
-                return null;
-            };
+            );
             return this;
         }
     }

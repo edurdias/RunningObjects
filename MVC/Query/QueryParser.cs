@@ -47,6 +47,7 @@ namespace RunningObjects.MVC.Query
                 query.Parameters = attr.Parameters;
                 query.Paging = attr.Paging;
                 query.PageSize = attr.PageSize > 0 ? attr.PageSize : Query.DefaultPageSize;
+                query.Filter = attr.Filter;
                 query.Id = attr.Id;
             }
             else
@@ -60,7 +61,7 @@ namespace RunningObjects.MVC.Query
             var descriptor = new ModelDescriptor(ModelMappingManager.MappingFor(modelType));
             var properties = descriptor.GetProperties().OfType<PropertyDescriptor>();
 
-            select.Properties.AddRange(properties);
+            //select.Properties.AddRange(properties);
             if (!string.IsNullOrEmpty(spec.Select))
             {
                 select.Properties.Clear();

@@ -128,6 +128,7 @@
     <Compile Include="Persistence\InMemoryRepository.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="QueryAttribute.cs" />
+    <Compile Include="Query\IQueryFilter.cs" />
     <Compile Include="Query\QueryConfigurationBuilder.cs" />
     <Compile Include="RunningObjectsActionExtensions.cs" />
     <Compile Include="ScriptOnlyAttribute.cs" />

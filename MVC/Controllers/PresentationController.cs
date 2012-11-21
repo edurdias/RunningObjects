@@ -12,9 +12,15 @@ namespace RunningObjects.MVC.Controllers
         public virtual ActionResult Welcome()
         {
             var welcome = RunningObjectsSetup.Configuration.Welcome;
-            var redirect = welcome.Redirect != null ? welcome.Redirect() : null;
-            if (redirect != null)
-                return redirect;
+            if (welcome.Redirects.Any())
+            {
+                foreach (var redirect in welcome.Redirects)
+                {
+                    var result = redirect();
+                    if (result != null)
+                        return result;
+                }
+            }
             var model = welcome.GetModel != null ? welcome.GetModel() : null;
             return View(welcome.ViewName, model);
         }
@@ -177,8 +183,8 @@ namespace RunningObjects.MVC.Controllers
                 var defaultRedirect = RunningObjectsSetup.Configuration.DefaultRedirect;
                 if (defaultRedirect != null)
                 {
-                    var routeValues = defaultRedirect.Action != RunningObjectsAction.Welcome 
-                        ? LinkExtensions.CreateRouteValueDictionary(defaultRedirect.Type, defaultRedirect.Arguments) 
+                    var routeValues = defaultRedirect.Action != RunningObjectsAction.Welcome
+                        ? LinkExtensions.CreateRouteValueDictionary(defaultRedirect.Type, defaultRedirect.Arguments)
                         : null;
 
                     return RedirectToAction(defaultRedirect.Action.ToString(), "Presentation", routeValues);

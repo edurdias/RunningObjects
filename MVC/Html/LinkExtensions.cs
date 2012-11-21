@@ -3,7 +3,9 @@ using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using RunningObjects.MVC.Controllers;
 using RunningObjects.MVC.Mapping;
+using RunningObjects.MVC.Workflow;
 
 namespace RunningObjects.MVC.Html
 {
@@ -38,6 +40,17 @@ namespace RunningObjects.MVC.Html
                 return urlHelper.Action(RunningObjectsAction.Execute.ToString(), "Presentation", values);
             }
             return string.Empty;
+        }
+
+        public static string WorkflowStartAction(this UrlHelper urlHelper, string workflowKey)
+        {
+            var startActivity = WorkflowController.GetWorkflow(workflowKey).StartActivity;
+            return urlHelper.Action("Start", "Workflow", new
+            {
+                workflowKey, 
+                modelType = startActivity.Method.DeclaringType.PartialName(), 
+                methodName = startActivity.Method.Name
+            });
         }
 
         public static string ApiAction(this UrlHelper urlHelper, Type modelType, RunningObjectsAction action, object arguments)

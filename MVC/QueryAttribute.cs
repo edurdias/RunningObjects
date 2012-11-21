@@ -1,4 +1,5 @@
 using System;
+using RunningObjects.MVC.Query;
 
 namespace RunningObjects.MVC
 {
@@ -55,5 +56,20 @@ namespace RunningObjects.MVC
         public bool Paging { get; set; }
 
         public int PageSize { get; set; }
+
+        public IQueryFilter Filter { get; set; }
+
+        public QueryAttribute()
+        {
+        }
+
+        public QueryAttribute(Type queryFilterType)
+        {
+            var filterTypeName = typeof (IQueryFilter).FullName;
+            if (queryFilterType.GetInterface(filterTypeName, true) == null)
+                throw new ArgumentException(string.Format("The type {0} does not implement the interface {1}.", queryFilterType.FullName, filterTypeName));
+
+            Filter = (IQueryFilter) Activator.CreateInstance(queryFilterType);
+        }
     }
 }

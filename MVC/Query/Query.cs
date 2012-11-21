@@ -66,6 +66,8 @@ namespace RunningObjects.MVC.Query
 
         public int PageSize { get; set; }
 
+        public IQueryFilter Filter { get; set; }
+
         public IQueryable Execute(bool? flush = null)
         {
             if (IsCacheable && (!flush.HasValue || !flush.Value))
@@ -81,6 +83,9 @@ namespace RunningObjects.MVC.Query
         {
             if (Source != null)
             {
+                if (Filter != null)
+                    Source = Filter.Apply(Source);
+
                 if (Where != null)
                 {
                     RunningObjectsSetup.Configuration.Query.ParseKeywords(this);
@@ -94,19 +99,19 @@ namespace RunningObjects.MVC.Query
                     var orderBy = OrderBy.Elements.Aggregate(string.Empty, (current, element) => current + (element.Key + " " + element.Value + ","));
                     Source = Source.OrderBy(orderBy.Substring(0, orderBy.Length - 1));
                 }
-                else
-                {
-                    var mapping = ModelMappingManager.MappingFor(ModelType);
-                    var descriptor = new ModelDescriptor(mapping);
+                //else
+                //{
+                //    var mapping = ModelMappingManager.MappingFor(ModelType);
+                //    var descriptor = new ModelDescriptor(mapping);
 
-                    if (descriptor.Properties.Any())
-                    {
-                        var orderedProperty = descriptor.KeyProperty ??
-                                              (descriptor.TextProperty ?? descriptor.Properties.FirstOrDefault());
-                        if (orderedProperty != null)
-                            Source = Source.OrderBy(orderedProperty.Name + " Asc");
-                    }
-                }
+                //    if (descriptor.Properties.Any())
+                //    {
+                //        var orderedProperty = descriptor.KeyProperty ??
+                //                              (descriptor.TextProperty ?? descriptor.Properties.FirstOrDefault());
+                //        if (orderedProperty != null)
+                //            Source = Source.OrderBy(orderedProperty.Name + " Asc");
+                //    }
+                //}
 
                 if (Skip.HasValue)
                     Source = Source.Skip(Skip.Value);
@@ -118,10 +123,9 @@ namespace RunningObjects.MVC.Query
                     foreach (var include in Includes)
                         Source = Source.Include(include);
 
-                var data = (Select != null && Select.Properties.Any())
-                               ? Source.Select(string.Format("new({0})", Select))
-                               : Source.Select("it");
-                return data;
+
+                if(Select != null && Select.Properties.Any())
+                    Source = Source.Select(string.Format("new({0})", Select));
             }
             return Source;
         }

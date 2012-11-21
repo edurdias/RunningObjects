@@ -19,7 +19,7 @@ namespace RunningObjects.MVC
 
             using (var repository = mapping.Configuration.Repository())
             {
-                var keyValues = descriptor.KeyProperty.PropertyType == typeof (Guid)
+                var keyValues = descriptor.KeyProperty.PropertyType == typeof(Guid)
                     ? Guid.Parse(key.ToString())
                     : Convert.ChangeType(key, descriptor.KeyProperty.PropertyType);
                 var instance = repository.Find(keyValues);
@@ -30,27 +30,7 @@ namespace RunningObjects.MVC
                     ValueProviderResult result;
                     if (property.IsModelCollection)
                     {
-                        var type = typeof(List<>).MakeGenericType(property.UnderliningModel.ModelType);
-                        var collection = Activator.CreateInstance(type);
-                        var index = 0;
-                        while ((result = bindingContext.ValueProvider.GetValue(string.Format("{0}[{1}]", property.Name, index))) != null)
-                        {
-                            var item = GetModelValue(result, property.UnderliningModel.ModelType);
-                            foreach (var itemProperty in property.UnderliningModel.Properties)
-                            {
-                                var itemPropertyName = string.Format("{0}[{1}].{2}", property.Name, index, itemProperty.Name);
-                                var itemResult = bindingContext.ValueProvider.GetValue(itemPropertyName);
-                                if (itemResult != null)
-                                {
-                                    itemProperty.Value = !itemProperty.IsModel
-                                        ? GetNonModelValue(itemResult, itemProperty.MemberType)
-                                        : GetModelValue(itemResult, itemProperty.MemberType);
-                                }
-                            }
-                            type.GetMethod("Add").Invoke(collection, new[] { item });
-                            index++;
-                        }
-                        property.Value = collection;
+                        property.Value = CreateCollection(bindingContext, property);
                     }
                     else
                     {
@@ -63,15 +43,53 @@ namespace RunningObjects.MVC
                         }
                     }
                 }
-                return model; 
+                return model;
             }
+        }
+
+        private static object CreateCollection(ModelBindingContext bindingContext, Property property)
+        {
+            var type = typeof(List<>).MakeGenericType(property.UnderliningModel.ModelType);
+            var collection = Activator.CreateInstance(type);
+            var index = 0;
+            var result = bindingContext.ValueProvider.GetValue(string.Format("{0}[{1}]", property.Name, index));
+            do
+            {
+                if (result != null)
+                    type.GetMethod("Add").Invoke(collection, new[] {CreateItem(bindingContext, property, result, index)});
+                index++;
+            }
+            while ((result = bindingContext.ValueProvider.GetValue(string.Format("{0}[{1}]", property.Name, index))) != null);
+            return collection;
+        }
+
+        private static object CreateItem(ModelBindingContext bindingContext, Property property, ValueProviderResult result, int index)
+        {
+            var item = GetModelValue(result, property.UnderliningModel.ModelType)
+                       ?? Activator.CreateInstance(property.UnderliningModel.ModelType);
+
+            var propertyDescriptor = new ModelDescriptor(ModelMappingManager.MappingFor(property.UnderliningModel.ModelType));
+            var propertyModel = new Model(property.UnderliningModel.ModelType, propertyDescriptor, item);
+
+            foreach (var itemProperty in propertyModel.Properties)
+            {
+                var itemPropertyName = string.Format("{0}[{1}].{2}", property.Name, index, itemProperty.Name);
+                var itemResult = bindingContext.ValueProvider.GetValue(itemPropertyName);
+                if (itemResult != null)
+                {
+                    itemProperty.Value = !itemProperty.IsModel
+                                             ? GetNonModelValue(itemResult, itemProperty.MemberType)
+                                             : GetModelValue(itemResult, itemProperty.MemberType);
+                }
+            }
+            return item;
         }
 
         internal static object GetNonModelValue(ValueProviderResult result, Type memberType)
         {
             var innerType = Nullable.GetUnderlyingType(memberType) ?? memberType;
 
-            if(innerType.IsEnum)
+            if (innerType.IsEnum)
                 return Enum.Parse(innerType, result.AttemptedValue);
 
             var value = innerType == typeof(Boolean)
