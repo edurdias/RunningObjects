@@ -12,7 +12,7 @@ It’s built on top of ASP.NET MVC using a refined mix of concepts such as Domai
 [assembly: AssemblyTrademark("Eduardo Dias")]
 [assembly: AssemblyCulture("en-US")]
 
-[assembly: AssemblyVersion("1.1.1.*")]
+[assembly: AssemblyVersion("1.1.*")]
 
 [assembly: ComVisible(false)]
 [assembly: Guid("6011298d-4be1-4a52-805d-73bec3bd2daa")]
