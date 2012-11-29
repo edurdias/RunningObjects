@@ -58,7 +58,7 @@ namespace RunningObjects.MVC.Controllers
                 throw new RunningObjectsException(string.Format("No constructor found at index {0} for type {1}", index, modelType.PartialName()));
 
             var method = new Method(new MethodDescriptor(mapping, ControllerContext.GetActionDescriptor(RunningObjectsAction.Create)));
-            return !ControllerContext.IsChildAction ? (ActionResult)View(method) : PartialView(method);
+            return !IsChildAction ? (ActionResult)View(method) : PartialView(method);
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
@@ -81,7 +81,7 @@ namespace RunningObjects.MVC.Controllers
             if (instance == null)
                 return HttpNotFound();
             var model = new Model(modelType, descriptor, instance);
-            return !ControllerContext.IsChildAction ? (ActionResult)View(model) : PartialView(model);
+            return !IsChildAction ? (ActionResult)View(model) : PartialView(model);
         }
 
         public ActionResult Edit(Type modelType, object key)
@@ -92,7 +92,7 @@ namespace RunningObjects.MVC.Controllers
             if (instance == null)
                 return HttpNotFound();
             var model = new Model(modelType, descriptor, instance);
-            return !ControllerContext.IsChildAction ? (ActionResult)View(model) : PartialView(model);
+            return !IsChildAction ? (ActionResult)View(model) : PartialView(model);
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
@@ -153,7 +153,7 @@ namespace RunningObjects.MVC.Controllers
                     RunningObjectsSetup.Configuration.Query.KeywordEvaluators.Add("{instance}", q => method.Instance);
                 }
             }
-            return !ControllerContext.IsChildAction ? (ActionResult)View(method) : PartialView(method);
+            return !IsChildAction ? (ActionResult)View(method) : PartialView(method);
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
@@ -170,6 +170,11 @@ namespace RunningObjects.MVC.Controllers
                 HttpNotFound,
                 key
             );
+        }
+
+        private bool IsChildAction
+        {
+            get { return ControllerContext.IsChildAction || Request.IsAjaxRequest(); }
         }
 
         private Func<object, ActionResult> OnSuccess(Type modelType)

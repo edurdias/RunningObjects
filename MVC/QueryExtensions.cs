@@ -21,14 +21,17 @@ namespace RunningObjects.MVC
 
         public static IEnumerable<SelectListItem> GetSelectListItems(this Member member, ControllerContext controllerContext, object selectedValue)
         {
-            var items = new List<SelectListItem> { new SelectListItem() };
-            if(member.IsModel)
-            {
-                var result = member.Query(controllerContext).Execute();
+            return GetSelectListItems(member, member.Query(controllerContext).Execute(), selectedValue);
+        }
 
-                var mapping = ModelMappingManager.MappingFor(result.ElementType);
+        public static IEnumerable<SelectListItem> GetSelectListItems(this Member member, IQueryable source, object selectedValue)
+        {
+            var items = new List<SelectListItem> {new SelectListItem()};
+            if (member.IsModel)
+            {
+                var mapping = ModelMappingManager.MappingFor(source.ElementType);
                 var elementDescriptor = new ModelDescriptor(mapping);
-                foreach (object item in result)
+                foreach (object item in source)
                 {
                     var listItem = new SelectListItem();
                     var value = elementDescriptor.KeyProperty.GetValue(item);

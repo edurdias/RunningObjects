@@ -159,7 +159,7 @@ namespace RunningObjects.MVC
                                          ? "Property"
                                          : "Member";
 
-            names.Add(member.Name);
+            
             if (member.IsModelCollection)
             {
                 names.Add(specificName + "Collection");
@@ -170,6 +170,8 @@ namespace RunningObjects.MVC
                 names.Add(specificName);
                 names.Add("Member");
             }
+
+            names.Add(member.Name);
             names.Add(member.MemberType.Name);
             names.Add(null);
             return names;
