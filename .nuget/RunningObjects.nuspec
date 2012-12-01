@@ -22,7 +22,7 @@
     <dependencies>
       <dependency id="NLog" version="2.0.0.2000" />
 	    <dependency id="EntityFramework" version="5.0.0" />
-	    <dependency id="Newtonsoft.Json" version="4.5.9" />
+	    <dependency id="Newtonsoft.Json" version="4.5.11" />
       
       <!-- dependency for the application bootstrapper -->
       <dependency id="WebActivator" version="1.5.1.0" />

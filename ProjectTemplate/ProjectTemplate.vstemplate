@@ -54,7 +54,7 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="jQuery.Validation.1.9.0.1.nupkg">jQuery.Validation.1.9.0.1.nupkg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="Microsoft.jQuery.Unobtrusive.Ajax.2.0.20710.0.nupkg">Microsoft.jQuery.Unobtrusive.Ajax.2.0.20710.0.nupkg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="Modernizr.2.6.2.nupkg">Modernizr.2.6.2.nupkg</ProjectItem>
-      <ProjectItem ReplaceParameters="false" TargetFileName="Newtonsoft.Json.4.5.9.nupkg">Newtonsoft.Json.4.5.9.nupkg</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Newtonsoft.Json.4.5.11.nupkg">Newtonsoft.Json.4.5.11.nupkg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="NLog.2.0.0.2000.nupkg">NLog.2.0.0.2000.nupkg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="WebActivator.1.5.1.nupkg">WebActivator.1.5.1.nupkg</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="Microsoft.Web.Infrastructure.1.0.0.0.nupkg">Microsoft.Web.Infrastructure.1.0.0.0.nupkg</ProjectItem>
@@ -73,7 +73,7 @@
     <packages repository="template">
       <!-- Packages from Running Objects -->
       <package id="EntityFramework" version="5.0.0"  />
-      <package id="Newtonsoft.Json" version="4.5.9"  />
+      <package id="Newtonsoft.Json" version="4.5.11"  />
       <package id="NLog" version="2.0.0.2000"  />
       <package id="WebActivator" version="1.5.1.0"  />
       <package id="RunningObjects" version="1.1.1"  />
