@@ -99,19 +99,19 @@ namespace RunningObjects.MVC.Query
                     var orderBy = OrderBy.Elements.Aggregate(string.Empty, (current, element) => current + (element.Key + " " + element.Value + ","));
                     Source = Source.OrderBy(orderBy.Substring(0, orderBy.Length - 1));
                 }
-                //else
-                //{
-                //    var mapping = ModelMappingManager.MappingFor(ModelType);
-                //    var descriptor = new ModelDescriptor(mapping);
+                else
+                {
+                    var mapping = ModelMappingManager.MappingFor(ModelType);
+                    var descriptor = new ModelDescriptor(mapping);
 
-                //    if (descriptor.Properties.Any())
-                //    {
-                //        var orderedProperty = descriptor.KeyProperty ??
-                //                              (descriptor.TextProperty ?? descriptor.Properties.FirstOrDefault());
-                //        if (orderedProperty != null)
-                //            Source = Source.OrderBy(orderedProperty.Name + " Asc");
-                //    }
-                //}
+                    if (descriptor.Properties.Any())
+                    {
+                        var orderedProperty = descriptor.KeyProperty ??
+                                              (descriptor.TextProperty ?? descriptor.Properties.FirstOrDefault());
+                        if (orderedProperty != null)
+                            Source = Source.OrderBy(orderedProperty.Name + " Asc");
+                    }
+                }
 
                 if (Skip.HasValue)
                     Source = Source.Skip(Skip.Value);
