@@ -1,155 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+    <PropertyGroup>
+        <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+        
+        <!-- Enable the restore command to run before builds -->
+        <RestorePackages Condition="  '$(RestorePackages)' == '' ">false</RestorePackages>
 
-    <!-- Enable the restore command to run before builds -->
-    <RestorePackages Condition="  '$(RestorePackages)' == '' ">true</RestorePackages>
+        <!-- Property that enables building a package from a project -->
+        <BuildPackage Condition=" '$(BuildPackage)' == '' ">false</BuildPackage>
 
-    <!-- Property that enables building a package from a project -->
-    <BuildPackage Condition=" '$(BuildPackage)' == '' AND '$(Configuration)' == 'Package' ">true</BuildPackage>
-
-    <!-- Determines if package restore consent is required to restore packages -->
-    <RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' ">true</RequireRestoreConsent>
-
-    <!-- Download NuGet.exe if it does not already exist -->
-    <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
-  </PropertyGroup>
-
-  <ItemGroup Condition=" '$(PackageSources)' == '' ">
-    <!-- Package sources used to restore packages. By default will used the registered sources under %APPDATA%\NuGet\NuGet.Config -->
-    <!--
+        <!-- Determines if package restore consent is required to restore packages -->
+        <RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' ">true</RequireRestoreConsent>
+        
+        <!-- Download NuGet.exe if it does not already exist -->
+        <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
+    </PropertyGroup>
+    
+    <ItemGroup Condition=" '$(PackageSources)' == '' ">
+        <!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used -->
+        <!-- The official NuGet package source (https://nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list -->
+        <!--
             <PackageSource Include="https://nuget.org/api/v2/" />
             <PackageSource Include="https://my-nuget-source/nuget/" />
         -->
-  </ItemGroup>
+    </ItemGroup>
 
+    <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
+        <!-- Windows specific commands -->
+        <NuGetToolsPath>$([System.IO.Path]::Combine($(SolutionDir), ".nuget"))</NuGetToolsPath>
+        <PackagesConfig>$([System.IO.Path]::Combine($(ProjectDir), "packages.config"))</PackagesConfig>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition=" '$(OS)' != 'Windows_NT'">
+        <!-- We need to launch nuget.exe with the mono command if we're not on windows -->
+        <NuGetToolsPath>$(SolutionDir).nuget</NuGetToolsPath>
+        <PackagesConfig>packages.config</PackagesConfig>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <!-- NuGet command -->
+        <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\nuget.exe</NuGetExePath>
+        <PackageSources Condition=" $(PackageSources) == '' ">@(PackageSource)</PackageSources>
+        
+        <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
+        <NuGetCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 $(NuGetExePath)</NuGetCommand>
 
-  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
-    <!-- Windows specific commands -->
-    <NuGetToolsPath>$([System.IO.Path]::Combine($(MSBuildProjectDirectory), "..\.nuget"))</NuGetToolsPath>
-    <PackagesConfig>$([System.IO.Path]::Combine($(ProjectDir), "packages.config"))</PackagesConfig>
-    <PackagesDir>$([System.IO.Path]::Combine($(SolutionDir), "packages"))</PackagesDir>
-  </PropertyGroup>
+        <PackageOutputDir Condition="$(PackageOutputDir) == ''">$(TargetDir.Trim('\\'))</PackageOutputDir>
+        
+        <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
+        <!-- Commands -->
+        <RestoreCommand>$(NuGetCommand) install "$(PackagesConfig)" -source "$(PackageSources)"  $(RequireConsentSwitch) -solutionDir "$(SolutionDir) "</RestoreCommand>
+        <BuildCommand>$(NuGetCommand) pack "$(ProjectPath)" -p Configuration=$(Configuration) -o "$(PackageOutputDir)" -symbols</BuildCommand>
 
-  <PropertyGroup Condition=" '$(OS)' != 'Windows_NT'">
-    <!-- We need to launch nuget.exe with the mono command if we're not on windows -->
-    <NuGetToolsPath>$(MSBuildProjectDirectory)\..\.nuget</NuGetToolsPath>
-    <PackagesConfig>packages.config</PackagesConfig>
-    <PackagesDir>$(SolutionDir)packages</PackagesDir>
-  </PropertyGroup>
+        <!-- We need to ensure packages are restored prior to assembly resolve -->
+        <BuildDependsOn Condition="$(RestorePackages) == 'true'">
+            RestorePackages;
+            $(BuildDependsOn);
+        </BuildDependsOn>
 
-  <PropertyGroup>
-    <!-- NuGet command -->
-    <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\nuget.exe</NuGetExePath>
-    <PackageSources Condition=" $(PackageSources) == '' ">@(PackageSource)</PackageSources>
+        <!-- Make the build depend on restore packages -->
+        <BuildDependsOn Condition="$(BuildPackage) == 'true'">
+            $(BuildDependsOn);
+            BuildPackage;
+        </BuildDependsOn>
+    </PropertyGroup>
 
-    <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
-    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 $(NuGetExePath)</NuGetCommand>
+    <Target Name="CheckPrerequisites">
+        <!-- Raise an error if we're unable to locate nuget.exe  -->
+        <Error Condition="'$(DownloadNuGetExe)' != 'true' AND !Exists('$(NuGetExePath)')" Text="Unable to locate '$(NuGetExePath)'" />
+        <SetEnvironmentVariable EnvKey="VisualStudioVersion" EnvValue="$(VisualStudioVersion)" Condition=" '$(VisualStudioVersion)' != '' AND '$(OS)' == 'Windows_NT' " />
+        <!--
+        Take advantage of MsBuild's build dependency tracking to make sure that we only ever download nuget.exe once.
+        This effectively acts as a lock that makes sure that the download operation will only happen once and all
+        parallel builds will have to wait for it to complete.
+        -->
+        <MsBuild Targets="_DownloadNuGet" Projects="$(MSBuildThisFileFullPath)" Properties="Configuration=NOT_IMPORTANT" />
+    </Target>
 
-    <PackageOutputDir Condition="$(PackageOutputDir) == ''">$(SolutionDir)\Releases</PackageOutputDir>
+    <Target Name="_DownloadNuGet">
+        <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition=" '$(DownloadNuGetExe)' == 'true' AND !Exists('$(NuGetExePath)')" />
+    </Target>
 
-    <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
-    <!-- Commands -->
-    <RestoreCommand>$(NuGetCommand) install "$(PackagesConfig)" -source "$(PackageSources)"  $(RequireConsentSwitch) -o "$(PackagesDir)"</RestoreCommand>
-    <BuildRunningObjects>$(NuGetCommand) pack "$(NuGetToolsPath)\RunningObjects.nuspec" -p Configuration=$(Configuration);assembly=$(TargetPath) -o "$(PackageOutputDir)"</BuildRunningObjects>
-    <!-- Create the default template package -->
-    <BuildDefaultTemplate>$(NuGetCommand) pack "$(NuGetToolsPath)\RunningObjects.Templates.Default.nuspec" -o "$(PackageOutputDir)"</BuildDefaultTemplate>
+    <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">
+        <Exec Command="$(RestoreCommand)"
+              Condition="'$(OS)' != 'Windows_NT' And Exists('$(PackagesConfig)')" />
+              
+        <Exec Command="$(RestoreCommand)"
+              LogStandardErrorAsError="true"
+              Condition="'$(OS)' == 'Windows_NT' And Exists('$(PackagesConfig)')" />
+    </Target>
 
-    <!-- Make the build depend on restore packages -->
-    <BuildDependsOn Condition="$(RestorePackages) == 'true'">
-      RestorePackages;
-      $(BuildDependsOn);
-      LoadVersion;
-    </BuildDependsOn>
-
-    <!-- Make the build depend on build packages -->
-    <BuildDependsOn Condition="$(BuildPackage) == 'true'">
-      $(BuildDependsOn);
-      LoadVersion;
-      BuildPackages;
-      CopyPackagesToProjectTemplate;
-    </BuildDependsOn>
-  </PropertyGroup>
-
-  <!--<ItemGroup>
-    <GeneratedPackages Include="$(PackageOutputDir)\*.nupkg" />
-  </ItemGroup>-->
-
-  <Target Name="LoadVersion">
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
-      <Output
-          TaskParameter="Assemblies"
-          ItemName="assembly"/>
-    </GetAssemblyIdentity>
-  </Target>
-
-  <Target Name="CheckPrerequisites">
-    <!-- Raise an error if we're unable to locate nuget.exe  -->
-    <Error Condition="'$(DownloadNuGetExe)' != 'true' AND !Exists('$(NuGetExePath)')" Text="Unable to locate '$(NuGetExePath)'" />
-    <SetEnvironmentVariable EnvKey="VisualStudioVersion" EnvValue="$(VisualStudioVersion)" Condition=" '$(VisualStudioVersion)' != '' AND '$(OS)' == 'Windows_NT' " />
-    <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition=" '$(DownloadNuGetExe)' == 'true' AND !Exists('$(NuGetExePath)')"  />
-  </Target>
-
-  <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">
-
-    <Exec Command="$(RestoreCommand)"
-          Condition="'$(OS)' != 'Windows_NT' And Exists('$(PackagesConfig)')" />
-
-    <Exec Command="$(RestoreCommand)"
-          LogStandardErrorAsError="true"
-          Condition="'$(OS)' == 'Windows_NT' And Exists('$(PackagesConfig)')" />
-  </Target>
-
-  <Target Name="BuildPackages" DependsOnTargets="CheckPrerequisites">
-
-    <RemoveDir Directories="$(PackageOutputDir)" />
-    <MakeDir Directories="$(PackageOutputDir)" />
-
-    <!-- build running objects core package -->
-    <Exec Command="$(BuildRunningObjects) -version  %(assembly.Version)"
-          Condition=" '$(OS)' != 'Windows_NT' " />
-
-    <Exec Command="$(BuildRunningObjects)  -version  %(assembly.Version)"
-          LogStandardErrorAsError="true"
-          Condition=" '$(OS)' == 'Windows_NT' " />
-
-    <!-- build default template -->
-    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
-          Condition=" '$(OS)' != 'Windows_NT' " />
-
-    <Exec Command="$(BuildDefaultTemplate) -p Configuration=$(Configuration);roversion=%(assembly.Version)"
-          LogStandardErrorAsError="true"
-          Condition=" '$(OS)' == 'Windows_NT' " />
-  </Target>
-
-  <!-- Copy the generated packages to project template -->
-  <Target Name="CopyPackagesToProjectTemplate">
-
-    <!-- Get the project template absolute path -->
-    <ConvertToAbsolutePath Paths="$(SolutionDir)ProjectTemplate">
-      <Output TaskParameter="AbsolutePaths" PropertyName="destinationPath"/>
-    </ConvertToAbsolutePath>
-
-    <DeleteRunningObjectsPackages DirName="$(destinationPath)" />
-    <CopyRunningObjectsPackages
-        SourcePath="$(PackageOutputDir)\" 
-        DestinationPath="$(destinationPath)" />
-  </Target>
-
-  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-    <ParameterGroup>
-      <OutputFilename ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.Core" />
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="System.Net" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
+    <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites">
+        <Exec Command="$(BuildCommand)" 
+              Condition=" '$(OS)' != 'Windows_NT' " />
+              
+        <Exec Command="$(BuildCommand)"
+              LogStandardErrorAsError="true"
+              Condition=" '$(OS)' == 'Windows_NT' " />
+    </Target>
+    
+    <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+        <ParameterGroup>
+            <OutputFilename ParameterType="System.String" Required="true" />
+        </ParameterGroup>
+        <Task>
+            <Reference Include="System.Core" />
+            <Using Namespace="System" />
+            <Using Namespace="System.IO" />
+            <Using Namespace="System.Net" />
+            <Using Namespace="Microsoft.Build.Framework" />
+            <Using Namespace="Microsoft.Build.Utilities" />
+            <Code Type="Fragment" Language="cs">
+                <![CDATA[
                 try {
                     OutputFilename = Path.GetFullPath(OutputFilename);
 
@@ -164,95 +126,26 @@
                     return false;
                 }
             ]]>
-      </Code>
-    </Task>
-  </UsingTask>
-
-  <UsingTask TaskName="DeleteRunningObjectsPackages" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-    <ParameterGroup>
-      <DirName ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.Core" />
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
+            </Code>
+        </Task>
+    </UsingTask>
+    
+     <UsingTask TaskName="SetEnvironmentVariable" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+        <ParameterGroup>
+            <EnvKey ParameterType="System.String" Required="true" />
+            <EnvValue ParameterType="System.String" Required="true" />
+        </ParameterGroup>
+        <Task>
+            <Using Namespace="System" />
+            <Code Type="Fragment" Language="cs">
+                <![CDATA[
                 try {
-                
-                    Log.LogMessage("Deleting existing Running Objects Packages on Template Project.");
-                    
-                    var files = Directory.GetFiles(DirName, "RunningObjects*.nupkg");
-                    foreach (var file in files)
-                    {
-                        File.Delete(file);
-                        //Log.LogMessage(string.Format("Deleting package: {0}", file));
-                    }
-                    
-                    return true;
-                }
-                catch (Exception ex) {
-                    Log.LogErrorFromException(ex);
-                    return false;
-                }
-            ]]>
-      </Code>
-    </Task>
-  </UsingTask>
-
-  <UsingTask TaskName="CopyRunningObjectsPackages" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-    <ParameterGroup>
-      <SourcePath ParameterType="System.String" Required="true" />
-      <DestinationPath ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.Core" />
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="System.Text.RegularExpressions" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-                try {
-                    Log.LogMessage("Copying new Running Objects Packages on Template Project.");
-                    var files = Directory.GetFiles(SourcePath, "RunningObjects*.nupkg");
-                    foreach (var file in files)
-                    {
-                        var oldName = new FileInfo(file).Name;
-                        var newName = Regex.Replace(oldName, @"\.([0-9.]*).nupkg", ".nupkg");
-                        File.Copy(file, Path.Combine(DestinationPath, newName), true);
-                        Log.LogMessage(string.Format("Package {0} copied as {1}.", oldName, newName));
-                    }
-                    return true;
-                }
-                catch (Exception ex) {
-                    Log.LogErrorFromException(ex);
-                    return false;
-                }
-            ]]>
-      </Code>
-    </Task>
-  </UsingTask>
-
-  <UsingTask TaskName="SetEnvironmentVariable" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-    <ParameterGroup>
-      <EnvKey ParameterType="System.String" Required="true" />
-      <EnvValue ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-                try {
-                    Environment.SetEnvironmentVariable(EnvKey, EnvValue);
+                    Environment.SetEnvironmentVariable(EnvKey, EnvValue, System.EnvironmentVariableTarget.Process);
                 }
                 catch  {
                 }
             ]]>
-      </Code>
-    </Task>
-  </UsingTask>
+            </Code>
+        </Task>
+    </UsingTask>
 </Project>

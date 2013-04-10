@@ -9,7 +9,7 @@ using RunningObjects.MVC.Query;
 
 namespace RunningObjects.MVC.Controllers
 {
-    public class ServiceController : ControllerBase
+    public sealed class ServiceController : ControllerBase
     {
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Index(Type modelType, int page = 1, int? size = null)
@@ -21,13 +21,13 @@ namespace RunningObjects.MVC.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult Create(Type modelType, Method method)
+        public ActionResult Create(Type modelType, Method method)
         {
             return CreateInstanceOf(modelType, method, Json, Throw);
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ActionResult View(Type modelType, object key)
+        public ActionResult View(Type modelType, object key)
         {
             var mapping = ModelMappingManager.MappingFor(modelType);
             var descriptor = new ModelDescriptor(mapping);
@@ -38,13 +38,13 @@ namespace RunningObjects.MVC.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Put)]
-        public virtual ActionResult Edit(Type modelType, Model model)
+        public ActionResult Edit(Type modelType, Model model)
         {
             return EditInstanceOf(modelType, model, Json, Throw, HttpNotFound);
         }
 
         [AcceptVerbs(HttpVerbs.Delete)]
-        public virtual ActionResult Delete(Type modelType, object key)
+        public ActionResult Delete(Type modelType, object key)
         {
             return DeleteInstanceOf(modelType, key, () => Json(true), Throw, HttpNotFound);
         }
@@ -65,14 +65,14 @@ namespace RunningObjects.MVC.Controllers
             base.OnException(filterContext);
         }
 
-        protected ActionResult ParseException(Exception ex)
+	    private ActionResult ParseException(Exception ex)
         {
             while (ex.InnerException != null)
                 ex = ex.InnerException;
             return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
         }
 
-        protected static ActionResult Throw(Exception ex)
+	    private static ActionResult Throw(Exception ex)
         {
             throw ex;
         }

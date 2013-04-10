@@ -7,9 +7,9 @@ using RunningObjects.MVC.Query;
 
 namespace RunningObjects.MVC.Controllers
 {
-    public class PresentationController : ControllerBase
+    public sealed class PresentationController : ControllerBase
     {
-        public virtual ActionResult Welcome()
+        public ActionResult Welcome()
         {
             var welcome = RunningObjectsSetup.Configuration.Welcome;
             if (welcome.Redirects.Any())
@@ -121,7 +121,7 @@ namespace RunningObjects.MVC.Controllers
             );
         }
 
-        public virtual ActionResult Execute(Type modelType, string methodName, int index, string key = null)
+        public ActionResult Execute(Type modelType, string methodName, int index, string key = null)
         {
             var typeMapping = ModelMappingManager.MappingFor(modelType);
             var methods = key != null ? typeMapping.InstanceMethods : typeMapping.StaticMethods;
@@ -157,7 +157,7 @@ namespace RunningObjects.MVC.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
-        public virtual ActionResult Execute(Type modelType, Method model, string key = null)
+        public ActionResult Execute(Type modelType, Method model, string key = null)
         {
             RunningObjectsSetup.Configuration.Query.RemoveKeywordEvaluator("{instance}");
             return ExecuteMethodOf
@@ -207,7 +207,7 @@ namespace RunningObjects.MVC.Controllers
             };
         }
 
-        protected Func<object, ActionResult> OnSuccessWithReturn(Method model)
+	    private Func<object, ActionResult> OnSuccessWithReturn(Method model)
         {
             return @return =>
             {

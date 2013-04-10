@@ -7,7 +7,7 @@ using RunningObjects.MVC.Security;
 
 namespace RunningObjects.MVC
 {
-    public sealed class RunningObjectsSetup
+    public static class RunningObjectsSetup
     {
         private static readonly ConfigurationBuilder configuration = new ConfigurationBuilder();
 

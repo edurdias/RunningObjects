@@ -131,8 +131,7 @@ namespace RunningObjects.MVC.Controllers
         {
             var mapping = ModelMappingManager.MappingFor(modelType);
             var source = mapping.Configuration.Repository().All();
-            var query = QueryParser.Parse(modelType, source);
-            return query;
+	        return QueryParser.Parse(modelType, source);
         }
 
         protected ActionResult CreateInstanceOf(Type modelType, Method method, Func<object, ActionResult> onSuccess, Func<Exception, ActionResult> onException)

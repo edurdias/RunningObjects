@@ -13,7 +13,7 @@ using RunningObjects.MVC.Workflow;
 
 namespace RunningObjects.MVC.Controllers
 {
-    public class WorkflowController : ControllerBase
+    public sealed class WorkflowController : ControllerBase
     {
         public ActionResult Start(string workflowKey, Type modelType, string methodName, int index)
         {
@@ -21,7 +21,7 @@ namespace RunningObjects.MVC.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
-        public virtual ActionResult Start(string workflowKey, Type modelType, Method method)
+        public ActionResult Start(string workflowKey, Type modelType, Method method)
         {
             return Execute(workflowKey, string.Empty, modelType, method);
         }
@@ -63,7 +63,7 @@ namespace RunningObjects.MVC.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post), ValidateRequest(true)]
-        public virtual ActionResult Execute(string workflowKey, string activityKey, Type modelType, Method method)
+        public ActionResult Execute(string workflowKey, string activityKey, Type modelType, Method method)
         {
             var activity = GetActivityFor(workflowKey, activityKey);
             if (activity == null)
