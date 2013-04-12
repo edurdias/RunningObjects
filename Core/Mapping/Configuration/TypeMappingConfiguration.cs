@@ -12,7 +12,7 @@ namespace RunningObjects.Core.Mapping.Configuration
         }
 
         public Type UnderlineType { get; set; }
-        public Func<IRepository<Object>> Repository { get; set; }
-        public AssemblyMappingConfiguration Assembly { get; set; }
+		public AssemblyMappingConfiguration Assembly { get; set; }
+		public Func<IRepository<Object>> Repository { get; set; }
     }
 }

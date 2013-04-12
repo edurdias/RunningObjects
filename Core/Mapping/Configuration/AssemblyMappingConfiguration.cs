@@ -23,7 +23,6 @@ namespace RunningObjects.Core.Mapping.Configuration
             Types = assembly.GetTypes()
 				.Where(t => t.IsPublic && !t.IsGenericType && !t.IsInterface && !t.IsEnum)
 				.Select(t => new TypeMappingConfiguration(t, this)).ToList();
-
             UseThisRepository(type => new EmptyRepository<object>());
         }
 
@@ -40,5 +39,10 @@ namespace RunningObjects.Core.Mapping.Configuration
         {
             return Types.FirstOrDefault(configuration => configuration.UnderlineType == type);
         }
+
+		public TypeMappingConfiguration For<T>()
+		{
+			return For(typeof (T));
+		}
     }
 }

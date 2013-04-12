@@ -19,23 +19,23 @@ namespace RunningObjects.Core
 
             using (var repository = mapping.Configuration.Repository())
             {
-                var keyValues = descriptor.KeyProperty.PropertyType == typeof(Guid)
-                    ? Guid.Parse(key.ToString())
-                    : Convert.ChangeType(key, descriptor.KeyProperty.PropertyType);
-                var instance = repository.Find(keyValues);
-
-                var model = new Model(modelType, descriptor, instance);
+	            var keyValues = descriptor.KeyProperty.PropertyType == typeof(Guid)
+						                ? Guid.Parse(key.ToString())
+						                : Convert.ChangeType(key, descriptor.KeyProperty.PropertyType);
+                
+				var instance = repository.Find(keyValues);
+				
+				var model = new Model(modelType, descriptor, instance);
                 foreach (var property in model.Properties)
                 {
-                    ValueProviderResult result;
-                    if (property.IsModelCollection)
+	                if (property.IsModelCollection)
                     {
                         property.Value = CreateCollection(bindingContext, property);
                     }
                     else
                     {
-                        result = bindingContext.ValueProvider.GetValue(property.Name);
-                        if (result != null)
+	                    var result = bindingContext.ValueProvider.GetValue(property.Name);
+	                    if (result != null)
                         {
                             property.Value = !property.IsModel
                                 ? GetNonModelValue(result, property.MemberType)
