@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RunningObjects.Data
@@ -9,14 +11,28 @@ namespace RunningObjects.Data
 			return item;
 		}
 
+		public void Add(IEnumerable<T> items)
+		{
+		}
+
 		public T Update(T item)
 		{
 			return item;
 		}
 
+		public void Update(IEnumerable<T> items)
+		{
+			
+		}
+
 		public T Remove(T item)
 		{
 			return item;
+		}
+
+		public void Remove(IEnumerable<T> items)
+		{
+			
 		}
 
 		public bool SaveChanges()
@@ -29,9 +45,14 @@ namespace RunningObjects.Data
 			return null;
 		}
 
-		public IQueryable All()
+		public IQueryable<T> All()
 		{
-			return default(IQueryable);
+			return default(IQueryable<T>);
+		}
+
+		public IQueryable<T> All(Func<T, bool> expression)
+		{
+			return default(IQueryable<T>);
 		}
 
 		public void Dispose()
