@@ -140,20 +140,20 @@ namespace RunningObjects.Core.Mapping
 
         private static TypeMapping CreateTypeMapping(Type type, NamespaceMapping @namespace, TypeMappingConfiguration configuration)
         {
-            var mapping = new TypeMapping
-                              {
-                                  ID = Guid.NewGuid().ToString("N"),
-                                  ModelType = type,
-                                  Namespace = @namespace,
-                                  Configuration = configuration
-                              };
+	        var mapping = new TypeMapping
+	        {
+		        ID = Guid.NewGuid().ToString("N"),
+		        ModelType = type,
+		        Namespace = @namespace,
+		        Configuration = configuration
+	        };
 
             var attributes = type.GetCustomAttributes(true);
 
             var displayName = attributes.OfType<System.ComponentModel.DisplayNameAttribute>().FirstOrDefault();
-            mapping.Name = (displayName != null && !string.IsNullOrEmpty(displayName.DisplayName))
-                               ? displayName.DisplayName
-                               : type.Name;
+	        mapping.Name = (displayName != null && !string.IsNullOrEmpty(displayName.DisplayName))
+		                       ? displayName.DisplayName
+		                       : type.Name;
 
             var scaffold = attributes.OfType<ScaffoldTableAttribute>().FirstOrDefault();
             mapping.Visible = (scaffold == null || scaffold.Scaffold) && !type.GetCustomAttributes(false).OfType<ScriptOnlyAttribute>().Any();

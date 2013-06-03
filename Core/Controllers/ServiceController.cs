@@ -52,7 +52,7 @@ namespace RunningObjects.Core.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Execute(Type modelType, Method model, string key = null)
         {
-            return ExecuteMethodOf(modelType, model, () => Json(true), Json, Throw, HttpNotFound, key);
+            return ExecuteMethodOf(modelType, model, () => new EmptyResult(), Json, Throw, HttpNotFound, key);
         }
 
         protected override void OnException(ExceptionContext filterContext)
