@@ -5,6 +5,7 @@ using System.Linq;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
+using MongoDB.Driver.Wrappers;
 
 namespace RunningObjects.Data.MongoDB
 {
@@ -107,5 +108,29 @@ namespace RunningObjects.Data.MongoDB
                 dbName = "runningobjects";
             return GetServer().GetDatabase(dbName);
         }
+
+		protected void EnsureIndex(string name, object keys, object extraOptions = null)
+		{
+			if (!Collection.IndexExistsByName(name))
+			{
+				IMongoIndexKeys indexKeys = new IndexKeysWrapper(keys);
+				var ints = keys as Dictionary<string, int>;
+				if (ints != null)
+					indexKeys = new IndexKeysDocument(ints);
+
+
+				var options = new Dictionary<string, object>
+				{
+					{ "name", name },
+					{ "background", true }
+				};
+
+				if (extraOptions != null)
+					foreach (var option in extraOptions.ToDictionary())
+						options.Add(option.Key, option.Value);
+
+				Collection.EnsureIndex(indexKeys, new IndexOptionsDocument(options));
+			}
+		}
     }
 }

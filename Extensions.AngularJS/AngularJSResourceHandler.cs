@@ -84,10 +84,12 @@ namespace RunningObjects.Extensions.AngularJS
 		{
 			var removeId = isStatic ? ", id : null" : string.Empty;
 			writer.Write("'{0}': {{ method:'POST', params : {{ methodName:'{1}' {2} ", ToCamelCase(method.MethodName), method.MethodName, removeId);
-			foreach (var parameter in method.Parameters)
-			{
-				writer.Write(", {0}:'@{0}' ", parameter.Name);
-			}
+
+			//foreach (var parameter in method.Parameters)
+			//{
+			//	writer.Write(", {0}:'@{0}' ", parameter.Name);
+			//}
+			
 			writer.WriteLine(" } }, ");
 		}
 

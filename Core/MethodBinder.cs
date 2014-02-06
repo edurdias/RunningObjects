@@ -45,8 +45,17 @@ namespace RunningObjects.Core
                 }
                 else
                 {
-                    result = bindingContext.ValueProvider.GetValue(parameter.Name);
-                    if (result != null)
+	                result = bindingContext.ValueProvider.GetValue(parameter.Name);
+
+	                if (result == null)
+	                {
+		                controllerContext.HttpContext.Request.InputStream.Position = 0;
+		                var provider = new JsonValueProviderFactory().GetValueProvider(controllerContext);
+		                if (provider != null)
+			                result = provider.GetValue(parameter.Name);
+	                }
+
+	                if (result != null)
                     {
                         parameter.Value = !parameter.IsModel
                             ? ModelBinder.GetNonModelValue(result, parameter.MemberType)
